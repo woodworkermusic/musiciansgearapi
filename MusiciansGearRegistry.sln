@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusiciansGearRegistry.Api", "MusiciansGearRegistry.Api\MusiciansGearRegistry.Api.csproj", "{73D42EB3-EB44-4852-BC13-F35C15BD9264}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusiciansGearRegistry.Data", "MusiciansGearRegistry.Data\MusiciansGearRegistry.Data.csproj", "{553646B0-C558-42E8-ADF9-99D93881D182}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusiciansGearRegistry.Api.Core", "MusiciansGearRegistry.Api.Core\MusiciansGearRegistry.Api.Core.csproj", "{3443B4AE-DFA9-449D-9148-733B004CF8DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusiciansGearRegistry.Api.Security", "MusiciansGearRegistry.Security\MusiciansGearRegistry.Api.Security.csproj", "{F8DF81E6-8BB8-E12C-B066-AEB8611762D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusiciansGearRegistry.Api.Logging", "MusiciansGearRegistry.Api.Logging\MusiciansGearRegistry.Api.Logging.csproj", "{3E60EF48-38DD-45B7-ADEE-3F7C44A9D652}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73D42EB3-EB44-4852-BC13-F35C15BD9264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D42EB3-EB44-4852-BC13-F35C15BD9264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D42EB3-EB44-4852-BC13-F35C15BD9264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D42EB3-EB44-4852-BC13-F35C15BD9264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{553646B0-C558-42E8-ADF9-99D93881D182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{553646B0-C558-42E8-ADF9-99D93881D182}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{553646B0-C558-42E8-ADF9-99D93881D182}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{553646B0-C558-42E8-ADF9-99D93881D182}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3443B4AE-DFA9-449D-9148-733B004CF8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3443B4AE-DFA9-449D-9148-733B004CF8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3443B4AE-DFA9-449D-9148-733B004CF8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3443B4AE-DFA9-449D-9148-733B004CF8DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8DF81E6-8BB8-E12C-B066-AEB8611762D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8DF81E6-8BB8-E12C-B066-AEB8611762D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8DF81E6-8BB8-E12C-B066-AEB8611762D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8DF81E6-8BB8-E12C-B066-AEB8611762D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E60EF48-38DD-45B7-ADEE-3F7C44A9D652}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E60EF48-38DD-45B7-ADEE-3F7C44A9D652}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E60EF48-38DD-45B7-ADEE-3F7C44A9D652}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E60EF48-38DD-45B7-ADEE-3F7C44A9D652}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6508ABE9-6981-4E22-8527-39257F836E07}
+	EndGlobalSection
+EndGlobal
