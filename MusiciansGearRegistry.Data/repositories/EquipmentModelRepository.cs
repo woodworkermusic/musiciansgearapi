@@ -1,6 +1,7 @@
-﻿using MusiciansGearRegistry.Data.infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using MusiciansGearRegistry.Data.entities;
+using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.repositories;
 
@@ -27,21 +28,20 @@ public class EquipmentModelRepository : RepositoryBase, IEquipmentModelRepositor
     /// <param name="pageCount"></param>
     /// <returns></returns>
     public async Task<List<EquipmentModel>> GetMany(
-        int? manufacturerId,
-        string startsWith,
-        int pageNumber,
-        int pageCount)
+                int? manufacturerId,
+                int? modelId,
+                CommonSearchEntity searchEntity)
     {
         return await _dbContext.EquipmentModel
             .Where(m =>
                 (
-                    string.IsNullOrWhiteSpace(startsWith) ||
-                    (!string.IsNullOrWhiteSpace(startsWith) && m.ModelName.StartsWith(startsWith))
+                    string.IsNullOrWhiteSpace(searchEntity.startsWith) ||
+                    (!string.IsNullOrWhiteSpace(searchEntity.startsWith) && m.ModelName.StartsWith(searchEntity.startsWith))
                 ) &&
                 m.ManufacturerId == (manufacturerId != null ? manufacturerId.Value : m.ManufacturerId) &&
                 m.DeletedOn == null)
-            .Skip((pageNumber - 1) * pageCount)
-            .Take(pageCount)
+            .Skip((searchEntity.pageNumber - 1) * searchEntity.pageSize)
+            .Take(searchEntity.pageSize)
             .ToListAsync();
     }
 

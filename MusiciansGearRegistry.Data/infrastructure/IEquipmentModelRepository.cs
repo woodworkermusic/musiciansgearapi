@@ -1,4 +1,5 @@
-﻿using MusiciansGearRegistry.Data.Models;
+﻿using MusiciansGearRegistry.Data.entities;
+using MusiciansGearRegistry.Data.Models;
 
 namespace MusiciansGearRegistry.Data.infrastructure;
 
@@ -6,10 +7,9 @@ public interface IEquipmentModelRepository
 {
     Task<EquipmentModel> Get(int equipmentModelId);
     Task<List<EquipmentModel>> GetMany(
-        int? manufacturerId,
-        string startsWith,
-        int pageNumber,
-        int pageCount);
+                int? manufacturerId,
+                int? modelId,
+                CommonSearchEntity searchEntity);
 
     Task<EquipmentModel?> Add(
         EquipmentModel equipmentModel,

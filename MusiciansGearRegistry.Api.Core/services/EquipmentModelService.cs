@@ -1,4 +1,5 @@
 ﻿using MusiciansGearRegistry.Api.Core.interfaces;
+using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
 
@@ -13,28 +14,32 @@ public class EquipmentModelService : IEquipmentModelService
         this._equipmentModelRepo = equipmentModelRepository;
     }
 
-    public Task<EquipmentModel> EquipmentModel_Add(EquipmentModel equipmentModel, int userId)
+    public async Task<EquipmentModel> Add(EquipmentModel equipmentModel, int userId)
     {
+        return await _equipmentModelRepo.Add(equipmentModel, userId);
+    }
+
+    public async Task<bool> Delete(int equipmentModelId, int userId)
+    {
+        return await _equipmentModelRepo.Delete(equipmentModelId, userId);
+    }
+
+    public async Task<EquipmentModel> Get(int equipmentModelId)
+    {
+        return await _equipmentModelRepo.Get(equipmentModelId);
+    }
+
+    public async Task<List<EquipmentModel>> GetMany(
+                int? manufacturerId,
+                int? modelId,
+                CommonSearchEntity searchEntity)
+    {
+        //return await _equipmentModelRepo.GetMany(manufacturerId, modelId, searchEntity);
         throw new NotImplementedException();
     }
 
-    public Task<bool> EquipmentModel_Delete(int equipmentModelId, int userId)
+    public async Task<EquipmentModel> Update(EquipmentModel equipmentModel, int userId)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<EquipmentModel> EquipmentModel_Get(int equipmentModelId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<EquipmentModel>> EquipmentModel_GetMany(int? manufacturerId, int? modelTypeId, string startsWith, int pageNumber, int pageCount)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<EquipmentModel> EquipmentModel_Update(EquipmentModel equipmentModel, int userId)
-    {
-        throw new NotImplementedException();
+        return await _equipmentModelRepo.Update(equipmentModel, userId);
     }
 }
