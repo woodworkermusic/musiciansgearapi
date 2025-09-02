@@ -1,5 +1,4 @@
-﻿using MusiciansGearRegistry.Api.Core.dto;
-using MusiciansGearRegistry.Api.Core.interfaces;
+﻿using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
@@ -15,13 +14,13 @@ public class EquipmentImageService : ServiceBase, IEquipmentImageService
         _imageRepo = imageRepo;
     }
 
-    public async Task<UserEquipmentImageDto> Get_UserEquipmentImage(int id)
+    public async Task<UserEquipmentImage> Get_UserEquipmentImage(int id)
     {
         await _imageRepo.Get_UserEquipmentImage(id);
         return null;
     }
 
-    public async Task<UserEquipmentImageDto> Add_UserEquipmentImage(UserEquipmentImage newImage)
+    public async Task<UserEquipmentImage> Add_UserEquipmentImage(UserEquipmentImage newImage)
     {
         await _imageRepo.Add_UserEquipmentImage(newImage);
         return null;
@@ -35,13 +34,13 @@ public class EquipmentImageService : ServiceBase, IEquipmentImageService
 
     // *********************************************************************
 
-    public async Task<EquipmentTypeImageDto> Get_EquipmentTypeImage(int id)
+    public async Task<EquipmentTypeImage> Get_EquipmentTypeImage(int id)
     {
         await _imageRepo.Get_EquipmentTypeImage(id);
         return null;
     }
 
-    public async Task<EquipmentTypeImageDto> Add_EquipmentTypeImage(EquipmentTypeImage newImage
+    public async Task<EquipmentTypeImage> Add_EquipmentTypeImage(EquipmentTypeImage newImage
         , int userId)
     {
         await _imageRepo.Add_EquipmentTypeImage(newImage, userId);
@@ -56,13 +55,13 @@ public class EquipmentImageService : ServiceBase, IEquipmentImageService
 
     // *********************************************************************
 
-    public async Task<EquipmentModelImageDto> Get_EquipmentModelImage(int id)
+    public async Task<EquipmentModelImage> Get_EquipmentModelImage(int id)
     {
         await _imageRepo.Get_EquipmentModelImage(id);
         return null;
     }
 
-    public async Task<EquipmentModelImageDto> Add_EquipmentModelImage(EquipmentModelImage newImage
+    public async Task<EquipmentModelImage> Add_EquipmentModelImage(EquipmentModelImage newImage
         , int userId)
     {
         await _imageRepo.Add_EquipmentModelImage(newImage, userId);

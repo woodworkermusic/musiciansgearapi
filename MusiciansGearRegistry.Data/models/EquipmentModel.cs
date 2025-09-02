@@ -52,4 +52,15 @@ public partial class EquipmentModel
 
     [StringLength(50)]
     public string DeletedBy { get; set; }
+
+    [InverseProperty("EquipmentModel")]
+    public virtual ICollection<EquipmentModelImage> EquipmentModelImage { get; set; } = new List<EquipmentModelImage>();
+
+    [ForeignKey("EquipmentTypeId")]
+    [InverseProperty("EquipmentModel")]
+    public virtual EquipmentType EquipmentType { get; set; }
+
+    [ForeignKey("ManufacturerId")]
+    [InverseProperty("EquipmentModel")]
+    public virtual EquipmentManufacturer Manufacturer { get; set; }
 }

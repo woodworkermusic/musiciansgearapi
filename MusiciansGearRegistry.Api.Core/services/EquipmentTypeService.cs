@@ -1,9 +1,7 @@
-﻿using MusiciansGearRegistry.Api.Core.dto;
-using MusiciansGearRegistry.Api.Core.Entities;
-using MusiciansGearRegistry.Api.Core.interfaces;
+﻿using MusiciansGearRegistry.Api.Core.interfaces;
+using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
-using MusiciansGearRegistry.Api.Logging.interfaces;
 
 namespace MusiciansGearRegistry.Api.Core.services;
 
@@ -16,7 +14,7 @@ public class EquipmentTypeService : IEquipmentTypeService
         _equipmentTypeRepo = equipmentTypeRepo;
     }
 
-    public Task<EquipmentModelDto> EquipmentType_Add(EquipmentModel equipmentType, int userId)
+    public Task<EquipmentModel> EquipmentType_Add(EquipmentModel equipmentType, int userId)
     {
         throw new NotImplementedException();
     }
@@ -26,17 +24,17 @@ public class EquipmentTypeService : IEquipmentTypeService
         throw new NotImplementedException();
     }
 
-    public Task<EquipmentModelDto> EquipmentType_Get(int EquipmentTypeId)
+    public Task<EquipmentModel> EquipmentType_Get(int EquipmentTypeId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<EquipmentTypeDto>> EquipmentType_GetMany(CommonSearchEntity equipmentTypeSearch)
+    public Task<List<EquipmentType>> EquipmentType_GetMany(CommonSearchEntity equipmentTypeSearch)
     {
         throw new NotImplementedException();
     }
 
-    public Task<EquipmentModelDto> EquipmentType_Update(EquipmentModel equipmentType, int userId)
+    public Task<EquipmentModel> EquipmentType_Update(EquipmentModel equipmentType, int userId)
     {
         throw new NotImplementedException();
     }

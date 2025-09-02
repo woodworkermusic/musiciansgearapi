@@ -14,14 +14,14 @@ public partial class EquipmentModelImage
     [Key]
     public int EquipmentModelImageId { get; set; }
 
-    public int EquipmentId { get; set; }
+    public int EquipmentModelId { get; set; }
 
     [Required]
     [StringLength(512)]
-    public string EquipmentImageFile { get; set; }
+    public string ImageFile { get; set; }
 
     [Column(TypeName = "image")]
-    public byte[] EquipmentImage { get; set; }
+    public byte[] ImageData { get; set; }
 
     [Required]
     [StringLength(50)]
@@ -41,4 +41,8 @@ public partial class EquipmentModelImage
 
     [StringLength(50)]
     public string DeletedBy { get; set; }
+
+    [ForeignKey("EquipmentModelId")]
+    [InverseProperty("EquipmentModelImage")]
+    public virtual EquipmentModel EquipmentModel { get; set; }
 }

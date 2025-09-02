@@ -18,10 +18,10 @@ public partial class UserEquipmentImage
 
     [Required]
     [StringLength(512)]
-    public string EquipmentImageFile { get; set; }
+    public string ImageFile { get; set; }
 
     [Column(TypeName = "image")]
-    public byte[] EquipmentImage { get; set; }
+    public byte[] ImageData { get; set; }
 
     [Required]
     [StringLength(50)]
@@ -41,4 +41,8 @@ public partial class UserEquipmentImage
 
     [StringLength(50)]
     public string DeletedBy { get; set; }
+
+    [ForeignKey("UserEquipmentId")]
+    [InverseProperty("UserEquipmentImage")]
+    public virtual UserEquipment UserEquipment { get; set; }
 }

@@ -1,25 +1,24 @@
-﻿using MusiciansGearRegistry.Api.Core.dto;
-using MusiciansGearRegistry.Data.Models;
+﻿using MusiciansGearRegistry.Data.Models;
 
 namespace MusiciansGearRegistry.Api.Core.interfaces;
 
 public interface IEquipmentModelService
 {
-    Task<EquipmentModelDto> EquipmentModel_Get(
+    Task<EquipmentModel> EquipmentModel_Get(
         int equipmentModelId);
 
-    Task<List<EquipmentModelDto>> EquipmentModel_GetMany(
+    Task<List<EquipmentModel>> EquipmentModel_GetMany(
                 int? manufacturerId,
                 int? modelTypeId,
                 string startsWith,
                 int pageNumber,
                 int pageCount);
 
-    Task<EquipmentModelDto> EquipmentModel_Add(
+    Task<EquipmentModel> EquipmentModel_Add(
                 EquipmentModel equipmentModelDto,
                 int userId);
 
-    Task<EquipmentModelDto> EquipmentModel_Update(
+    Task<EquipmentModel> EquipmentModel_Update(
                 EquipmentModel equipmentModelDto,
                 int userId);
 

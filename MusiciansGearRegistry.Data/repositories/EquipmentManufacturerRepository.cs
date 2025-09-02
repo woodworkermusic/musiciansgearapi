@@ -42,7 +42,12 @@ public class EquipmentManufacturerRepository : RepositoryBase, IEquipmentManufac
         {
             newManufacturer.CreatedBy = userId.ToString();
             newManufacturer.CreatedOn = DateTime.UtcNow;
-            _dbContext.EquipmentManufacturer.Add(newManufacturer);
+            newManufacturer.ModifiedBy = null;
+            newManufacturer.ModifiedOn = null;
+            newManufacturer.DeletedBy = null;
+            newManufacturer.DeletedOn = null;
+
+            await _dbContext.EquipmentManufacturer.AddAsync(newManufacturer);
             await _dbContext.SaveChangesAsync();
 
             return newManufacturer;

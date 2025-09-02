@@ -1,26 +1,24 @@
-﻿using MusiciansGearRegistry.Api.Core.dto;
-using MusiciansGearRegistry.Api.Core.Entities;
+﻿using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.Models;
 
 namespace MusiciansGearRegistry.Api.Core.interfaces;
 
 public interface IEquipmentManufacturerService
 {
-    Task<EquipmentManufacturerDto> Get(
+    Task<EquipmentManufacturer> Get(
             int manufacturerId);
 
-    Task<List<EquipmentManufacturerDto>> GetMany(CommonSearchEntity manufacturerSearch);
+    Task<List<EquipmentManufacturer>> GetMany(CommonSearchEntity manufacturerSearch);
 
-    Task<EquipmentManufacturerDto> Add(
-                EquipmentManufacturer dtoManufacturer,
+    Task<EquipmentManufacturer> Add(
+                EquipmentManufacturer equipmentManufacturer,
                 int userId);
 
-    Task<EquipmentManufacturerDto> Update(
-                EquipmentManufacturer dtoManufacturer,
+    Task<EquipmentManufacturer> Update(
+                EquipmentManufacturer equipmentManufacturer,
                 int userId);
 
     Task<bool> Delete(
         int manufacturerId,
         int userId);
-
 }

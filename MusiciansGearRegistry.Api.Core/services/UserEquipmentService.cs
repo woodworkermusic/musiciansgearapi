@@ -1,5 +1,4 @@
-﻿using MusiciansGearRegistry.Api.Core.dto;
-using MusiciansGearRegistry.Api.Core.interfaces;
+﻿using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
@@ -17,26 +16,26 @@ public class UserEquipmentService : ServiceBase, IUserEquipmentService
         _userEquipmentRepo = userEquipmentRepo;
     }
 
-    public async Task<UserEquipmentDto> Get(int userEquipmentId)
+    public async Task<UserEquipment> Get(int userEquipmentId)
     {
         await _userEquipmentRepo.Get(userEquipmentId);
         return null;
     }
 
-    public async Task<List<UserEquipmentDto>> GetMany(int userProfileId)
+    public async Task<List<UserEquipment>> GetMany(int userProfileId)
     {
         await _userEquipmentRepo.GetMany(userProfileId);
         return null;
     }
 
-    public async Task<UserEquipmentDto> Add(UserEquipment newEquipment
+    public async Task<UserEquipment> Add(UserEquipment newEquipment
         , int userId)
     {
         await _userEquipmentRepo.Add(newEquipment, userId);
         return null;
     }
 
-    public async Task<UserEquipmentDto> Update(UserEquipment equipment
+    public async Task<UserEquipment> Update(UserEquipment equipment
         , int userId)
     {
         await _userEquipmentRepo.Update(equipment, userId);

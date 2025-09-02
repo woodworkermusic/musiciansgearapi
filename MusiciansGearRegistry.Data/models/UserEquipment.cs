@@ -51,4 +51,7 @@ public partial class UserEquipment
 
     [StringLength(50)]
     public string DeletedBy { get; set; }
+
+    [InverseProperty("UserEquipment")]
+    public virtual ICollection<UserEquipmentImage> UserEquipmentImage { get; set; } = new List<UserEquipmentImage>();
 }

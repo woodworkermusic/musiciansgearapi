@@ -76,14 +76,26 @@ public partial class MusiciansGearRegistryContext : DbContext
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.EquipmentType).WithMany(p => p.EquipmentModel)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EquipmentType");
+
+            entity.HasOne(d => d.Manufacturer).WithMany(p => p.EquipmentModel)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EquipmentManufacturer");
         });
 
         modelBuilder.Entity<EquipmentModelImage>(entity =>
         {
-            entity.HasKey(e => e.EquipmentModelImageId).HasName("PK__Equipmen__C7A5B93C85F76B90");
+            entity.HasKey(e => e.EquipmentModelImageId).HasName("PK__Equipmen__C7A5B93C3DD11CD2");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.EquipmentModel).WithMany(p => p.EquipmentModelImage)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EquipmentModelImage");
         });
 
         modelBuilder.Entity<EquipmentType>(entity =>
@@ -97,10 +109,14 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<EquipmentTypeImage>(entity =>
         {
-            entity.HasKey(e => e.EquipmentTypeImageId).HasName("PK__Equipmen__A477772E61DF0BD0");
+            entity.HasKey(e => e.EquipmentTypeImageId).HasName("PK__Equipmen__A477772E28461D65");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.EquipmentType).WithMany(p => p.EquipmentTypeImage)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EquipmentTypeImage");
         });
 
         modelBuilder.Entity<IncidentReport>(entity =>
@@ -147,15 +163,19 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<UserEquipmentImage>(entity =>
         {
-            entity.HasKey(e => e.UserEquipmentImageId).HasName("PK__UserEqui__EF24362A6F564194");
+            entity.HasKey(e => e.UserEquipmentImageId).HasName("PK__UserEqui__EF24362AB918AA5F");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.UserEquipment).WithMany(p => p.UserEquipmentImage)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_UserEquipmentImage");
         });
 
         modelBuilder.Entity<UserProfile>(entity =>
         {
-            entity.HasKey(e => e.UserProfileId).HasName("PK__UserProf__9E267F6267F2F25F");
+            entity.HasKey(e => e.UserProfileId).HasName("PK__UserProf__9E267F62419F7FFF");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");

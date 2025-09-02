@@ -1,9 +1,8 @@
-﻿using MusiciansGearRegistry.Api.Core.dto;
-using MusiciansGearRegistry.Api.Core.Entities;
-using MusiciansGearRegistry.Api.Core.interfaces;
+﻿using MusiciansGearRegistry.Api.Core.interfaces;
+using MusiciansGearRegistry.Api.Logging.interfaces;
+using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
-using MusiciansGearRegistry.Api.Logging.interfaces;
 
 namespace MusiciansGearRegistry.Api.Core.services;
 
@@ -17,28 +16,28 @@ public class EquipmentManufacturerService : ServiceBase, IEquipmentManufacturerS
         _equipmentMfrRepo = equipmentManufacturerRepository;
     }
 
-    public Task<EquipmentManufacturerDto> Add(EquipmentManufacturer dtoManufacturer, int userId)
+    public async Task<EquipmentManufacturer> Add(EquipmentManufacturer newManufacturer, int userId)
     {
-        throw new NotImplementedException();
+        return await _equipmentMfrRepo.Add(newManufacturer, userId);
     }
 
-    public Task<bool> Delete(int manufacturerId, int userId)
+    public async Task<bool> Delete(int manufacturerId, int userId)
     {
-        throw new NotImplementedException();
+        return await _equipmentMfrRepo.Delete(manufacturerId, userId);
     }
 
-    public Task<EquipmentManufacturerDto> Get(int manufacturerId)
+    public async Task<EquipmentManufacturer> Get(int manufacturerId)
     {
-        throw new NotImplementedException();
+        return await _equipmentMfrRepo.Get(manufacturerId);
     }
 
-    public Task<List<EquipmentManufacturerDto>> GetMany(CommonSearchEntity manufacturerSearch)
+    public async Task<List<EquipmentManufacturer>> GetMany(CommonSearchEntity manufacturerSearch)
     {
-        throw new NotImplementedException();
+        return await _equipmentMfrRepo.GetMany(manufacturerSearch);
     }
 
-    public Task<EquipmentManufacturerDto> Update(EquipmentManufacturer dtoManufacturer, int userId)
+    public async Task<EquipmentManufacturer> Update(EquipmentManufacturer manufacturer, int userId)
     {
-        throw new NotImplementedException();
+        return await _equipmentMfrRepo.Update(manufacturer, userId);
     }
 }

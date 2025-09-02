@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MusiciansGearRegistry.Api.Core.Entities;
 using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Api.Security.interfaces;
+using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.Models;
 
 namespace MusiciansGearRegistry.Api.Controllers

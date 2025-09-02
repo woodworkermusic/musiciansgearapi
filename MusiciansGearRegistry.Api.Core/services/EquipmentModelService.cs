@@ -1,8 +1,6 @@
-﻿using MusiciansGearRegistry.Api.Core.dto;
-using MusiciansGearRegistry.Api.Core.interfaces;
+﻿using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
-using MusiciansGearRegistry.Api.Logging.interfaces;
 
 namespace MusiciansGearRegistry.Api.Core.Services;
 
@@ -15,7 +13,7 @@ public class EquipmentModelService : IEquipmentModelService
         this._equipmentModelRepo = equipmentModelRepository;
     }
 
-    public Task<EquipmentModelDto> EquipmentModel_Add(EquipmentModel equipmentModelDto, int userId)
+    public Task<EquipmentModel> EquipmentModel_Add(EquipmentModel equipmentModel, int userId)
     {
         throw new NotImplementedException();
     }
@@ -25,17 +23,17 @@ public class EquipmentModelService : IEquipmentModelService
         throw new NotImplementedException();
     }
 
-    public Task<EquipmentModelDto> EquipmentModel_Get(int equipmentModelId)
+    public Task<EquipmentModel> EquipmentModel_Get(int equipmentModelId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<EquipmentModelDto>> EquipmentModel_GetMany(int? manufacturerId, int? modelTypeId, string startsWith, int pageNumber, int pageCount)
+    public Task<List<EquipmentModel>> EquipmentModel_GetMany(int? manufacturerId, int? modelTypeId, string startsWith, int pageNumber, int pageCount)
     {
         throw new NotImplementedException();
     }
 
-    public Task<EquipmentModelDto> EquipmentModel_Update(EquipmentModel equipmentModelDto, int userId)
+    public Task<EquipmentModel> EquipmentModel_Update(EquipmentModel equipmentModel, int userId)
     {
         throw new NotImplementedException();
     }

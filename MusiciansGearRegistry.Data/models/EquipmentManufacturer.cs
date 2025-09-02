@@ -38,4 +38,7 @@ public partial class EquipmentManufacturer
 
     [StringLength(50)]
     public string DeletedBy { get; set; }
+
+    [InverseProperty("Manufacturer")]
+    public virtual ICollection<EquipmentModel> EquipmentModel { get; set; } = new List<EquipmentModel>();
 }
