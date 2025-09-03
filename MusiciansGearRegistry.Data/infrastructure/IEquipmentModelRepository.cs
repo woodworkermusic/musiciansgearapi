@@ -6,10 +6,7 @@ namespace MusiciansGearRegistry.Data.infrastructure;
 public interface IEquipmentModelRepository
 {
     Task<EquipmentModel> Get(int equipmentModelId);
-    Task<List<EquipmentModel>> GetMany(
-                int? manufacturerId,
-                int? modelId,
-                CommonSearchEntity searchEntity);
+    Task<List<EquipmentModel>> GetMany(CommonSearchEntity searchEntity);
 
     Task<EquipmentModel?> Add(
         EquipmentModel equipmentModel,

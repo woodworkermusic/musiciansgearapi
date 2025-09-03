@@ -28,31 +28,27 @@ public class EquipmentModelController : ApiControllerBase
 
     [Route("/Search")]
     [HttpPost]
-    public async Task<IActionResult> GetMany(int? manufacturerId
-        , int? modelId
-        , [FromBody] CommonSearchEntity manufacturerSearch)
+    public async Task<IActionResult> GetMany([FromBody] CommonSearchEntity manufacturerSearch)
     {
-        var dto = await _equipmentModelSvc.GetMany(manufacturerId, modelId, manufacturerSearch);
+        var dto = await _equipmentModelSvc.GetMany(manufacturerSearch);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [Route("/{userId}")]
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] EquipmentModel newModel
-        , int userId)
+    public async Task<IActionResult> Add([FromBody] EquipmentModel newModel)
     {
-        var dto = await _equipmentModelSvc.Add(newModel, userId);
+        //var dto = await _equipmentModelSvc.Add(newModel, userId);
+        var dto = await _equipmentModelSvc.Add(newModel, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [Route("/{userId}")]
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] EquipmentModel modelUpdate
-        , int userId)
+    public async Task<IActionResult> Update([FromBody] EquipmentModel modelUpdate)
     {
         // Will have to check against the logged in user to make sure they can update this piece of equipment
         // or that they are an admin.
-        var dto = await _equipmentModelSvc.Update(modelUpdate, userId);
+        //var dto = await _equipmentModelSvc.Update(modelUpdate, userId);
+        var dto = await _equipmentModelSvc.Update(modelUpdate, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 

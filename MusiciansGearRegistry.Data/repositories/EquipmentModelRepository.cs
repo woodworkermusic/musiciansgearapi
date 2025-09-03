@@ -27,19 +27,16 @@ public class EquipmentModelRepository : RepositoryBase, IEquipmentModelRepositor
     /// <param name="pageNumber"></param>
     /// <param name="pageCount"></param>
     /// <returns></returns>
-    public async Task<List<EquipmentModel>> GetMany(
-                int? manufacturerId,
-                int? modelId,
-                CommonSearchEntity searchEntity)
+    public async Task<List<EquipmentModel>> GetMany(CommonSearchEntity searchEntity)
     {
         return await _dbContext.EquipmentModel
             .Where(m =>
                 (
                     string.IsNullOrWhiteSpace(searchEntity.startsWith) ||
                     (!string.IsNullOrWhiteSpace(searchEntity.startsWith) && m.ModelName.StartsWith(searchEntity.startsWith))
-                ) &&
-                m.ManufacturerId == (manufacturerId != null ? manufacturerId.Value : m.ManufacturerId) &&
-                m.DeletedOn == null)
+                ) 
+                //&& m.ManufacturerId == (manufacturerId != null ? manufacturerId.Value : m.ManufacturerId) 
+                && m.DeletedOn == null)
             .Skip((searchEntity.pageNumber - 1) * searchEntity.pageSize)
             .Take(searchEntity.pageSize)
             .ToListAsync();

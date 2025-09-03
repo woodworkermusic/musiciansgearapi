@@ -29,13 +29,9 @@ public class EquipmentModelService : IEquipmentModelService
         return await _equipmentModelRepo.Get(equipmentModelId);
     }
 
-    public async Task<List<EquipmentModel>> GetMany(
-                int? manufacturerId,
-                int? modelId,
-                CommonSearchEntity searchEntity)
+    public async Task<List<EquipmentModel>> GetMany(CommonSearchEntity searchEntity)
     {
-        //return await _equipmentModelRepo.GetMany(manufacturerId, modelId, searchEntity);
-        throw new NotImplementedException();
+        return await _equipmentModelRepo.GetMany(searchEntity);
     }
 
     public async Task<EquipmentModel> Update(EquipmentModel equipmentModel, int userId)

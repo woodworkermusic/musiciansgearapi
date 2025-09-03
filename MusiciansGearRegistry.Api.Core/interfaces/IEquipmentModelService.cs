@@ -8,10 +8,7 @@ public interface IEquipmentModelService
     Task<EquipmentModel> Get(
         int equipmentModelId);
 
-    Task<List<EquipmentModel>> GetMany(
-                int? manufacturerId,
-                int? modelId,
-                CommonSearchEntity searchEntity);
+    Task<List<EquipmentModel>> GetMany(CommonSearchEntity searchEntity);
 
     Task<EquipmentModel> Add(
                 EquipmentModel equipmentModelDto,
