@@ -5,19 +5,19 @@ namespace MusiciansGearRegistry.Api.Core.interfaces;
 
 public interface IEquipmentTypeService
 {
-    Task<EquipmentModel> EquipmentType_Get(int EquipmentTypeId);
+    Task<EquipmentType> Get(int EquipmentTypeId);
 
-    Task<List<EquipmentType>> EquipmentType_GetMany(CommonSearchEntity equipmentTypeSearch);
+    Task<List<EquipmentType>> GetMany(CommonSearchEntity equipmentTypeSearch);
 
-    Task<EquipmentModel> EquipmentType_Add(
-                EquipmentModel equipmentType,
+    Task<EquipmentType> Add(
+                EquipmentType equipmentType,
                 int userId);
 
-    Task<EquipmentModel> EquipmentType_Update(
-                EquipmentModel equipmentType,
+    Task<EquipmentType> Update(
+                EquipmentType equipmentType,
                 int userId);
 
-    Task<bool> EquipmentType_Delete(
+    Task<bool> Delete(
                 int equipmentTypeId,
                 int userId);
 }

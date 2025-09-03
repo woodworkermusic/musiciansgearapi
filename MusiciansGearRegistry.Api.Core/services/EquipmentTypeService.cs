@@ -14,28 +14,28 @@ public class EquipmentTypeService : IEquipmentTypeService
         _equipmentTypeRepo = equipmentTypeRepo;
     }
 
-    public Task<EquipmentModel> EquipmentType_Add(EquipmentModel equipmentType, int userId)
+    public async Task<EquipmentType> Add(EquipmentType equipmentType, int userId)
     {
-        throw new NotImplementedException();
+        return await _equipmentTypeRepo.Add(equipmentType, userId);
     }
 
-    public Task<bool> EquipmentType_Delete(int equipmentTypeId, int userId)
+    public async Task<bool> Delete(int equipmentTypeId, int userId)
     {
-        throw new NotImplementedException();
+        return await _equipmentTypeRepo.Delete(equipmentTypeId, userId);
     }
 
-    public Task<EquipmentModel> EquipmentType_Get(int EquipmentTypeId)
+    public async Task<EquipmentType> Get(int equipmentTypeId)
     {
-        throw new NotImplementedException();
+        return await _equipmentTypeRepo.Get(equipmentTypeId);
     }
 
-    public Task<List<EquipmentType>> EquipmentType_GetMany(CommonSearchEntity equipmentTypeSearch)
+    public async Task<List<EquipmentType>> GetMany(CommonSearchEntity equipmentTypeSearch)
     {
-        throw new NotImplementedException();
+        return await _equipmentTypeRepo.GetMany(equipmentTypeSearch);
     }
 
-    public Task<EquipmentModel> EquipmentType_Update(EquipmentModel equipmentType, int userId)
+    public async Task<EquipmentType> Update(EquipmentType equipmentType, int userId)
     {
-        throw new NotImplementedException();
+        return await _equipmentTypeRepo.Update(equipmentType, userId);
     }
 }
