@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using MusiciansGearRegistry.Api.Core.Entities;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 
@@ -6,6 +7,7 @@ namespace MusiciansGearRegistry.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MusiciansGearRegistryApi")]
     public abstract class ApiControllerBase : ControllerBase
     {
         protected ILoggingService log { get; set; }
