@@ -5,17 +5,17 @@ using MusiciansGearRegistry.Data.Models;
 
 namespace MusiciansGearRegistry.Data.repositories;
 
-public class EquipmentModelRepository : RepositoryBase, IEquipmentModelRepository
+public class GearModelRepository : RepositoryBase, IGearModelRepository
 {
-    public EquipmentModelRepository(MusiciansGearRegistryContext dbContext) : base(dbContext)
+    public GearModelRepository(MusiciansGearRegistryContext dbContext) : base(dbContext)
     {
     }
 
-    public async Task<EquipmentModel> Get(int equipmentModelId)
+    public async Task<GearModel> Get(int GearModelId)
     {
-        return await _dbContext.EquipmentModel
+        return await _dbContext.GearModel
             .SingleAsync(x =>
-                x.EquipmentModelId == equipmentModelId &&
+                x.GearModelId == GearModelId &&
                 x.DeletedOn == null);
     }
 
@@ -27,9 +27,9 @@ public class EquipmentModelRepository : RepositoryBase, IEquipmentModelRepositor
     /// <param name="pageNumber"></param>
     /// <param name="pageCount"></param>
     /// <returns></returns>
-    public async Task<List<EquipmentModel>> GetMany(CommonSearchEntity searchEntity)
+    public async Task<List<GearModel>> GetMany(CommonSearchEntity searchEntity)
     {
-        return await _dbContext.EquipmentModel
+        return await _dbContext.GearModel
             .Where(m =>
                 (
                     string.IsNullOrWhiteSpace(searchEntity.startsWith) ||
@@ -42,43 +42,43 @@ public class EquipmentModelRepository : RepositoryBase, IEquipmentModelRepositor
             .ToListAsync();
     }
 
-    public async Task<EquipmentModel?> Add(
-        EquipmentModel equipmentModel,
+    public async Task<GearModel?> Add(
+        GearModel GearModel,
         int userId)
     {
-        if (!_dbContext.EquipmentModel.Any(a => a.ModelName == equipmentModel.ModelName && a.ManufacturerId == equipmentModel.ManufacturerId))
+        if (!_dbContext.GearModel.Any(a => a.ModelName == GearModel.ModelName && a.ManufacturerId == GearModel.ManufacturerId))
         {
-            equipmentModel.CreatedBy = userId.ToString();
-            equipmentModel.CreatedOn = DateTime.UtcNow;
+            GearModel.CreatedBy = userId.ToString();
+            GearModel.CreatedOn = DateTime.UtcNow;
 
-            _dbContext.EquipmentModel.Add(equipmentModel);
+            _dbContext.GearModel.Add(GearModel);
             await _dbContext.SaveChangesAsync();
 
-            return equipmentModel;
+            return GearModel;
         }
         return null;
     }
 
-    public async Task<EquipmentModel?> Update(
-        EquipmentModel equipmentModel,
+    public async Task<GearModel?> Update(
+        GearModel GearModel,
         int userId)
     {
         var currentModel = _dbContext
-            .EquipmentModel
-            .Single(s => s.EquipmentModelId == equipmentModel.EquipmentModelId);
+            .GearModel
+            .Single(s => s.GearModelId == GearModel.GearModelId);
 
         if (currentModel == null) return null;
 
-        if (!_dbContext.EquipmentModel.Any(a => a.ModelName == currentModel.ModelName && a.ManufacturerId == currentModel.ManufacturerId))
+        if (!_dbContext.GearModel.Any(a => a.ModelName == currentModel.ModelName && a.ManufacturerId == currentModel.ManufacturerId))
         {
-            currentModel.ModelName = equipmentModel.ModelName;
-            currentModel.Active = equipmentModel.Active;
-            currentModel.StartingDate = equipmentModel.StartingDate;
-            currentModel.EndingDate = equipmentModel.EndingDate;
+            currentModel.ModelName = GearModel.ModelName;
+            currentModel.Active = GearModel.Active;
+            currentModel.StartingDate = GearModel.StartingDate;
+            currentModel.EndingDate = GearModel.EndingDate;
             currentModel.ModifiedBy = userId.ToString();
             currentModel.ModifiedOn = DateTime.UtcNow;
 
-            _dbContext.EquipmentModel.Update(currentModel);
+            _dbContext.GearModel.Update(currentModel);
             await _dbContext.SaveChangesAsync();
 
             return currentModel;
@@ -88,12 +88,12 @@ public class EquipmentModelRepository : RepositoryBase, IEquipmentModelRepositor
     }
 
     public async Task<bool> Delete(
-        int equipmentModelId,
+        int GearModelId,
         int userId)
     {
         var currentModel = await _dbContext
-            .EquipmentModel
-            .SingleAsync(s => s.EquipmentModelId == equipmentModelId);
+            .GearModel
+            .SingleAsync(s => s.GearModelId == GearModelId);
 
         if (currentModel == null) return false;
 
@@ -101,7 +101,7 @@ public class EquipmentModelRepository : RepositoryBase, IEquipmentModelRepositor
         currentModel.DeletedBy = userId.ToString();
         currentModel.DeletedOn = DateTime.UtcNow;
 
-        _dbContext.EquipmentModel.Update(currentModel);
+        _dbContext.GearModel.Update(currentModel);
         await _dbContext.SaveChangesAsync();
 
         return true;

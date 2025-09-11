@@ -4,7 +4,7 @@
    "ContextNamespace": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
-   "MinimumProductVersion": "2.6.0",
+   "MinimumProductVersion": "2.6.1093",
    "ModelNamespace": null,
    "OutputContextPath": null,
    "OutputPath": "Models",
@@ -24,23 +24,19 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[EquipmentManufacturer]",
+         "Name": "[dbo].[GearModel]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[EquipmentModel]",
+         "Name": "[dbo].[GearModelImage]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[EquipmentModelImage]",
+         "Name": "[dbo].[GearType]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[EquipmentType]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[EquipmentTypeImage]",
+         "Name": "[dbo].[GearTypeImage]",
          "ObjectType": 0
       },
       {
@@ -56,15 +52,19 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Manufacturer]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[TransferHistory]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[UserEquipment]",
+         "Name": "[dbo].[UserGear]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[UserEquipmentImage]",
+         "Name": "[dbo].[UserGearImage]",
          "ObjectType": 0
       },
       {

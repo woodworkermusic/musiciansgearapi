@@ -47,7 +47,7 @@ public partial class UserProfile
     public DateTime? LastLogin { get; set; }
 
     [Required]
-    [StringLength(512)]
+    [StringLength(256)]
     public string UserPassword { get; set; }
 
     [Required]

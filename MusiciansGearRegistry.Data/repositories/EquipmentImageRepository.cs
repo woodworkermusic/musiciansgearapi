@@ -4,113 +4,113 @@ using MusiciansGearRegistry.Data.Models;
 
 namespace MusiciansGearRegistry.Data.repositories;
 
-public class EquipmentImageRepository : RepositoryBase, IEquipmentImageRepository
+public class GearImageRepository : RepositoryBase, IGearImageRepository
 {
-    public EquipmentImageRepository(MusiciansGearRegistryContext dbContext) : base(dbContext) { }
+    public GearImageRepository(MusiciansGearRegistryContext dbContext) : base(dbContext) { }
 
-    public async Task<UserEquipmentImage> Get_UserEquipmentImage(int id)
+    public async Task<UserGearImage> Get_UserGearImage(int id)
     {
         return await _dbContext
-            .UserEquipmentImage
-            .SingleAsync(s => s.UserEquipmentImageId == id);
+            .UserGearImage
+            .SingleAsync(s => s.UserGearImageId == id);
     }
 
-    public async Task<UserEquipmentImage> Add_UserEquipmentImage(UserEquipmentImage newImage)
+    public async Task<UserGearImage> Add_UserGearImage(UserGearImage newImage)
     {
         await _dbContext
-            .UserEquipmentImage
+            .UserGearImage
             .AddAsync(newImage);
 
         return newImage;
     }
 
-    public async Task<bool> Delete_UserEquipmentImage(int id
+    public async Task<bool> Delete_UserGearImage(int id
         , int userId)
     {
-        var equipmentImage = await Get_UserEquipmentImage(id);
+        var GearImage = await Get_UserGearImage(id);
 
-        if (equipmentImage != null) return false;
+        if (GearImage != null) return false;
 
-        equipmentImage.DeletedOn = DateTime.UtcNow;
-        equipmentImage.DeletedBy = userId.ToString();
+        GearImage.DeletedOn = DateTime.UtcNow;
+        GearImage.DeletedBy = userId.ToString();
 
         _dbContext
-            .UserEquipmentImage
-            .Update(equipmentImage);
+            .UserGearImage
+            .Update(GearImage);
 
         return true;
     }
 
-    public async Task<EquipmentModelImage> Get_EquipmentModelImage(int id)
+    public async Task<GearModelImage> Get_GearModelImage(int id)
     {
         return await _dbContext
-            .EquipmentModelImage
-            .SingleAsync(s => s.EquipmentModelImageId == id);
+            .GearModelImage
+            .SingleAsync(s => s.GearModelImageId == id);
     }
 
-    public async Task<EquipmentModelImage> Add_EquipmentModelImage(EquipmentModelImage newImage
+    public async Task<GearModelImage> Add_GearModelImage(GearModelImage newImage
         , int userId)
     {
         newImage.CreatedOn = DateTime.UtcNow;
         newImage.CreatedBy = userId.ToString();
 
         await _dbContext
-            .EquipmentModelImage
+            .GearModelImage
             .AddAsync(newImage);
 
         return newImage;
     }
 
-    public async Task<bool> Delete_EquipmentModelImage(int id
+    public async Task<bool> Delete_GearModelImage(int id
     , int userId)
     {
-        var equipmentImage = await Get_EquipmentModelImage(id);
+        var GearImage = await Get_GearModelImage(id);
 
-        if (equipmentImage != null) return false;
+        if (GearImage != null) return false;
 
-        equipmentImage.DeletedOn = DateTime.UtcNow;
-        equipmentImage.DeletedBy = userId.ToString();
+        GearImage.DeletedOn = DateTime.UtcNow;
+        GearImage.DeletedBy = userId.ToString();
 
         _dbContext
-            .EquipmentModelImage
-            .Update(equipmentImage);
+            .GearModelImage
+            .Update(GearImage);
 
         return true;
     }
 
-    public async Task<EquipmentTypeImage> Get_EquipmentTypeImage(int id)
+    public async Task<GearTypeImage> Get_GearTypeImage(int id)
     {
         return await _dbContext
-            .EquipmentTypeImage
-            .SingleAsync(s => s.EquipmentTypeImageId == id);
+            .GearTypeImage
+            .SingleAsync(s => s.GearTypeImageId == id);
     }
 
-    public async Task<EquipmentTypeImage> Add_EquipmentTypeImage(EquipmentTypeImage newImage
+    public async Task<GearTypeImage> Add_GearTypeImage(GearTypeImage newImage
         , int userId)
     {
         newImage.CreatedOn = DateTime.UtcNow;
         newImage.CreatedBy = userId.ToString();
 
         await _dbContext
-            .EquipmentTypeImage
+            .GearTypeImage
             .AddAsync(newImage);
 
         return newImage;
     }
 
-    public async Task<bool> Delete_EquipmentTypeImage(int id
+    public async Task<bool> Delete_GearTypeImage(int id
     , int userId)
     {
-        var equipmentImage = await Get_EquipmentTypeImage(id);
+        var GearImage = await Get_GearTypeImage(id);
 
-        if (equipmentImage != null) return false;
+        if (GearImage != null) return false;
 
-        equipmentImage.DeletedOn = DateTime.UtcNow;
-        equipmentImage.DeletedBy = userId.ToString();
+        GearImage.DeletedOn = DateTime.UtcNow;
+        GearImage.DeletedBy = userId.ToString();
 
         _dbContext
-            .EquipmentTypeImage
-            .Update(equipmentImage);
+            .GearTypeImage
+            .Update(GearImage);
 
         return true;
     }

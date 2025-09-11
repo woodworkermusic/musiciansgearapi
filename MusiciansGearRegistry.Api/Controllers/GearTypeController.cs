@@ -8,21 +8,21 @@ namespace MusiciansGearRegistry.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class EquipmentTypeController : ApiControllerBase
+public class GearTypeController : ApiControllerBase
 {
-    private readonly IEquipmentTypeService _equipmentTypeService;
+    private readonly IGearTypeService _GearTypeService;
 
-    public EquipmentTypeController(IEquipmentTypeService equipmentTypeService
-        , ILoggingService logSvc) : base(logSvc, "EquipmentType")
+    public GearTypeController(IGearTypeService GearTypeService
+        , ILoggingService logSvc) : base(logSvc, "GearType")
     {
-        _equipmentTypeService = equipmentTypeService;
+        _GearTypeService = GearTypeService;
     }
 
     [Route("/{typeId}")]
     [HttpGet]
     public async Task<IActionResult> Get(int typeId)
     {
-        var dto = await _equipmentTypeService.Get(typeId);
+        var dto = await _GearTypeService.Get(typeId);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
@@ -30,25 +30,25 @@ public class EquipmentTypeController : ApiControllerBase
     [HttpPost]
     public async Task<IActionResult> GetMany([FromBody] CommonSearchEntity manufacturerSearch)
     {
-        var dto = await _equipmentTypeService.GetMany(manufacturerSearch);
+        var dto = await _GearTypeService.GetMany(manufacturerSearch);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] EquipmentType newType)
+    public async Task<IActionResult> Add([FromBody] GearType newType)
     {
-        //var dto = await _equipmentTypeService.Add(newType, userId);
-        var dto = await _equipmentTypeService.Add(newType, 1);
+        //var dto = await _GearTypeService.Add(newType, userId);
+        var dto = await _GearTypeService.Add(newType, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] EquipmentType typeUpdate)
+    public async Task<IActionResult> Update([FromBody] GearType typeUpdate)
     {
-        // Will have to check against the logged in user to make sure they can update this piece of equipment
+        // Will have to check against the logged in user to make sure they can update this piece of Gear
         // or that they are an admin.
-        //var dto = await _equipmentTypeService.Update(typeUpdate, userId);
-        var dto = await _equipmentTypeService.Update(typeUpdate, 1);
+        //var dto = await _GearTypeService.Update(typeUpdate, userId);
+        var dto = await _GearTypeService.Update(typeUpdate, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
@@ -59,7 +59,7 @@ public class EquipmentTypeController : ApiControllerBase
     {
         // Will have to check against the logged in user to make sure they are either the current gear owner 
         // or an admin level user to do this.
-        var dto = await _equipmentTypeService.Delete(typeId, userId);
+        var dto = await _GearTypeService.Delete(typeId, userId);
         return Ok(dto);
     }
 }

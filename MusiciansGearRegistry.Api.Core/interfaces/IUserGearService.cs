@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace MusiciansGearRegistry.Api.Core.interfaces;
 
-public interface IUserEquipmentService
+public interface IUserGearService
 {
 }

@@ -15,7 +15,7 @@ public partial class TransferHistory
     [Key]
     public int TransferHistoryId { get; set; }
 
-    public int UserEquipmentId { get; set; }
+    public int UserGearId { get; set; }
 
     public int? UserProfileId { get; set; }
 

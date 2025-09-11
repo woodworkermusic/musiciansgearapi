@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("EquipmentModelImageId", Name = "IX_EquipmentModelImage_1")]
-public partial class EquipmentModelImage
+[Index("UserGearId", Name = "IX_UserGearImage_1")]
+public partial class UserGearImage
 {
     [Key]
-    public int EquipmentModelImageId { get; set; }
+    public int UserGearImageId { get; set; }
 
-    public int EquipmentModelId { get; set; }
+    public int UserGearId { get; set; }
 
     [Required]
     [StringLength(512)]
@@ -42,7 +42,7 @@ public partial class EquipmentModelImage
     [StringLength(50)]
     public string DeletedBy { get; set; }
 
-    [ForeignKey("EquipmentModelId")]
-    [InverseProperty("EquipmentModelImage")]
-    public virtual EquipmentModel EquipmentModel { get; set; }
+    [ForeignKey("UserGearId")]
+    [InverseProperty("UserGearImage")]
+    public virtual UserGear UserGear { get; set; }
 }

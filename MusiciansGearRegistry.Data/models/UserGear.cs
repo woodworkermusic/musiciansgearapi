@@ -8,22 +8,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("ManufacturerId", Name = "IX_EquipmentType_1")]
-[Index("ManufacturerId", "Active", Name = "IX_EquipmentType_2")]
-public partial class EquipmentType
+[Index("UserProfileId", Name = "IX_UserGear_1")]
+[Index("GearModelId", Name = "IX_UserGear_2")]
+public partial class UserGear
 {
     [Key]
-    public int EquipmentTypeId { get; set; }
+    public int UserGearId { get; set; }
 
-    public int ManufacturerId { get; set; }
+    public int UserProfileId { get; set; }
 
     public bool Active { get; set; }
 
-    [StringLength(100)]
-    public string EquipmentTypeName { get; set; }
+    public int GearModelId { get; set; }
 
-    [StringLength(40)]
-    public string EquipmentSubType { get; set; }
+    [StringLength(100)]
+    public string SerialNumber { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? DateAcquired { get; set; }
+
+    public bool? IsOriginal { get; set; }
+
+    public int? ClientId_PurchasedFrom { get; set; }
+
+    public string GearNotes { get; set; }
 
     [Required]
     [StringLength(50)]
@@ -44,9 +52,6 @@ public partial class EquipmentType
     [StringLength(50)]
     public string DeletedBy { get; set; }
 
-    [InverseProperty("EquipmentType")]
-    public virtual ICollection<EquipmentModel> EquipmentModel { get; set; } = new List<EquipmentModel>();
-
-    [InverseProperty("EquipmentType")]
-    public virtual ICollection<EquipmentTypeImage> EquipmentTypeImage { get; set; } = new List<EquipmentTypeImage>();
+    [InverseProperty("UserGear")]
+    public virtual ICollection<UserGearImage> UserGearImage { get; set; } = new List<UserGearImage>();
 }

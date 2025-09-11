@@ -8,19 +8,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("ManufacturerId", Name = "IX_EquipmentModel_1")]
-[Index("EquipmentTypeId", Name = "IX_EquipmentModel_2")]
-[Index("ModelName", Name = "IX_EquipmentModel_3")]
-[Index("ManufacturerId", "EquipmentTypeId", Name = "IX_EquipmentModel_4")]
-[Index("ManufacturerId", "EquipmentTypeId", "ModelName", Name = "IX_EquipmentModel_5")]
-public partial class EquipmentModel
+[Index("ManufacturerId", Name = "IX_GearModel_1")]
+[Index("GearTypeId", Name = "IX_GearModel_2")]
+[Index("ModelName", Name = "IX_GearModel_3")]
+[Index("ManufacturerId", "GearTypeId", Name = "IX_GearModel_4")]
+[Index("ManufacturerId", "GearTypeId", "ModelName", Name = "IX_GearModel_5")]
+public partial class GearModel
 {
     [Key]
-    public int EquipmentModelId { get; set; }
+    public int GearModelId { get; set; }
 
     public int ManufacturerId { get; set; }
 
-    public int EquipmentTypeId { get; set; }
+    public int GearTypeId { get; set; }
 
     [Required]
     [StringLength(100)]
@@ -53,14 +53,14 @@ public partial class EquipmentModel
     [StringLength(50)]
     public string DeletedBy { get; set; }
 
-    [InverseProperty("EquipmentModel")]
-    public virtual ICollection<EquipmentModelImage> EquipmentModelImage { get; set; } = new List<EquipmentModelImage>();
+    [InverseProperty("GearModel")]
+    public virtual ICollection<GearModelImage> GearModelImage { get; set; } = new List<GearModelImage>();
 
-    [ForeignKey("EquipmentTypeId")]
-    [InverseProperty("EquipmentModel")]
-    public virtual EquipmentType EquipmentType { get; set; }
+    [ForeignKey("GearTypeId")]
+    [InverseProperty("GearModel")]
+    public virtual GearType GearType { get; set; }
 
     [ForeignKey("ManufacturerId")]
-    [InverseProperty("EquipmentModel")]
-    public virtual EquipmentManufacturer Manufacturer { get; set; }
+    [InverseProperty("GearModel")]
+    public virtual Manufacturer Manufacturer { get; set; }
 }

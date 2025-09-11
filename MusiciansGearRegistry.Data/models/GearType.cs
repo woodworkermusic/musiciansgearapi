@@ -8,20 +8,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("EquipmentTypeImageId", Name = "IX_EquipmentTypeImage_1")]
-public partial class EquipmentTypeImage
+[Index("ManufacturerId", Name = "IX_GearType_1")]
+[Index("ManufacturerId", "Active", Name = "IX_GearType_2")]
+public partial class GearType
 {
     [Key]
-    public int EquipmentTypeImageId { get; set; }
+    public int GearTypeId { get; set; }
 
-    public int EquipmentTypeId { get; set; }
+    public int ManufacturerId { get; set; }
 
-    [Required]
-    [StringLength(512)]
-    public string ImageFile { get; set; }
+    public bool Active { get; set; }
 
-    [Column(TypeName = "image")]
-    public byte[] ImageData { get; set; }
+    [StringLength(100)]
+    public string GearTypeName { get; set; }
+
+    [StringLength(40)]
+    public string GearSubType { get; set; }
 
     [Required]
     [StringLength(50)]
@@ -42,7 +44,9 @@ public partial class EquipmentTypeImage
     [StringLength(50)]
     public string DeletedBy { get; set; }
 
-    [ForeignKey("EquipmentTypeId")]
-    [InverseProperty("EquipmentTypeImage")]
-    public virtual EquipmentType EquipmentType { get; set; }
+    [InverseProperty("GearType")]
+    public virtual ICollection<GearModel> GearModel { get; set; } = new List<GearModel>();
+
+    [InverseProperty("GearType")]
+    public virtual ICollection<GearTypeImage> GearTypeImage { get; set; } = new List<GearTypeImage>();
 }

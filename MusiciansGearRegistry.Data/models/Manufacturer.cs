@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-public partial class EquipmentManufacturer
+public partial class Manufacturer
 {
     [Key]
     public int ManufacturerId { get; set; }
@@ -40,5 +40,5 @@ public partial class EquipmentManufacturer
     public string DeletedBy { get; set; }
 
     [InverseProperty("Manufacturer")]
-    public virtual ICollection<EquipmentModel> EquipmentModel { get; set; } = new List<EquipmentModel>();
+    public virtual ICollection<GearModel> GearModel { get; set; } = new List<GearModel>();
 }

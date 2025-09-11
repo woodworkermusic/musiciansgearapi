@@ -8,21 +8,21 @@ namespace MusiciansGearRegistry.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class EquipmentModelController : ApiControllerBase
+public class GearModelController : ApiControllerBase
 {
-    private readonly IEquipmentModelService _equipmentModelSvc; 
+    private readonly IGearModelService _gearModelSvc; 
 
-    public EquipmentModelController(IEquipmentModelService equipmentModelSvc,
+    public GearModelController(IGearModelService equipmentModelSvc,
         ILoggingService logSvc) : base(logSvc, "EquipmentModel") 
     {
-        _equipmentModelSvc = equipmentModelSvc;
+        _gearModelSvc = equipmentModelSvc;
     }
 
     [Route("/{modelId}")]
     [HttpGet]
     public async Task<IActionResult> Get(int modelId)
     {
-        var dto = await _equipmentModelSvc.Get(modelId);
+        var dto = await _gearModelSvc.Get(modelId);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
@@ -30,25 +30,25 @@ public class EquipmentModelController : ApiControllerBase
     [HttpPost]
     public async Task<IActionResult> GetMany([FromBody] CommonSearchEntity manufacturerSearch)
     {
-        var dto = await _equipmentModelSvc.GetMany(manufacturerSearch);
+        var dto = await _gearModelSvc.GetMany(manufacturerSearch);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] EquipmentModel newModel)
+    public async Task<IActionResult> Add([FromBody] GearModel newModel)
     {
-        //var dto = await _equipmentModelSvc.Add(newModel, userId);
-        var dto = await _equipmentModelSvc.Add(newModel, 1);
+        //var dto = await _GearModelSvc.Add(newModel, userId);
+        var dto = await _gearModelSvc.Add(newModel, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] EquipmentModel modelUpdate)
+    public async Task<IActionResult> Update([FromBody] GearModel modelUpdate)
     {
-        // Will have to check against the logged in user to make sure they can update this piece of equipment
+        // Will have to check against the logged in user to make sure they can update this piece of Gear
         // or that they are an admin.
-        //var dto = await _equipmentModelSvc.Update(modelUpdate, userId);
-        var dto = await _equipmentModelSvc.Update(modelUpdate, 1);
+        //var dto = await _GearModelSvc.Update(modelUpdate, userId);
+        var dto = await _gearModelSvc.Update(modelUpdate, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
@@ -59,7 +59,7 @@ public class EquipmentModelController : ApiControllerBase
     {
         // Will have to check against the logged in user to make sure they are either the current gear owner 
         // or an admin level user to do this.
-        var dto = await _equipmentModelSvc.Delete(modelId, userId);
+        var dto = await _gearModelSvc.Delete(modelId, userId);
         return Ok(dto);
     }
 }

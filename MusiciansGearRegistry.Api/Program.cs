@@ -15,19 +15,19 @@ using MusiciansGearRegistry.Data.repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped(typeof(IEquipmentImageService), typeof (EquipmentImageService));
-builder.Services.AddScoped(typeof(IEquipmentManufacturerService), typeof(EquipmentManufacturerService));
-builder.Services.AddScoped(typeof(IEquipmentModelService), typeof(EquipmentModelService));
-builder.Services.AddScoped(typeof(IEquipmentTypeService), typeof(EquipmentTypeService));
+builder.Services.AddScoped(typeof(IGearImageService), typeof (GearImageService));
+builder.Services.AddScoped(typeof(IManufacturerService), typeof(ManufacturerService));
+builder.Services.AddScoped(typeof(IGearModelService), typeof(GearModelService));
+builder.Services.AddScoped(typeof(IGearTypeService), typeof(GearTypeService));
 builder.Services.AddScoped(typeof(IUserProfileService), typeof(UserProfileService));
-builder.Services.AddScoped(typeof(IUserEquipmentService), typeof(UserEquipmentService));
+builder.Services.AddScoped(typeof(IUserGearService), typeof(UserGearService));
 
 // repositories:
-builder.Services.AddScoped(typeof(IEquipmentImageRepository), typeof(EquipmentImageRepository));
-builder.Services.AddScoped(typeof(IEquipmentManufacturerRepository), typeof(EquipmentManufacturerRepository));
-builder.Services.AddScoped(typeof(IEquipmentModelRepository), typeof(EquipmentModelRepository));
-builder.Services.AddScoped(typeof(IEquipmentTypeRepository), typeof(EquipmentTypeRepository));
-builder.Services.AddScoped(typeof(IUserEquipmentRepository), typeof(UserEquipmentRepository));
+builder.Services.AddScoped(typeof(IGearImageRepository), typeof(GearImageRepository));
+builder.Services.AddScoped(typeof(IManufacturerRepository), typeof(ManufacturerRepository));
+builder.Services.AddScoped(typeof(IGearModelRepository), typeof(GearModelRepository));
+builder.Services.AddScoped(typeof(IGearTypeRepository), typeof(GearTypeRepository));
+builder.Services.AddScoped(typeof(IUserGearRepository), typeof(UserGearRepository));
 builder.Services.AddScoped(typeof(IUserProfileRepository), typeof(UserProfileRepository));
 
 // security / logging
