@@ -17,21 +17,25 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
         return await _dbContext.Manufacturer.SingleAsync(s => s.ManufacturerId == manufacturerId && s.DeletedOn != null);
     }
 
-    public async Task<List<Manufacturer>> GetMany(CommonSearchEntity manufacturerSearch)
+    public async Task<List<Manufacturer>> GetMany(CommonSearchEntity search)
     {
-        manufacturerSearch.startsWith = manufacturerSearch.startsWith.Trim();
+        search.startsWith = search.startsWith.Trim();
 
-        if (string.IsNullOrEmpty(manufacturerSearch.startsWith))
-            return new List<Manufacturer>();
+        //if (string.IsNullOrEmpty(manufacturerSearch.startsWith))
+        //    return new List<Manufacturer>();
 
         return await _dbContext.Manufacturer
             .Where(m =>
-                m.ManufacturerName.StartsWith(manufacturerSearch.startsWith)
-                && m.DeletedOn == null
+                (
+                    string.IsNullOrEmpty(search.startsWith) ||
+                    m.ManufacturerName.StartsWith(search.startsWith)
+                )
+                && 
+                (search.includeDeleted || (m.DeletedOn == null))
                 )
             .OrderBy(ob => ob.ManufacturerName)
-            .Skip((manufacturerSearch.pageNumber - 1) * manufacturerSearch.pageSize)
-            .Take(manufacturerSearch.pageSize)
+            .Skip((search.pageNumber - 1) * search.pageSize)
+            .Take(search.pageSize)
             .ToListAsync();
     }
 

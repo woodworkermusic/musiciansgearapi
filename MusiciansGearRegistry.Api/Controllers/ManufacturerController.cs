@@ -19,16 +19,14 @@ public class ManufacturerController : ApiControllerBase
         _MfrSvc = MfrSvc;
     }
 
-    [Route("/{manufacturerId}")]
-    [HttpGet]
-    public async Task<IActionResult> Get(int manufacturerId)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Get(int id)
     {
-        var dto = await _MfrSvc.Get(manufacturerId);
+        var dto = await _MfrSvc.Get(id);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [Route("/Search")]
-    [HttpPost]
+    [HttpPost("Search")]
     public async Task<IActionResult> GetMany([FromBody] CommonSearchEntity manufacturerSearch)
     {
         var dto = await _MfrSvc.GetMany(manufacturerSearch);
@@ -51,8 +49,7 @@ public class ManufacturerController : ApiControllerBase
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [Route("/{manufacturerId}/{userId}")]
-    [HttpDelete]
+    [HttpDelete("/{manufacturerId}/{userId}")]
     public async Task<IActionResult> Delete(int manufacturerId
         , int userId)
     {

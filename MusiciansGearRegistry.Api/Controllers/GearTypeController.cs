@@ -18,16 +18,14 @@ public class GearTypeController : ApiControllerBase
         _GearTypeService = GearTypeService;
     }
 
-    [Route("/{typeId}")]
-    [HttpGet]
-    public async Task<IActionResult> Get(int typeId)
+    [HttpGet("/{id}")]
+    public async Task<IActionResult> Get(int id)
     {
-        var dto = await _GearTypeService.Get(typeId);
+        var dto = await _GearTypeService.Get(id);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [Route("/Search")]
-    [HttpPost]
+    [HttpPost("Search")]
     public async Task<IActionResult> GetMany([FromBody] CommonSearchEntity manufacturerSearch)
     {
         var dto = await _GearTypeService.GetMany(manufacturerSearch);
@@ -52,8 +50,7 @@ public class GearTypeController : ApiControllerBase
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [Route("/{modelId}/{userId}")]
-    [HttpDelete]
+    [HttpDelete("/{modelId}/{userId}")]
     public async Task<IActionResult> Delete(int typeId
         , int userId)
     {
