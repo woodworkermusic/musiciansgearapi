@@ -18,10 +18,10 @@ public class GearModelController : ApiControllerBase
         _gearModelSvc = equipmentModelSvc;
     }
 
-    [HttpGet("/{id}")]
-    public async Task<IActionResult> Get(int id)
+    [HttpGet("{gearModelId}")]
+    public async Task<IActionResult> Get(int gearModelId)
     {
-        var dto = await _gearModelSvc.Get(id);
+        var dto = await _gearModelSvc.Get(gearModelId);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
@@ -50,7 +50,7 @@ public class GearModelController : ApiControllerBase
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [HttpDelete("/{modelId}/{userId}")]
+    [HttpDelete("{modelId}/{userId}")]
     public async Task<IActionResult> Delete(int modelId
         , int userId)
     {

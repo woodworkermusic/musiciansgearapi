@@ -19,10 +19,10 @@ public class ManufacturerController : ApiControllerBase
         _MfrSvc = MfrSvc;
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)
+    [HttpGet("{manufacturerId}")]
+    public async Task<IActionResult> Get(int manufacturerId)
     {
-        var dto = await _MfrSvc.Get(id);
+        var dto = await _MfrSvc.Get(manufacturerId);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
@@ -49,7 +49,7 @@ public class ManufacturerController : ApiControllerBase
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [HttpDelete("/{manufacturerId}/{userId}")]
+    [HttpDelete("{manufacturerId}/{userId}")]
     public async Task<IActionResult> Delete(int manufacturerId
         , int userId)
     {
