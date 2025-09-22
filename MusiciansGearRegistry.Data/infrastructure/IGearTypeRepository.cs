@@ -6,7 +6,7 @@ namespace MusiciansGearRegistry.Data.infrastructure;
 public interface IGearTypeRepository
 {
     Task<GearType> Get(int GearTypeId);
-    Task<Dictionary<Guid, GearType>> GetMany(CommonSearchEntity GearTypeSearch);
+    Task<List<KeyValuePair<Guid,  GearType>>> GetMany(CommonSearchEntity GearTypeSearch);
 
     Task<GearType?> Add(
         GearType GearType,

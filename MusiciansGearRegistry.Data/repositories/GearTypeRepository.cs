@@ -27,7 +27,7 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
     /// <param name="pageNumber"></param>
     /// <param name="pageCount"></param>
     /// <returns></returns>
-    public async Task<Dictionary<Guid, GearType>> GetMany(CommonSearchEntity GearTypeSearch)
+    public async Task<List<KeyValuePair<Guid,  GearType>>> GetMany(CommonSearchEntity GearTypeSearch)
     {
         string startsWith = (!string.IsNullOrWhiteSpace(GearTypeSearch.startsWith) ? GearTypeSearch.startsWith.Trim() : string.Empty);
 
@@ -42,8 +42,8 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
             .OrderBy(ob => ob.GearTypeName)
             .ToListAsync();
 
-        var searchResponse = new Dictionary<Guid, GearType>();
-        searchResult.ForEach(f => searchResponse.Add(Guid.NewGuid(), f));
+        var searchResponse = new List<KeyValuePair<Guid,  GearType>>();
+        searchResult.ForEach(f => searchResponse.Add(KeyValuePair.Create(Guid.NewGuid(), f)));
 
         return searchResponse;
     }

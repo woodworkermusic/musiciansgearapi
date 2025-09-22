@@ -29,7 +29,7 @@ public class GearModelService : IGearModelService
         return await _GearModelRepo.Get(GearModelId);
     }
 
-    public async Task<Dictionary<Guid, GearModel>> GetMany(CommonSearchEntity searchEntity)
+    public async Task<List<KeyValuePair<Guid,  GearModel>>> GetMany(CommonSearchEntity searchEntity)
     {
         return await _GearModelRepo.GetMany(searchEntity);
     }
