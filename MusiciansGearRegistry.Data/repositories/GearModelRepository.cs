@@ -27,9 +27,9 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
     /// <param name="pageNumber"></param>
     /// <param name="pageCount"></param>
     /// <returns></returns>
-    public async Task<List<GearModel>> GetMany(CommonSearchEntity searchEntity)
+    public async Task<Dictionary<Guid, GearModel>> GetMany(CommonSearchEntity searchEntity)
     {
-        return await _dbContext.GearModel
+        var searchResult = await _dbContext.GearModel
             .Where(m =>
                 (
                     string.IsNullOrWhiteSpace(searchEntity.startsWith) ||
@@ -40,6 +40,12 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
             .Skip((searchEntity.pageNumber - 1) * searchEntity.pageSize)
             .Take(searchEntity.pageSize)
             .ToListAsync();
+
+        var searchResponse = new Dictionary<Guid, GearModel>();
+        searchResult.ForEach(f => searchResponse.Add(Guid.NewGuid(), f));
+
+        return searchResponse;
+
     }
 
     public async Task<GearModel?> Add(

@@ -9,7 +9,7 @@ public interface IManufacturerService
     Task<Manufacturer> Get(
             int manufacturerId);
 
-    Task<List<Manufacturer>> GetMany(CommonSearchEntity manufacturerSearch);
+    Task<List<KeyValuePair<Guid, Manufacturer>>> GetMany(CommonSearchEntity manufacturerSearch);
 
     Task<Manufacturer> Add(
                 dtoManufacturer Manufacturer,

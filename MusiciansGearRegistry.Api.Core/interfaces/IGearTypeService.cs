@@ -7,7 +7,7 @@ public interface IGearTypeService
 {
     Task<GearType> Get(int GearTypeId);
 
-    Task<List<GearType>> GetMany(CommonSearchEntity GearTypeSearch);
+    Task<Dictionary<Guid, GearType>> GetMany(CommonSearchEntity GearTypeSearch);
 
     Task<GearType> Add(
                 GearType GearType,

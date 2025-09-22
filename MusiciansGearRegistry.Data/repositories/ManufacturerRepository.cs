@@ -17,26 +17,28 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
         return await _dbContext.Manufacturer.SingleAsync(s => s.ManufacturerId == manufacturerId && s.DeletedOn != null);
     }
 
-    public async Task<List<Manufacturer>> GetMany(CommonSearchEntity search)
+    public async Task<List<KeyValuePair<Guid, Manufacturer>>> GetMany(CommonSearchEntity search)
     {
         search.startsWith = search.startsWith.Trim();
 
-        //if (string.IsNullOrEmpty(manufacturerSearch.startsWith))
-        //    return new List<Manufacturer>();
-
-        return await _dbContext.Manufacturer
+        var searchResult = await _dbContext.Manufacturer
             .Where(m =>
                 (
                     string.IsNullOrEmpty(search.startsWith) ||
                     m.ManufacturerName.StartsWith(search.startsWith)
                 )
-                && 
+                &&
                 (search.includeDeleted || (m.DeletedOn == null))
                 )
             .OrderBy(ob => ob.ManufacturerName)
             .Skip((search.pageNumber - 1) * search.pageSize)
             .Take(search.pageSize)
             .ToListAsync();
+
+        var searchResponse = new List<KeyValuePair<Guid, Manufacturer>>();
+        searchResult.ForEach(f => searchResponse.Add(KeyValuePair.Create(Guid.NewGuid(), f)));
+
+        return searchResponse;
     }
 
     public async Task<Manufacturer> Add(

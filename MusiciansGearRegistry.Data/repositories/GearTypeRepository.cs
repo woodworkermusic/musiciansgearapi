@@ -27,11 +27,11 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
     /// <param name="pageNumber"></param>
     /// <param name="pageCount"></param>
     /// <returns></returns>
-    public async Task<List<GearType>> GetMany(CommonSearchEntity GearTypeSearch)
+    public async Task<Dictionary<Guid, GearType>> GetMany(CommonSearchEntity GearTypeSearch)
     {
         string startsWith = (!string.IsNullOrWhiteSpace(GearTypeSearch.startsWith) ? GearTypeSearch.startsWith.Trim() : string.Empty);
 
-        return await _dbContext.GearType
+        var searchResult = await _dbContext.GearType
             .Where(m =>
                 (
                 (startsWith == string.Empty) || m.GearTypeName.StartsWith(startsWith)
@@ -41,6 +41,11 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
             .Take(GearTypeSearch.pageSize)
             .OrderBy(ob => ob.GearTypeName)
             .ToListAsync();
+
+        var searchResponse = new Dictionary<Guid, GearType>();
+        searchResult.ForEach(f => searchResponse.Add(Guid.NewGuid(), f));
+
+        return searchResponse;
     }
 
     public async Task<GearType?> Add(
