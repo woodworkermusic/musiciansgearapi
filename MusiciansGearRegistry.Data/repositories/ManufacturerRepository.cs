@@ -14,7 +14,7 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
 
     public async Task<Manufacturer> Get(int manufacturerId)
     {
-        return await _dbContext.Manufacturer.SingleAsync(s => s.ManufacturerId == manufacturerId && s.DeletedOn != null);
+        return await _dbContext.Manufacturer.SingleOrDefaultAsync(s => s.ManufacturerId == manufacturerId && s.DeletedOn == null);
     }
 
     public async Task<List<KeyValuePair<Guid, Manufacturer>>> GetMany(CommonSearchEntity search)
@@ -72,7 +72,7 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
     {
         var currentManufacturer = await _dbContext
             .Manufacturer
-            .SingleAsync(x =>
+            .SingleOrDefaultAsync(x =>
                 x.ManufacturerId == dto.ManufacturerId &&
                 x.DeletedOn == null);
 
@@ -99,7 +99,7 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
     {
         var existingManufacturer = await _dbContext
             .Manufacturer
-            .SingleAsync(x =>
+            .SingleOrDefaultAsync(x =>
                 x.ManufacturerId == manufacturerId &&
                 x.DeletedOn == null);
 

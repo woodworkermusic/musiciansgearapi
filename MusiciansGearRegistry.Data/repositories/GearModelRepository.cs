@@ -14,7 +14,7 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
     public async Task<GearModel> Get(int GearModelId)
     {
         return await _dbContext.GearModel
-            .SingleAsync(x =>
+            .SingleOrDefaultAsync(x =>
                 x.GearModelId == GearModelId &&
                 x.DeletedOn == null);
     }
@@ -69,9 +69,9 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
         GearModel GearModel,
         int userId)
     {
-        var currentModel = _dbContext
+        var currentModel = await _dbContext
             .GearModel
-            .Single(s => s.GearModelId == GearModel.GearModelId);
+            .SingleOrDefaultAsync(s => s.GearModelId == GearModel.GearModelId);
 
         if (currentModel == null) return null;
 
@@ -99,7 +99,7 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
     {
         var currentModel = await _dbContext
             .GearModel
-            .SingleAsync(s => s.GearModelId == GearModelId);
+            .SingleOrDefaultAsync(s => s.GearModelId == GearModelId);
 
         if (currentModel == null) return false;
 

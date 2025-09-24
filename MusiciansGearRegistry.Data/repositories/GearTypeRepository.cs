@@ -14,7 +14,7 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
     public async Task<GearType> Get(int GearTypeId)
     {
         return await _dbContext.GearType
-            .SingleAsync(x =>
+            .SingleOrDefaultAsync(x =>
                 x.GearTypeId == GearTypeId &&
                 x.DeletedOn == null);
     }
@@ -86,7 +86,7 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
     {
         var GearType = await _dbContext
             .GearType
-            .SingleAsync(s => s.GearTypeId == GearTypeId);
+            .SingleOrDefaultAsync(s => s.GearTypeId == GearTypeId);
 
         if (GearType == null) return false;
 
