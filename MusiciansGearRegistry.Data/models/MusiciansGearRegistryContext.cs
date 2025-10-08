@@ -21,9 +21,13 @@ public partial class MusiciansGearRegistryContext : DbContext
 
     public virtual DbSet<GearModelImage> GearModelImage { get; set; }
 
+    public virtual DbSet<GearModelNotes> GearModelNotes { get; set; }
+
     public virtual DbSet<GearType> GearType { get; set; }
 
     public virtual DbSet<GearTypeImage> GearTypeImage { get; set; }
+
+    public virtual DbSet<GearTypeNotes> GearTypeNotes { get; set; }
 
     public virtual DbSet<IncidentReport> IncidentReport { get; set; }
 
@@ -32,6 +36,8 @@ public partial class MusiciansGearRegistryContext : DbContext
     public virtual DbSet<Location> Location { get; set; }
 
     public virtual DbSet<Manufacturer> Manufacturer { get; set; }
+
+    public virtual DbSet<ManufacturerNotes> ManufacturerNotes { get; set; }
 
     public virtual DbSet<TransferHistory> TransferHistory { get; set; }
 
@@ -45,7 +51,7 @@ public partial class MusiciansGearRegistryContext : DbContext
     {
         modelBuilder.Entity<Client>(entity =>
         {
-            entity.HasKey(e => e.ClientId).HasName("PK__Client__E67E1A241C3B8E42");
+            entity.HasKey(e => e.ClientId).HasName("PK__Client__E67E1A24C9963309");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
@@ -53,7 +59,7 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<ClientContact>(entity =>
         {
-            entity.HasKey(e => e.ClientContactId).HasName("PK__ClientCo__421FAD88146B145A");
+            entity.HasKey(e => e.ClientContactId).HasName("PK__ClientCo__421FAD88F2C452B6");
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
@@ -62,7 +68,7 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<GearModel>(entity =>
         {
-            entity.HasKey(e => e.GearModelId).HasName("PK__GearMode__9ECFAE91E456D031");
+            entity.HasKey(e => e.GearModelId).HasName("PK__GearMode__9ECFAE9103139320");
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
@@ -70,28 +76,40 @@ public partial class MusiciansGearRegistryContext : DbContext
 
             entity.HasOne(d => d.GearType).WithMany(p => p.GearModel)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_GearType");
+                .HasConstraintName("fk_gearModel_gearType");
 
             entity.HasOne(d => d.Manufacturer).WithMany(p => p.GearModel)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_GearManufacturer");
+                .HasConstraintName("fk_gearManufacturer");
         });
 
         modelBuilder.Entity<GearModelImage>(entity =>
         {
-            entity.HasKey(e => e.GearModelImageId).HasName("PK__GearMode__BD99D5E5FE501989");
+            entity.HasKey(e => e.GearModelImageId).HasName("PK__GearMode__BD99D5E59A78346D");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.GearModel).WithMany(p => p.GearModelImage)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_GearModelImage");
+                .HasConstraintName("fk_gearModelImage");
+        });
+
+        modelBuilder.Entity<GearModelNotes>(entity =>
+        {
+            entity.HasKey(e => e.NoteId).HasName("PK__GearMode__EACE355F91DB1661");
+
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system");
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.GearModel).WithMany(p => p.GearModelNotes)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_gearModel");
         });
 
         modelBuilder.Entity<GearType>(entity =>
         {
-            entity.HasKey(e => e.GearTypeId).HasName("PK__GearType__26A4FE7E1E5758FE");
+            entity.HasKey(e => e.GearTypeId).HasName("PK__GearType__26A4FE7EE3606F3E");
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
@@ -100,19 +118,31 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<GearTypeImage>(entity =>
         {
-            entity.HasKey(e => e.GearTypeImageId).HasName("PK__GearType__F527FEAECBE0737F");
+            entity.HasKey(e => e.GearTypeImageId).HasName("PK__GearType__F527FEAE3FEC3CB3");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.GearType).WithMany(p => p.GearTypeImage)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_GearTypeImage");
+                .HasConstraintName("fk_gearTypeImage");
+        });
+
+        modelBuilder.Entity<GearTypeNotes>(entity =>
+        {
+            entity.HasKey(e => e.NoteId).HasName("PK__GearType__EACE355F1EAECE6B");
+
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system");
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.GearType).WithMany(p => p.GearTypeNotes)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_gearType");
         });
 
         modelBuilder.Entity<IncidentReport>(entity =>
         {
-            entity.HasKey(e => e.IncidentReportId).HasName("PK__Incident__807950303B1BFE3C");
+            entity.HasKey(e => e.IncidentReportId).HasName("PK__Incident__80795030AFF80799");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
@@ -120,15 +150,19 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<IncidentReportHistory>(entity =>
         {
-            entity.HasKey(e => e.IncidentReportHistoryId).HasName("PK__Incident__51F62EB5DC95C06A");
+            entity.HasKey(e => e.IncidentReportHistoryId).HasName("PK__Incident__51F62EB5CC9A1FE7");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.IncidentReport).WithMany(p => p.IncidentReportHistory)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_incidentReport");
         });
 
         modelBuilder.Entity<Location>(entity =>
         {
-            entity.HasKey(e => e.LocationId).HasName("PK__Location__E7FEA497F3DB1611");
+            entity.HasKey(e => e.LocationId).HasName("PK__Location__E7FEA49768F35876");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
@@ -136,16 +170,28 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<Manufacturer>(entity =>
         {
-            entity.HasKey(e => e.ManufacturerId).HasName("PK__Manufact__357E5CC1E39E1E6A");
+            entity.HasKey(e => e.ManufacturerId).HasName("PK__Manufact__357E5CC12589CD17");
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
         });
 
+        modelBuilder.Entity<ManufacturerNotes>(entity =>
+        {
+            entity.HasKey(e => e.NoteId).HasName("PK__Manufact__EACE355F68F29394");
+
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system");
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.Manufacturer).WithMany(p => p.ManufacturerNotes)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_manufacturer");
+        });
+
         modelBuilder.Entity<TransferHistory>(entity =>
         {
-            entity.HasKey(e => e.TransferHistoryId).HasName("PK__Transfer__593FCDD3939A381D");
+            entity.HasKey(e => e.TransferHistoryId).HasName("PK__Transfer__593FCDD3E9D4029C");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
@@ -153,7 +199,7 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<UserGear>(entity =>
         {
-            entity.HasKey(e => e.UserGearId).HasName("PK__UserGear__6525EE7A5C3423B6");
+            entity.HasKey(e => e.UserGearId).HasName("PK__UserGear__6525EE7A77D17A25");
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
@@ -163,19 +209,19 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<UserGearImage>(entity =>
         {
-            entity.HasKey(e => e.UserGearImageId).HasName("PK__UserGear__68678F08F118999F");
+            entity.HasKey(e => e.UserGearImageId).HasName("PK__UserGear__68678F08EFB79F1A");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.UserGear).WithMany(p => p.UserGearImage)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_UserGearImage");
+                .HasConstraintName("fk_userGearImage");
         });
 
         modelBuilder.Entity<UserProfile>(entity =>
         {
-            entity.HasKey(e => e.UserProfileId).HasName("PK__UserProf__9E267F62F51CF66B");
+            entity.HasKey(e => e.UserProfileId).HasName("PK__UserProf__9E267F62BAE0CC93");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");

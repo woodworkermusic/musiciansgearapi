@@ -2,7 +2,7 @@
 
 namespace MusiciansGearRegistry.Data.dto;
 
-public class dtoManufacturer
+public class dto_Manufacturer
 {
     public int ManufacturerId { get; set; }
 
@@ -10,8 +10,6 @@ public class dtoManufacturer
     public string ManufacturerName { get; set; }
 
     public bool? Active { get; set; }
-
     public int? PrimaryLocationId { get; set; }
-
     public string UpdatedBy { get; set; }
 }

@@ -34,14 +34,14 @@ public class ManufacturerController : ApiControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] dtoManufacturer newManufacturer)
+    public async Task<IActionResult> Add([FromBody] dto_Manufacturer newManufacturer)
     {
         var dto = await _MfrSvc.Add(newManufacturer, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] dtoManufacturer manufacturerUpdate)
+    public async Task<IActionResult> Update([FromBody] dto_Manufacturer manufacturerUpdate)
     {
         // Will have to check against the logged in user to make sure they can update this piece of 
         // or that they are an admin.

@@ -32,11 +32,19 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[GearModelNotes]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[GearType]",
          "ObjectType": 0
       },
       {
          "Name": "[dbo].[GearTypeImage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GearTypeNotes]",
          "ObjectType": 0
       },
       {
@@ -53,6 +61,10 @@
       },
       {
          "Name": "[dbo].[Manufacturer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ManufacturerNotes]",
          "ObjectType": 0
       },
       {

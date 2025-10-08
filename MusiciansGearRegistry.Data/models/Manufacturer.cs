@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
+[Index("ManufacturerName", Name = "idx_manufacturerName")]
 public partial class Manufacturer
 {
     [Key]
@@ -41,4 +42,7 @@ public partial class Manufacturer
 
     [InverseProperty("Manufacturer")]
     public virtual ICollection<GearModel> GearModel { get; set; } = new List<GearModel>();
+
+    [InverseProperty("Manufacturer")]
+    public virtual ICollection<ManufacturerNotes> ManufacturerNotes { get; set; } = new List<ManufacturerNotes>();
 }

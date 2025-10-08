@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("ManufacturerId", Name = "IX_GearModel_1")]
-[Index("GearTypeId", Name = "IX_GearModel_2")]
-[Index("ModelName", Name = "IX_GearModel_3")]
-[Index("ManufacturerId", "GearTypeId", Name = "IX_GearModel_4")]
-[Index("ManufacturerId", "GearTypeId", "ModelName", Name = "IX_GearModel_5")]
+[Index("ManufacturerId", Name = "idx_gearModel_1")]
+[Index("GearTypeId", Name = "idx_gearModel_2")]
+[Index("ModelName", Name = "idx_gearModel_3")]
+[Index("ManufacturerId", "GearTypeId", Name = "idx_gearModel_4")]
+[Index("ManufacturerId", "GearTypeId", "ModelName", Name = "idx_gearModel_5")]
 public partial class GearModel
 {
     [Key]
@@ -55,6 +55,9 @@ public partial class GearModel
 
     [InverseProperty("GearModel")]
     public virtual ICollection<GearModelImage> GearModelImage { get; set; } = new List<GearModelImage>();
+
+    [InverseProperty("GearModel")]
+    public virtual ICollection<GearModelNotes> GearModelNotes { get; set; } = new List<GearModelNotes>();
 
     [ForeignKey("GearTypeId")]
     [InverseProperty("GearModel")]

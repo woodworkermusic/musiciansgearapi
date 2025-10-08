@@ -17,7 +17,7 @@ public class ManufacturerService : ServiceBase, IManufacturerService
         _MfrRepo = ManufacturerRepository;
     }
 
-    public async Task<Manufacturer> Add(dtoManufacturer newManufacturer, int userId)
+    public async Task<Manufacturer> Add(dto_Manufacturer newManufacturer, int userId)
     {
         return await _MfrRepo.Add(newManufacturer, userId);
     }
@@ -38,7 +38,7 @@ public class ManufacturerService : ServiceBase, IManufacturerService
         return response;
     }
 
-    public async Task<Manufacturer> Update(dtoManufacturer manufacturer, int userId)
+    public async Task<Manufacturer> Update(dto_Manufacturer manufacturer, int userId)
     {
         return await _MfrRepo.Update(manufacturer, userId);
     }

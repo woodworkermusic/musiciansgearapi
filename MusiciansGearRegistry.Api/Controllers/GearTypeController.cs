@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Logging.interfaces;
+using MusiciansGearRegistry.Data.dto;
 using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.Models;
 
@@ -33,9 +34,8 @@ public class GearTypeController : ApiControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] GearType newType)
+    public async Task<IActionResult> Add([FromBody] dto_GearType newType)
     {
-        //var dto = await _GearTypeService.Add(newType, userId);
         var dto = await _GearTypeService.Add(newType, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }

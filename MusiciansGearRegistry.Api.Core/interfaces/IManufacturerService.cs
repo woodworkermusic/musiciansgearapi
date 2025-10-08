@@ -12,11 +12,11 @@ public interface IManufacturerService
     Task<List<KeyValuePair<Guid, Manufacturer>>> GetMany(CommonSearchEntity manufacturerSearch);
 
     Task<Manufacturer> Add(
-                dtoManufacturer Manufacturer,
+                dto_Manufacturer Manufacturer,
                 int userId);
 
     Task<Manufacturer> Update(
-                dtoManufacturer Manufacturer,
+                dto_Manufacturer Manufacturer,
                 int userId);
 
     Task<bool> Delete(

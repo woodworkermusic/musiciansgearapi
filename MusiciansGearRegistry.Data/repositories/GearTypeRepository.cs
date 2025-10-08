@@ -2,6 +2,7 @@
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using MusiciansGearRegistry.Data.dto;
 
 namespace MusiciansGearRegistry.Data.repositories;
 
@@ -49,26 +50,35 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
     }
 
     public async Task<GearType?> Add(
-        GearType GearType,
+        dto_GearType dto,
         int userId)
     {
-        if (_dbContext.GearType.Any(a => a.GearTypeName == GearType.GearTypeName && a.ManufacturerId == GearType.ManufacturerId))
-            return null;
+        if (!this.GearTypeExists(0, dto.GearTypeName))
+        {
+            var newRow = new GearType()
+            {
+                GearTypeName = dto.GearTypeName,
+                Active = dto.Active.GetValueOrDefault(false),
+                CreatedBy = userId.ToString(),
+                CreatedOn = DateTime.UtcNow
+            };
 
-        GearType.CreatedBy = userId.ToString();
-        GearType.CreatedOn = DateTime.UtcNow;
+            await _dbContext.GearType.AddAsync(newRow);
+            await _dbContext.SaveChangesAsync();
 
-        _dbContext.GearType.Add(GearType);
-        await _dbContext.SaveChangesAsync();
-
-        return GearType;
+            return newRow;
+        }
+        else
+        {
+            throw new Exception("This gear type name already exists.  Please enter a different name.");
+        }
     }
 
     public async Task<GearType?> Update(
         GearType GearType,
         int userId)
     {
-        if (!_dbContext.GearType.Any(a => a.GearTypeName == GearType.GearTypeName && a.ManufacturerId == GearType.ManufacturerId))
+        if (!_dbContext.GearType.Any(a => a.GearTypeName == GearType.GearTypeName))
             return null;
 
         GearType.ModifiedBy = userId.ToString();
@@ -98,4 +108,13 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
 
         return true;
     }
+
+    private bool GearTypeExists(int gearTypeId,
+        string gearTypeName)
+    {
+        return _dbContext.GearType
+            .Any(m => m.GearTypeName == gearTypeName &&
+                m.GearTypeId != gearTypeId);
+    }
+
 }

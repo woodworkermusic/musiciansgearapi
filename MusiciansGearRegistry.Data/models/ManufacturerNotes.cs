@@ -8,29 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("ClientId", Name = "idx_ClientContact1")]
-public partial class ClientContact
+[Index("ManufacturerId", Name = "idx_manufacturer")]
+public partial class ManufacturerNotes
 {
     [Key]
-    public int ClientContactId { get; set; }
+    public int NoteId { get; set; }
 
-    public int ClientId { get; set; }
+    public int ManufacturerId { get; set; }
 
-    [Required]
-    [StringLength(50)]
-    public string FirstName { get; set; }
-
-    [StringLength(50)]
-    public string LastName { get; set; }
-
-    [Required]
-    [StringLength(255)]
-    public string EMailAddress { get; set; }
-
-    [StringLength(50)]
-    public string PhoneNumber { get; set; }
-
-    public bool? Active { get; set; }
+    [StringLength(1024)]
+    public string NoteText { get; set; }
 
     [Required]
     [StringLength(50)]
@@ -39,15 +26,19 @@ public partial class ClientContact
     [Column(TypeName = "datetime")]
     public DateTime CreatedOn { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime? ModifiedOn { get; set; }
-
     [StringLength(50)]
     public string ModifiedBy { get; set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime? DeletedOn { get; set; }
+    public DateTime? ModifiedOn { get; set; }
 
     [StringLength(50)]
     public string DeletedBy { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? DeletedOn { get; set; }
+
+    [ForeignKey("ManufacturerId")]
+    [InverseProperty("ManufacturerNotes")]
+    public virtual Manufacturer Manufacturer { get; set; }
 }

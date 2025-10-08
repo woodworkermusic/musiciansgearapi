@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("GearModelImageId", Name = "IX_GearModelImage_1")]
+[Index("GearModelImageId", Name = "idx_gearModelImage_1")]
 public partial class GearModelImage
 {
     [Key]

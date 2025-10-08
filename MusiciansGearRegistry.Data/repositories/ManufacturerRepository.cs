@@ -42,7 +42,7 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
     }
 
     public async Task<Manufacturer> Add(
-        dtoManufacturer dto,
+        dto_Manufacturer dto,
         int userId)
     {
         if (!this.ManufacturerExists(0, dto.ManufacturerName))
@@ -67,7 +67,7 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
     }
 
     public async Task<Manufacturer> Update(
-        dtoManufacturer dto,
+        dto_Manufacturer dto,
         int userId)
     {
         var currentManufacturer = await _dbContext

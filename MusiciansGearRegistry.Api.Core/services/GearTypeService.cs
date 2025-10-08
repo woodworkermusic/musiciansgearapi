@@ -1,4 +1,5 @@
 ﻿using MusiciansGearRegistry.Api.Core.interfaces;
+using MusiciansGearRegistry.Data.dto;
 using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
@@ -14,7 +15,7 @@ public class GearTypeService : IGearTypeService
         _GearTypeRepo = GearTypeRepo;
     }
 
-    public async Task<GearType> Add(GearType GearType, int userId)
+    public async Task<GearType> Add(dto_GearType GearType, int userId)
     {
         return await _GearTypeRepo.Add(GearType, userId);
     }

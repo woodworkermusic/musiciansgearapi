@@ -1,4 +1,5 @@
-﻿using MusiciansGearRegistry.Data.entities;
+﻿using MusiciansGearRegistry.Data.dto;
+using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.Models;
 
 namespace MusiciansGearRegistry.Data.infrastructure;
@@ -9,7 +10,7 @@ public interface IGearTypeRepository
     Task<List<KeyValuePair<Guid,  GearType>>> GetMany(CommonSearchEntity GearTypeSearch);
 
     Task<GearType?> Add(
-        GearType GearType,
+        dto_GearType GearType,
         int userId);
 
     Task<GearType?> Update(

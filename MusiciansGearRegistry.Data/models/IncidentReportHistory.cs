@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("IncidentReportId", Name = "IX_IncidentReportHistory_1")]
+[Index("IncidentReportId", Name = "idx_incidentReportHistory_1")]
 public partial class IncidentReportHistory
 {
     [Key]
@@ -37,4 +37,8 @@ public partial class IncidentReportHistory
 
     [StringLength(50)]
     public string DeletedBy { get; set; }
+
+    [ForeignKey("IncidentReportId")]
+    [InverseProperty("IncidentReportHistory")]
+    public virtual IncidentReport IncidentReport { get; set; }
 }

@@ -8,8 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("UserProfileId", Name = "IX_UserGear_1")]
-[Index("GearModelId", Name = "IX_UserGear_2")]
+[Index("UserProfileId", "GearModelId", Name = "idx_userGear_1")]
 public partial class UserGear
 {
     [Key]

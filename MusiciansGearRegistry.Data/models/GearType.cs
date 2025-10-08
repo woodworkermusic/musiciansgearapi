@@ -8,22 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("ManufacturerId", Name = "IX_GearType_1")]
-[Index("ManufacturerId", "Active", Name = "IX_GearType_2")]
 public partial class GearType
 {
     [Key]
     public int GearTypeId { get; set; }
 
-    public int ManufacturerId { get; set; }
-
     public bool Active { get; set; }
 
     [StringLength(100)]
     public string GearTypeName { get; set; }
-
-    [StringLength(40)]
-    public string GearSubType { get; set; }
 
     [Required]
     [StringLength(50)]
@@ -49,4 +42,7 @@ public partial class GearType
 
     [InverseProperty("GearType")]
     public virtual ICollection<GearTypeImage> GearTypeImage { get; set; } = new List<GearTypeImage>();
+
+    [InverseProperty("GearType")]
+    public virtual ICollection<GearTypeNotes> GearTypeNotes { get; set; } = new List<GearTypeNotes>();
 }

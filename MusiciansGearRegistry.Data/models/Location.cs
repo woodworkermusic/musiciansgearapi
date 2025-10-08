@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MusiciansGearRegistry.Data.Models;
 
-[Index("LocationType", Name = "IX_Location_1")]
-[Index("UserProfileId", Name = "IX_Location_2")]
-[Index("ClientId", Name = "IX_Location_3")]
+[Index("LocationType", Name = "idx_location_1")]
+[Index("UserProfileId", Name = "idx_location_2")]
+[Index("ClientId", Name = "idx_location_3")]
 public partial class Location
 {
     [Key]
