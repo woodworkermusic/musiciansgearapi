@@ -8,6 +8,9 @@ public interface IGearModelRepository
     Task<GearModel> Get(int GearModelId);
     Task<List<KeyValuePair<Guid,  GearModel>>> GetMany(CommonSearchEntity searchEntity);
 
+    Task<List<KeyValuePair<Guid, GearModel>>> GetByManufacturerAndType(int manufacturerId
+        , int gearTypeId);
+
     Task<GearModel?> Add(
         GearModel GearModel,
         int userId);

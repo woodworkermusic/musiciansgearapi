@@ -49,11 +49,21 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
         return searchResponse;
     }
 
+    public async Task<List<KeyValuePair<Guid, GearType>>> GetByManufacturerId(int manufacturerId)
+    {
+        var searchResult = await _dbContext.Procedures.sp_GearTypesByManufacturerAsync(manufacturerId);
+
+        var searchResponse = new List<KeyValuePair<Guid, GearType>>();
+        searchResult.ForEach(f => searchResponse.Add(KeyValuePair.Create(Guid.NewGuid(), new GearType() { Active = f.Active, GearTypeId = f.GearTypeId, GearTypeName = f.GearTypeName })));
+
+        return searchResponse;
+    }
+
     public async Task<GearType?> Add(
         dto_GearType dto,
         int userId)
     {
-        if (!this.GearTypeExists(0, dto.GearTypeName))
+        if (!_dbContext.GearType.Any(a => a.GearTypeName == dto.GearTypeName))
         {
             var newRow = new GearType()
             {
@@ -108,13 +118,4 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
 
         return true;
     }
-
-    private bool GearTypeExists(int gearTypeId,
-        string gearTypeName)
-    {
-        return _dbContext.GearType
-            .Any(m => m.GearTypeName == gearTypeName &&
-                m.GearTypeId != gearTypeId);
-    }
-
 }

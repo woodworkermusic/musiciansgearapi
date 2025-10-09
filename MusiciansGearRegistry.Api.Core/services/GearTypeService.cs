@@ -35,6 +35,11 @@ public class GearTypeService : IGearTypeService
         return await _GearTypeRepo.GetMany(GearTypeSearch);
     }
 
+    public async Task<List<KeyValuePair<Guid, GearType>>> GetByManufacturer(int manufacturerId)
+    {
+        return await _GearTypeRepo.GetByManufacturerId(manufacturerId);
+    }
+
     public async Task<GearType> Update(GearType GearType, int userId)
     {
         return await _GearTypeRepo.Update(GearType, userId);

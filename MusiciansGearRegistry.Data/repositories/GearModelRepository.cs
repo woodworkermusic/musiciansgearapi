@@ -48,6 +48,25 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
 
     }
 
+    public async Task<List<KeyValuePair<Guid, GearModel>>> GetByManufacturerAndType(int manufacturerId
+        , int gearTypeId)
+    {
+        var searchResult = await _dbContext.Procedures.sp_GearModelsByManufacturerAndTypeAsync(manufacturerId, gearTypeId);
+
+        var searchResponse = new List<KeyValuePair<Guid, GearModel>>();
+        searchResult.ForEach(f => searchResponse.Add(KeyValuePair.Create(Guid.NewGuid(),
+            new GearModel()
+            {
+                Active = f.Active,
+                GearModelId = f.GearModelId,
+                ModelName = f.ModelName,
+                StartingDate = f.StartingDate,
+                EndingDate = f.EndingDate
+            })));
+
+        return searchResponse;
+    }
+
     public async Task<GearModel?> Add(
         GearModel GearModel,
         int userId)

@@ -25,6 +25,14 @@ public class GearModelController : ApiControllerBase
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
+    [HttpGet("manufacturer/{manufacturerId}/geartype/{gearTypeId}")]
+    public async Task<IActionResult> GetByManufacturerAndType(int manufacturerId
+        , int gearTypeId)
+    {
+        var result = await _gearModelSvc.GetByManufacturerAndType(manufacturerId , gearTypeId);
+        return (result != null) ? Ok(result) : BadRequest("nope");
+    }
+
     [HttpPost("Search")]
     public async Task<IActionResult> GetMany([FromBody] CommonSearchEntity manufacturerSearch)
     {

@@ -10,6 +10,8 @@ public interface IGearTypeService
 
     Task<List<KeyValuePair<Guid,  GearType>>> GetMany(CommonSearchEntity GearTypeSearch);
 
+    Task<List<KeyValuePair<Guid, GearType>>> GetByManufacturer(int manufacturerId);
+
     Task<GearType> Add(
                 dto_GearType GearType,
                 int userId);

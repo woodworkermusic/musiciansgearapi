@@ -82,6 +82,14 @@
       {
          "Name": "[dbo].[UserProfile]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[sp_GearModelsByManufacturerAndType]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_GearTypesByManufacturer]",
+         "ObjectType": 1
       }
    ],
    "UiHint": null,
