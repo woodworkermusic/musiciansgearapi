@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MusiciansGearRegistry.Data.dto;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
 
@@ -15,8 +16,16 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             .SingleAsync(s => s.UserGearImageId == id);
     }
 
-    public async Task<UserGearImage> Add_UserGearImage(UserGearImage newImage)
+    public async Task<UserGearImage> Add_UserGearImage(dto_UserGearImage userGearImage)
     {
+        var newImage = new UserGearImage()
+        {
+            CreatedBy = userGearImage.CreatedBy,
+            CreatedOn = DateTime.UtcNow,
+            ImageFile = userGearImage.ImageFile,
+            ImageData = userGearImage.ImageData,
+        };
+
         await _dbContext
             .UserGearImage
             .AddAsync(newImage);
@@ -48,11 +57,15 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             .SingleAsync(s => s.GearModelImageId == id);
     }
 
-    public async Task<GearModelImage> Add_GearModelImage(GearModelImage newImage
-        , int userId)
+    public async Task<GearModelImage> Add_GearModelImage(dto_GearModelImage gearModelImage)
     {
-        newImage.CreatedOn = DateTime.UtcNow;
-        newImage.CreatedBy = userId.ToString();
+        var newImage = new GearModelImage()
+        {
+            CreatedBy = gearModelImage.CreatedBy,
+            CreatedOn = DateTime.UtcNow,
+            ImageFile = gearModelImage.ImageFile,
+            ImageData = gearModelImage.ImageData
+        };
 
         await _dbContext
             .GearModelImage
@@ -85,11 +98,15 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             .SingleAsync(s => s.GearTypeImageId == id);
     }
 
-    public async Task<GearTypeImage> Add_GearTypeImage(GearTypeImage newImage
-        , int userId)
+    public async Task<GearTypeImage> Add_GearTypeImage(dto_GearTypeImage gearTypeImage)
     {
-        newImage.CreatedOn = DateTime.UtcNow;
-        newImage.CreatedBy = userId.ToString();
+        var newImage = new GearTypeImage()
+        {
+            CreatedBy = gearTypeImage.CreatedBy,
+            CreatedOn = DateTime.UtcNow,
+            ImageFile = gearTypeImage.ImageFile,
+            ImageData = gearTypeImage.ImageData
+        };
 
         await _dbContext
             .GearTypeImage

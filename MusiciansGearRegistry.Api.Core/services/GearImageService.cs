@@ -2,6 +2,7 @@
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
+using MusiciansGearRegistry.Data.dto;
 
 namespace MusiciansGearRegistry.Api.Core.services;
 
@@ -20,7 +21,7 @@ public class GearImageService : ServiceBase, IGearImageService
         return null;
     }
 
-    public async Task<UserGearImage> Add_UserGearImage(UserGearImage newImage)
+    public async Task<UserGearImage> Add_UserGearImage(dto_UserGearImage newImage)
     {
         await _imageRepo.Add_UserGearImage(newImage);
         return null;
@@ -40,10 +41,9 @@ public class GearImageService : ServiceBase, IGearImageService
         return null;
     }
 
-    public async Task<GearTypeImage> Add_GearTypeImage(GearTypeImage newImage
-        , int userId)
+    public async Task<GearTypeImage> Add_GearTypeImage(dto_GearTypeImage newImage)
     {
-        await _imageRepo.Add_GearTypeImage(newImage, userId);
+        await _imageRepo.Add_GearTypeImage(newImage);
         return null;
     }
 
@@ -61,10 +61,9 @@ public class GearImageService : ServiceBase, IGearImageService
         return null;
     }
 
-    public async Task<GearModelImage> Add_GearModelImage(GearModelImage newImage
-        , int userId)
+    public async Task<GearModelImage> Add_GearModelImage(dto_GearModelImage newImage)
     {
-        await _imageRepo.Add_GearModelImage(newImage, userId);
+        await _imageRepo.Add_GearModelImage(newImage);
         return null;
     }
 
