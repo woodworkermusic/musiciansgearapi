@@ -23,12 +23,14 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             CreatedBy = userGearImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = userGearImage.ImageFile,
-            ImageData = userGearImage.ImageData,
+            ImageData = System.Text.Encoding.UTF8.GetBytes(userGearImage.ImageData)
         };
 
         await _dbContext
             .UserGearImage
             .AddAsync(newImage);
+
+        await _dbContext.SaveChangesAsync();
 
         return newImage;
     }
@@ -47,6 +49,8 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             .UserGearImage
             .Update(GearImage);
 
+        await _dbContext.SaveChangesAsync();
+
         return true;
     }
 
@@ -64,12 +68,14 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             CreatedBy = gearModelImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = gearModelImage.ImageFile,
-            ImageData = gearModelImage.ImageData
+            ImageData = System.Text.Encoding.UTF8.GetBytes(gearModelImage.ImageData)
         };
 
         await _dbContext
             .GearModelImage
             .AddAsync(newImage);
+
+        await _dbContext.SaveChangesAsync();
 
         return newImage;
     }
@@ -88,6 +94,8 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             .GearModelImage
             .Update(GearImage);
 
+        await _dbContext.SaveChangesAsync();
+
         return true;
     }
 
@@ -105,12 +113,14 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             CreatedBy = gearTypeImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = gearTypeImage.ImageFile,
-            ImageData = gearTypeImage.ImageData
+            ImageData = System.Text.Encoding.UTF8.GetBytes(gearTypeImage.ImageData)
         };
 
         await _dbContext
             .GearTypeImage
             .AddAsync(newImage);
+
+        await _dbContext.SaveChangesAsync();
 
         return newImage;
     }
@@ -128,6 +138,8 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
         _dbContext
             .GearTypeImage
             .Update(GearImage);
+
+        await _dbContext.SaveChangesAsync();
 
         return true;
     }

@@ -17,21 +17,21 @@ public class ImageContentController : ApiControllerBase
         _gearImageService = gearImageService;
     }
 
-    [HttpPost("gearmodelimage")]
+    [HttpPost("gearmodel")]
     public async Task<IActionResult> AddGearModelImage([FromBody] dto_GearModelImage gearModelImage)
     {
         var dto = await _gearImageService.Add_GearModelImage(gearModelImage);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [HttpPost("geartypeimage")]
+    [HttpPost("geartype")]
     public async Task<IActionResult> AddGearTypeImage([FromBody] dto_GearTypeImage gearTypeImage)
     {
         var dto = await _gearImageService.Add_GearTypeImage(gearTypeImage);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
-    [HttpPost("usergearimage")]
+    [HttpPost("usergear")]
     public async Task<IActionResult> AddUserGearImage([FromBody] dto_UserGearImage userGearImage)
     {
         var dto = await _gearImageService.Add_UserGearImage(userGearImage);

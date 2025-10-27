@@ -8,7 +8,7 @@ public abstract class dto_ImageBase
     [StringLength(512)]
     public string ImageFile { get; set; }
 
-    public byte[] ImageData { get; set; }
+    public string ImageData { get; set; }
 
     [Required]
     [StringLength(50)]
