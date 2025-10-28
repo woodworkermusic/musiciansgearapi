@@ -20,6 +20,7 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
     {
         var newImage = new UserGearImage()
         {
+            UserGearId = userGearImage.UserGearId,
             CreatedBy = userGearImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = userGearImage.ImageFile,
@@ -65,6 +66,7 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
     {
         var newImage = new GearModelImage()
         {
+            GearModelId = gearModelImage.GearModelId,
             CreatedBy = gearModelImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = gearModelImage.ImageFile,
@@ -110,6 +112,7 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
     {
         var newImage = new GearTypeImage()
         {
+            GearTypeId = gearTypeImage.GearTypeId,
             CreatedBy = gearTypeImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = gearTypeImage.ImageFile,
