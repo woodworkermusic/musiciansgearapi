@@ -15,6 +15,8 @@ public class GearImageService : ServiceBase, IGearImageService
         _imageRepo = imageRepo;
     }
 
+    #region "UserGearImages"
+
     public async Task<UserGearImage> Get_UserGearImage(int id)
     {
         return await _imageRepo.Get_UserGearImage(id);
@@ -31,7 +33,9 @@ public class GearImageService : ServiceBase, IGearImageService
         return await _imageRepo.Delete_UserGearImage(id, userId);
     }
 
-    // *********************************************************************
+    #endregion
+
+    #region "GearTypeImages"
 
     public async Task<GearTypeImage> Get_GearTypeImage(int id)
     {
@@ -49,7 +53,9 @@ public class GearImageService : ServiceBase, IGearImageService
         return await _imageRepo.Delete_GearTypeImage(id, userId);
     }
 
-    // *********************************************************************
+    #endregion
+
+    #region "GearModelImages"
 
     public async Task<GearModelImage> Get_GearModelImage(int id)
     {
@@ -67,4 +73,5 @@ public class GearImageService : ServiceBase, IGearImageService
         return await _imageRepo.Delete_GearModelImage(id, userId);
     }
 
+    #endregion
 }

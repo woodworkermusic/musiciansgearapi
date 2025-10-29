@@ -85,7 +85,7 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<GearModelImage>(entity =>
         {
-            entity.HasKey(e => e.GearModelImageId).HasName("PK__GearMode__BD99D5E59A78346D");
+            entity.HasKey(e => e.GearModelImageId).HasName("PK__GearMode__BD99D5E53AD917EB");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
@@ -118,7 +118,7 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<GearTypeImage>(entity =>
         {
-            entity.HasKey(e => e.GearTypeImageId).HasName("PK__GearType__F527FEAE3FEC3CB3");
+            entity.HasKey(e => e.GearTypeImageId).HasName("PK__GearType__F527FEAEE902C065");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
@@ -209,7 +209,7 @@ public partial class MusiciansGearRegistryContext : DbContext
 
         modelBuilder.Entity<UserGearImage>(entity =>
         {
-            entity.HasKey(e => e.UserGearImageId).HasName("PK__UserGear__68678F08EFB79F1A");
+            entity.HasKey(e => e.UserGearImageId).HasName("PK__UserGear__68678F0869ED7CEE");
 
             entity.Property(e => e.CreatedBy).HasDefaultValue("system");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");

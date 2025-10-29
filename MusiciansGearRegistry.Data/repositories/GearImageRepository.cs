@@ -9,6 +9,8 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
 {
     public GearImageRepository(MusiciansGearRegistryContext dbContext) : base(dbContext) { }
 
+    #region "UserGearImages"
+
     public async Task<UserGearImage> Get_UserGearImage(int id)
     {
         return await _dbContext
@@ -24,7 +26,8 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             CreatedBy = userGearImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = userGearImage.ImageFile,
-            ImageData = System.Text.Encoding.UTF8.GetBytes(userGearImage.ImageData)
+            ImageType = userGearImage.ImageType,
+            ImageData = userGearImage.ImageData
         };
 
         await _dbContext
@@ -55,11 +58,17 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
         return true;
     }
 
+    #endregion
+
+    #region "GearModelImages"
+
     public async Task<GearModelImage> Get_GearModelImage(int id)
     {
-        return await _dbContext
+        var gearModelImage = await _dbContext
             .GearModelImage
             .SingleAsync(s => s.GearModelImageId == id);
+
+        return gearModelImage;
     }
 
     public async Task<GearModelImage> Add_GearModelImage(dto_GearModelImage gearModelImage)
@@ -70,7 +79,8 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             CreatedBy = gearModelImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = gearModelImage.ImageFile,
-            ImageData = System.Text.Encoding.UTF8.GetBytes(gearModelImage.ImageData)
+            ImageType = gearModelImage.ImageType,
+            ImageData = gearModelImage.ImageData
         };
 
         await _dbContext
@@ -101,6 +111,8 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
         return true;
     }
 
+    #endregion
+
     public async Task<GearTypeImage> Get_GearTypeImage(int id)
     {
         return await _dbContext
@@ -116,7 +128,8 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
             CreatedBy = gearTypeImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = gearTypeImage.ImageFile,
-            ImageData = System.Text.Encoding.UTF8.GetBytes(gearTypeImage.ImageData)
+            ImageType = gearTypeImage.ImageType,
+            ImageData = gearTypeImage.ImageData
         };
 
         await _dbContext

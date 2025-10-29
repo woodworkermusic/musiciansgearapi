@@ -11,12 +11,21 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
     {
     }
 
-    public async Task<GearModel> Get(int GearModelId)
+    public async Task<GearModel> Get(int gearModelId)
     {
-        return await _dbContext.GearModel
+        var gearModel = await _dbContext.GearModel
             .SingleOrDefaultAsync(x =>
-                x.GearModelId == GearModelId &&
+                x.GearModelId == gearModelId &&
                 x.DeletedOn == null);
+
+        var imageIdList = await _dbContext
+            .GearModelImage
+            .Where(w => w.GearModelId == gearModelId)
+            .Select(s => s.GearModelImageId)
+            .ToListAsync();
+
+        gearModel.ImageIdList.AddRange(imageIdList);
+        return gearModel;
     }
 
     /// <summary>

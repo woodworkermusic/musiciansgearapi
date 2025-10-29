@@ -20,7 +20,11 @@ public partial class GearModelImage
     [StringLength(512)]
     public string ImageFile { get; set; }
 
-    [Column(TypeName = "image")]
+    [Required]
+    [StringLength(30)]
+    [Unicode(false)]
+    public string ImageType { get; set; }
+
     public byte[] ImageData { get; set; }
 
     [Required]
