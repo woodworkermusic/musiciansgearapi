@@ -57,7 +57,7 @@ public class GearImageService : ServiceBase, IGearImageService
 
     #region "GearModelImages"
 
-    public async Task<GearModelImage> Get_GearModelImage(int id)
+    public async Task<KeyValuePair<Guid, GearModelImage>> Get_GearModelImage(int id)
     {
         return await _imageRepo.Get_GearModelImage(id);
     }

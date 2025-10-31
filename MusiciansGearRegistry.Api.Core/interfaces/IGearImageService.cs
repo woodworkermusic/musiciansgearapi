@@ -10,7 +10,7 @@ public interface IGearImageService
     Task<bool> Delete_UserGearImage(int id
         , int userId);
 
-    Task<GearModelImage> Get_GearModelImage(int id);
+    Task<KeyValuePair<Guid, GearModelImage>> Get_GearModelImage(int id);
     Task<GearModelImage> Add_GearModelImage(dto_GearModelImage gearModelImage);
     Task<bool> Delete_GearModelImage(int id
     , int userId);

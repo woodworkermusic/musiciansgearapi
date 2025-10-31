@@ -28,7 +28,7 @@ public class ImageContentController : ApiControllerBase
     public async Task<IActionResult> GearModelImage_Get(int imageId)
     {
         var result = await _gearImageService.Get_GearModelImage(imageId);
-        return (result != null) ? Ok(result) : BadRequest("nope");
+        return Ok(result);
     }
 
     [HttpDelete("gearmodel/{imageId}")]

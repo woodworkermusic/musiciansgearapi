@@ -62,13 +62,13 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
 
     #region "GearModelImages"
 
-    public async Task<GearModelImage> Get_GearModelImage(int id)
+    public async Task<KeyValuePair<Guid, GearModelImage>> Get_GearModelImage(int id)
     {
         var gearModelImage = await _dbContext
             .GearModelImage
             .SingleAsync(s => s.GearModelImageId == id);
 
-        return gearModelImage;
+        return KeyValuePair.Create(Guid.NewGuid(), gearModelImage);
     }
 
     public async Task<GearModelImage> Add_GearModelImage(dto_GearModelImage gearModelImage)
@@ -95,16 +95,18 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
     public async Task<bool> Delete_GearModelImage(int id
     , int userId)
     {
-        var GearImage = await Get_GearModelImage(id);
+        var gearImage = await _dbContext
+            .GearModelImage
+            .SingleAsync(s => s.GearModelImageId == id); 
 
-        if (GearImage != null) return false;
+        if (gearImage != null) return false;
 
-        GearImage.DeletedOn = DateTime.UtcNow;
-        GearImage.DeletedBy = userId.ToString();
+        gearImage.DeletedOn = DateTime.UtcNow;
+        gearImage.DeletedBy = userId.ToString();
 
         _dbContext
             .GearModelImage
-            .Update(GearImage);
+            .Update(gearImage);
 
         await _dbContext.SaveChangesAsync();
 
