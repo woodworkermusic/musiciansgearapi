@@ -49,6 +49,15 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
         return searchResponse;
     }
 
+    public async Task<List<KeyValuePair<Guid, GearType>>> Get()
+    {
+        var gearTypes = await _dbContext.GearType.ToListAsync();
+        var dataList = new List<KeyValuePair<Guid, GearType>>();
+
+        gearTypes.ForEach(f => dataList.Add(KeyValuePair.Create(Guid.NewGuid(), f)));
+        return dataList;
+    }
+
     public async Task<List<KeyValuePair<Guid, GearType>>> GetByManufacturerId(int manufacturerId)
     {
         var searchResult = await _dbContext.Procedures.sp_GearTypesByManufacturerAsync(manufacturerId);

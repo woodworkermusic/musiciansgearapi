@@ -11,39 +11,47 @@ namespace MusiciansGearRegistry.Api.Controllers;
 [ApiController]
 public class GearTypeController : ApiControllerBase
 {
-    private readonly IGearTypeService _GearTypeService;
+    private readonly IGearTypeService _gearTypeService;
 
     public GearTypeController(IGearTypeService GearTypeService
         , ILoggingService logSvc) : base(logSvc, "GearType")
     {
-        _GearTypeService = GearTypeService;
+        _gearTypeService = GearTypeService;
     }
 
     [HttpGet("{gearTypeId}")]
-    public async Task<IActionResult> Get(int gearTypeId)
+    public async Task<IActionResult> Get(int gearTypeId = 0)
     {
-        var dto = await _GearTypeService.Get(gearTypeId);
-        return (dto != null) ? Ok(dto) : BadRequest("nope");
+        if (gearTypeId != 0)
+        {
+            var dto = await _gearTypeService.Get(gearTypeId);
+            return (dto != null) ? Ok(dto) : BadRequest("nope");
+        }
+        else
+        {
+            var dto = await _gearTypeService.Get();
+            return (dto != null) ? Ok(dto) : BadRequest("nope");
+        }
     }
 
     [HttpGet("manufacturer/{manufacturerId}")]
     public async Task<IActionResult> GetByManufacturer(int manufacturerId)
     {
-        var result = await _GearTypeService.GetByManufacturer(manufacturerId);
+        var result = await _gearTypeService.GetByManufacturer(manufacturerId);
         return (result != null) ? Ok(result) : BadRequest("nope");
     }
 
     [HttpPost("Search")]
     public async Task<IActionResult> GetMany([FromBody] CommonSearchEntity manufacturerSearch)
     {
-        var dto = await _GearTypeService.GetMany(manufacturerSearch);
+        var dto = await _gearTypeService.GetMany(manufacturerSearch);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] dto_GearType newType)
     {
-        var dto = await _GearTypeService.Add(newType, 1);
+        var dto = await _gearTypeService.Add(newType, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
@@ -53,7 +61,7 @@ public class GearTypeController : ApiControllerBase
         // Will have to check against the logged in user to make sure they can update this piece of Gear
         // or that they are an admin.
         //var dto = await _GearTypeService.Update(typeUpdate, userId);
-        var dto = await _GearTypeService.Update(typeUpdate, 1);
+        var dto = await _gearTypeService.Update(typeUpdate, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
@@ -63,7 +71,7 @@ public class GearTypeController : ApiControllerBase
     {
         // Will have to check against the logged in user to make sure they are either the current gear owner 
         // or an admin level user to do this.
-        var dto = await _GearTypeService.Delete(typeId, userId);
+        var dto = await _gearTypeService.Delete(typeId, userId);
         return Ok(dto);
     }
 }

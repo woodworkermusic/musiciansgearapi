@@ -30,7 +30,12 @@ public class GearTypeService : IGearTypeService
         return await _GearTypeRepo.Get(GearTypeId);
     }
 
-    public async Task<List<KeyValuePair<Guid,  GearType>>> GetMany(CommonSearchEntity GearTypeSearch)
+    public async Task<List<KeyValuePair<Guid,  GearType>>> Get()
+    {
+        return await _GearTypeRepo.Get();
+    }
+
+    public async Task<List<KeyValuePair<Guid, GearType>>> GetMany(CommonSearchEntity GearTypeSearch)
     {
         return await _GearTypeRepo.GetMany(GearTypeSearch);
     }

@@ -8,7 +8,8 @@ public interface IGearTypeService
 {
     Task<GearType> Get(int GearTypeId);
 
-    Task<List<KeyValuePair<Guid,  GearType>>> GetMany(CommonSearchEntity GearTypeSearch);
+    Task<List<KeyValuePair<Guid, GearType>>> GetMany(CommonSearchEntity GearTypeSearch);
+    Task<List<KeyValuePair<Guid, GearType>>> Get();
 
     Task<List<KeyValuePair<Guid, GearType>>> GetByManufacturer(int manufacturerId);
 
