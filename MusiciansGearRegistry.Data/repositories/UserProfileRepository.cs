@@ -4,6 +4,7 @@ using MusiciansGearRegistry.Data.models;
 using MusiciansGearRegistry.Data.Models;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml.XPath;
 
 namespace MusiciansGearRegistry.Data.repositories;
 
@@ -18,9 +19,9 @@ public class UserProfileRepository : RepositoryBase, IUserProfileRepository
             .SingleAsync(s => s.UserProfileId == userProfileId);
     }
 
-    public async Task<UserProfile> Add(CreateUserRequest createRequest)
+    public async Task<bool> Add(CreateUserRequest createRequest)
     {
-        if (_dbContext.UserProfile.Any(a => a.UserName == createRequest.UserName)) return null;
+        if (_dbContext.UserProfile.Any(a => a.UserName == createRequest.UserName)) return false;
 
         var newId = Guid.NewGuid();
         var hashedPwd = GenerateSaltedHash(createRequest.NewUserPassword, newId);
@@ -41,10 +42,10 @@ public class UserProfileRepository : RepositoryBase, IUserProfileRepository
             CreatedOn = DateTime.UtcNow
         };
 
-        _dbContext.UserProfile.Add(newUserProfile);
-        await _dbContext.SaveChangesAsync();
+        await _dbContext.UserProfile.AddAsync(newUserProfile);
+        int result = await _dbContext.SaveChangesAsync();
 
-        return newUserProfile;
+        return (result > 0);
     }
 
     public async Task<UserProfile> Update(UserProfile currentProfile

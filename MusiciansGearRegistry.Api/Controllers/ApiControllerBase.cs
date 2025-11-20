@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using MusiciansGearRegistry.Api.Core.Entities;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 
 namespace MusiciansGearRegistry.Api.Controllers
@@ -18,30 +17,24 @@ namespace MusiciansGearRegistry.Api.Controllers
             this.log = log.GetLoggingService(logName);
         }
 
-        /// <summary>
-        /// All api calls will go through this function.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="svcFunction"></param>
-        /// <param name="successStatus"></param>
-        /// <param name="failureStatus"></param>
-        /// <returns></returns>
-        protected Task<IActionResult> ProcessSvcRequest<T>(Func<MGR_SvcResponse<T>> svcFunction,
-            StatusCodeResult successStatus,
-            StatusCodeResult failureStatus) where T : class
+        protected async Task<IActionResult> ProcessSvcRequest<T>(Task<T> svcFunction)
         {
-            MGR_SvcResponse<T> svcResponse = svcFunction();
-            return null;
+            try
+            {
+                var cancelToken = new CancellationToken();
+                var svcResult = default(T);
 
-            //if (svcResponse.success)
-            //{
-            //    return Request.CreateResponse(successStatus, svcResponse.responseContent);
-            //}
-            //else
-            //{
-            //    return Request.CreateResponse(failureStatus, svcResponse.message);
-            //}
+                await svcFunction.WaitAsync(cancelToken);
+                svcResult = svcFunction.Result;
+
+                return Ok(svcResult);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.ToString());
+
+                return BadRequest(ex.ToString());
+            }
         }
-
     }
 }

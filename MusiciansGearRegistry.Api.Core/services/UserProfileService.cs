@@ -23,7 +23,7 @@ public class UserProfileService : ServiceBase, IUserProfileService
     }
 
 
-    public async Task<UserProfile> Add(CreateUserRequest createUserRequest)
+    public async Task<bool> Add(CreateUserRequest createUserRequest)
     {
         return await _userProfileRepo.Add(createUserRequest);
     }

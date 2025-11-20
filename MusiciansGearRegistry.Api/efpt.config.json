@@ -1,0 +1,122 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "MusiciansGearRegistryDbContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "MinimumProductVersion": "2.6.1093",
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "MusiciansGearRegistry.Api",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Client]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClientContact]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GearModel]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GearModelImage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GearModelNotes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GearType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GearTypeImage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GearTypeNotes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IncidentReport]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IncidentReportHistory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Location]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Manufacturer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ManufacturerNotes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TransferHistory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserGear]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserGearImage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserProfile]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[sp_GearModelsByManufacturerAndType]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_GearTypesByManufacturer]",
+         "ObjectType": 1
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}

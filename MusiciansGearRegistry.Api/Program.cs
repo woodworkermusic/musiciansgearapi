@@ -55,14 +55,12 @@ builder.Services.AddSwaggerGen(options => {
 });
 
 string[] allowedOrigins = ["*"];
-//string[] allowedOrigins = ["https://localhost:3000", "http://localhost:3000"];
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MusiciansGearRegistryApi", builder =>
         builder
             .WithOrigins(allowedOrigins)
-            //.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
@@ -70,14 +68,20 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+app.UseRouting();
 app.UseCors("MusiciansGearRegistryApi");
 app.UseAuthorization();
-app.MapControllers();
+
+app.UseEndpoints(e => e.MapControllers());
+//app.MapControllers();
 app.Run();

@@ -22,8 +22,7 @@ public class UserProfileController : ApiControllerBase
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateUserRequest createUserRequest)
     {
-        var dto = _userProfileSvc.Add(createUserRequest);
-        return (dto != null) ? Ok(dto) : BadRequest();
+        return await ProcessSvcRequest<bool>(_userProfileSvc.Add(createUserRequest));
     }
 
     [HttpDelete]

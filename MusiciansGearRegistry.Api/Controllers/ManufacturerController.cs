@@ -3,6 +3,7 @@ using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.dto;
 using MusiciansGearRegistry.Data.entities;
+using MusiciansGearRegistry.Data.Models;
 
 namespace MusiciansGearRegistry.Api.Controllers;
 
@@ -22,22 +23,19 @@ public class ManufacturerController : ApiControllerBase
     [HttpGet("{manufacturerId}")]
     public async Task<IActionResult> Get(int manufacturerId)
     {
-        var dto = await _MfrSvc.Get(manufacturerId);
-        return (dto != null) ? Ok(dto) : BadRequest("nope");
+        return await ProcessSvcRequest<Manufacturer>(_MfrSvc.Get(manufacturerId));
     }
 
     [HttpPost("Search")]
     public async Task<IActionResult> GetMany([FromBody] CommonSearchEntity manufacturerSearch)
     {
-        var dto = await _MfrSvc.GetMany(manufacturerSearch);
-        return (dto != null) ? Ok(dto) : BadRequest("nope");
+        return await ProcessSvcRequest<List<KeyValuePair<Guid, Manufacturer>>>(_MfrSvc.GetMany(manufacturerSearch));
     }
 
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] dto_Manufacturer newManufacturer)
     {
-        var dto = await _MfrSvc.Add(newManufacturer, 1);
-        return (dto != null) ? Ok(dto) : BadRequest("nope");
+        return await ProcessSvcRequest<Manufacturer>(_MfrSvc.Add(newManufacturer, 1));
     }
 
     [HttpPut]

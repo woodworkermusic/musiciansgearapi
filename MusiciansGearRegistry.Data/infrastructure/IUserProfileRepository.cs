@@ -6,7 +6,7 @@ namespace MusiciansGearRegistry.Data.infrastructure;
 public interface IUserProfileRepository
 {
     Task<UserProfile> Get(int userProfileId);
-    Task<UserProfile> Add(CreateUserRequest createRequest);
+    Task<bool> Add(CreateUserRequest createRequest);
     Task<UserProfile> Update(UserProfile currentProfile
         , int updatedBy);
 
