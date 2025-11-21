@@ -10,9 +10,11 @@ using MusiciansGearRegistry.Api.Security.services;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
 using MusiciansGearRegistry.Data.repositories;
-
+using Microsoft.ApplicationInsights.Extensibility;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApplicationInsightsTelemetry();
 
 // Add services to the container.
 builder.Services.AddScoped(typeof(IGearImageService), typeof (GearImageService));
