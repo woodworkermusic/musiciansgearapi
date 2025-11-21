@@ -67,7 +67,11 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod());
 });
 
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
+
+app.UseExceptionHandler(e => e.Run(async context => await Results.Problem().ExecuteAsync(context)));
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
