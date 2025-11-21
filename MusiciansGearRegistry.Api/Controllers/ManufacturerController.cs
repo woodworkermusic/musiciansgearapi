@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.AspNetCore.Mvc;
 using MusiciansGearRegistry.Api.Core.interfaces;
-using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.dto;
 using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.Models;
@@ -13,9 +13,11 @@ public class ManufacturerController : ApiControllerBase
 {
     private readonly IManufacturerService _MfrSvc;
 
-    public ManufacturerController(ILoggingService log
-        , IManufacturerService MfrSvc)
-        : base(log, "Manufacturer")
+    public ManufacturerController(IManufacturerService MfrSvc
+        , ILogger<ManufacturerController> logger
+        , TelemetryClient telemetryClient
+        )
+        : base(logger, telemetryClient)
     {
         _MfrSvc = MfrSvc;
     }

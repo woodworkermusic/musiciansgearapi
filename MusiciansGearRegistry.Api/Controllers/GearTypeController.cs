@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.AspNetCore.Mvc;
 using MusiciansGearRegistry.Api.Core.interfaces;
-using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.dto;
 using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.Models;
@@ -14,7 +14,10 @@ public class GearTypeController : ApiControllerBase
     private readonly IGearTypeService _gearTypeService;
 
     public GearTypeController(IGearTypeService GearTypeService
-        , ILoggingService logSvc) : base(logSvc, "GearType")
+        , ILogger<GearTypeController> logger
+        , TelemetryClient telemetryClient
+        ) 
+        : base(logger, telemetryClient)
     {
         _gearTypeService = GearTypeService;
     }

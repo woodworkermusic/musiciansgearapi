@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.AspNetCore.Mvc;
 using MusiciansGearRegistry.Api.Core.interfaces;
-using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.dto;
 
 namespace MusiciansGearRegistry.Api.Controllers;
@@ -11,8 +11,11 @@ public class ImageContentController : ApiControllerBase
 {
     private readonly IGearImageService _gearImageService;
 
-    public ImageContentController(IGearImageService gearImageService,
-        ILoggingService logSvc) : base(logSvc, "ImageContent")
+    public ImageContentController(IGearImageService gearImageService
+        , ILogger<ImageContentController> logger
+        , TelemetryClient telemetryClient
+        ) 
+        : base(logger, telemetryClient)
     {
         _gearImageService = gearImageService;
     }

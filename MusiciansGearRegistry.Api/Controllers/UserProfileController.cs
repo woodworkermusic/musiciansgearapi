@@ -3,6 +3,7 @@ using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Api.Security.interfaces;
 using MusiciansGearRegistry.Data.models;
+using Microsoft.ApplicationInsights;
 
 namespace MusiciansGearRegistry.Api.Controllers;
 
@@ -12,8 +13,11 @@ public class UserProfileController : ApiControllerBase
 {
     private readonly IUserProfileService _userProfileSvc;
 
-    public UserProfileController(ILoggingService logSvc
-        , IUserProfileService userProfileSvc) : base(logSvc, "UserProfile")
+    public UserProfileController(IUserProfileService userProfileSvc
+        , ILogger<GearModelController> logger
+        , TelemetryClient telemetryClient
+        ) 
+        : base(logger, telemetryClient)
     {
         _userProfileSvc = userProfileSvc;
     }

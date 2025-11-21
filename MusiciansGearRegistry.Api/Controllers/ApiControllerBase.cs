@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MusiciansGearRegistry.Api.Logging.interfaces;
+using MusiciansGearRegistry.Api.Logging.Services;
 
 namespace MusiciansGearRegistry.Api.Controllers
 {
@@ -10,18 +11,18 @@ namespace MusiciansGearRegistry.Api.Controllers
     [EnableCors("MusiciansGearRegistryApi")]
     public abstract class ApiControllerBase : ControllerBase
     {
-        protected readonly ILoggingService log;
-        protected readonly ILogger _logger;
-        protected readonly TelemetryClient _telemetryClient;
+        private readonly ILoggingService _log;
+        private readonly ILogger _logger;
+        private readonly TelemetryClient _telemetryClient;
 
-        public ApiControllerBase(ILoggingService log, 
-            string logName,
-            ILogger logger,
-            TelemetryClient telemetry)
+        public ApiControllerBase(ILogger logger
+            , TelemetryClient telemetryClient)
         {
-            this.log = log.GetLoggingService(logName);
+            var loggerFactory = new NLogLogger();
+            this._log = loggerFactory.GetLoggingService("api");
+
             this._logger = logger;
-            this._telemetryClient = telemetry;
+            this._telemetryClient = telemetryClient;
         }
 
         protected async Task<IActionResult> ProcessSvcRequest<T>(Task<T> svcFunction)
@@ -38,7 +39,7 @@ namespace MusiciansGearRegistry.Api.Controllers
             }
             catch (Exception ex)
             {
-                log.Error(ex.ToString());
+                _log.Error(ex.ToString());
                 _logger.LogError(ex.ToString());
                 _telemetryClient.TrackEvent("ServiceRequest");
 

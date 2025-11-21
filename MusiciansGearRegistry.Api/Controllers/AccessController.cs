@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MusiciansGearRegistry.Api.Logging.interfaces;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.AspNetCore.Mvc;
 using MusiciansGearRegistry.Api.Security.interfaces;
 using MusiciansGearRegistry.Api.Security.models;
 namespace MusiciansGearRegistry.Api.Controllers;
@@ -10,8 +10,11 @@ public class AccessController : ApiControllerBase
 {
     private readonly ILoginService _loginSvc;
 
-    public AccessController(ILoggingService logSvc
-        , ILoginService loginSvc) : base(logSvc, "Access")
+    public AccessController(ILoginService loginSvc
+        , ILogger<AccessController> logger
+        , TelemetryClient telemetryClient
+        ) 
+        : base(logger, telemetryClient)
     {
         _loginSvc = loginSvc;
     }
