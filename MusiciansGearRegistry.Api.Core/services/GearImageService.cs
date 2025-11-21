@@ -3,6 +3,8 @@ using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
 using MusiciansGearRegistry.Data.dto;
+using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging;
 
 namespace MusiciansGearRegistry.Api.Core.services;
 
@@ -11,7 +13,11 @@ public class GearImageService : ServiceBase, IGearImageService
     private readonly IGearImageRepository _imageRepo;
 
     public GearImageService(IGearImageRepository imageRepo
-        , ILoggingService logSvc) : base(logSvc, "GearImageService") { 
+        , ILoggingService logSvc
+        , ILogger log
+        , TelemetryClient telemetryClient
+        ) 
+        : base(logSvc, log, telemetryClient) { 
         _imageRepo = imageRepo;
     }
 

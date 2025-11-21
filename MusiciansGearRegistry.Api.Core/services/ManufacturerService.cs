@@ -1,4 +1,6 @@
-﻿using MusiciansGearRegistry.Api.Core.interfaces;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging;
+using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.dto;
 using MusiciansGearRegistry.Data.entities;
@@ -12,14 +14,18 @@ public class ManufacturerService : ServiceBase, IManufacturerService
     private readonly IManufacturerRepository _MfrRepo;
 
     public ManufacturerService(IManufacturerRepository ManufacturerRepository
-        , ILoggingService logSvc) : base(logSvc, "ManufacturerService")
+        , ILoggingService logSvc
+        , ILogger log
+        , TelemetryClient telemetryClient
+        ) 
+        : base(logSvc, log, telemetryClient)
     {
         _MfrRepo = ManufacturerRepository;
     }
 
     public async Task<Manufacturer> Add(dto_Manufacturer newManufacturer, int userId)
     {
-        return await _MfrRepo.Add(newManufacturer, userId);
+        return await ProcessRepoRequest<Manufacturer>(_MfrRepo.Add(newManufacturer, userId));
     }
 
     public async Task<bool> Delete(int manufacturerId, int userId)

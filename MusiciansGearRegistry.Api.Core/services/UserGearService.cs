@@ -1,4 +1,6 @@
-﻿using MusiciansGearRegistry.Api.Core.interfaces;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging;
+using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
@@ -10,8 +12,11 @@ public class UserGearService : ServiceBase, IUserGearService
     private readonly IUserGearRepository _userGearRepo;
 
     public UserGearService(IUserGearRepository userGearRepo
-        , ILoggingService logSvc)
-        :base(logSvc, "UserGearService")
+        , ILoggingService logSvc
+        , ILogger log
+        , TelemetryClient telemetryClient
+        ) 
+        : base(logSvc, log, telemetryClient)
     {
         _userGearRepo = userGearRepo;
     }

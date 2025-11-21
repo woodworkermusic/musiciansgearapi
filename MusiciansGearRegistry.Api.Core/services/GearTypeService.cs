@@ -1,17 +1,26 @@
-﻿using MusiciansGearRegistry.Api.Core.interfaces;
+﻿using Microsoft.ApplicationInsights;
+using MusiciansGearRegistry.Api.Core.interfaces;
+using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.dto;
 using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
+using Microsoft.Extensions.Logging;
 
 namespace MusiciansGearRegistry.Api.Core.services;
 
-public class GearTypeService : IGearTypeService
+public class GearTypeService : ServiceBase, IGearTypeService
 {
     private readonly IGearTypeRepository _GearTypeRepo;
 
-    public GearTypeService(IGearTypeRepository GearTypeRepo)
+    public GearTypeService(IGearTypeRepository GearTypeRepo
+        , ILoggingService logSvc
+        , ILogger log
+        , TelemetryClient telemetryClient
+        ) 
+        : base(logSvc, log, telemetryClient)
     {
+
         _GearTypeRepo = GearTypeRepo;
     }
 

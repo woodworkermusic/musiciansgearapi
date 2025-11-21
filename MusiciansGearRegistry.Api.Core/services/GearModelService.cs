@@ -1,16 +1,25 @@
-﻿using MusiciansGearRegistry.Api.Core.interfaces;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging;
+using MusiciansGearRegistry.Api.Core.interfaces;
+using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Data.entities;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
 
-namespace MusiciansGearRegistry.Api.Core.Services;
+namespace MusiciansGearRegistry.Api.Core.services;
 
-public class GearModelService : IGearModelService
+public class GearModelService : ServiceBase, IGearModelService
 {
     private readonly IGearModelRepository _GearModelRepo;
 
-    public GearModelService(IGearModelRepository GearModelRepository)
+    public GearModelService(IGearModelRepository GearModelRepository
+        , ILoggingService logSvc
+        , ILogger log
+        , TelemetryClient telemetryClient
+        ) 
+        : base(logSvc, log, telemetryClient)
     {
+
         this._GearModelRepo = GearModelRepository;
     }
 
