@@ -1,7 +1,7 @@
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.EntityFrameworkCore;
 using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Core.services;
-using MusiciansGearRegistry.Api.Core.Services;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Api.Logging.Services;
 using MusiciansGearRegistry.Api.Security.interfaces;
@@ -10,11 +10,12 @@ using MusiciansGearRegistry.Api.Security.services;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
 using MusiciansGearRegistry.Data.repositories;
-using Microsoft.ApplicationInsights.Extensibility;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApplicationInsightsTelemetry();
+var aiOptions = new ApplicationInsightsServiceOptions() { ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"] };
+
+builder.Services.AddApplicationInsightsTelemetry(aiOptions);
 
 // Add services to the container.
 builder.Services.AddScoped(typeof(IGearImageService), typeof (GearImageService));
