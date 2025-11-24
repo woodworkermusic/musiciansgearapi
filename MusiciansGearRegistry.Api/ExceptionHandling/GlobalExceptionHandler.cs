@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace MusiciansGearRegistry.Api.ExceptionHandling;
+﻿namespace MusiciansGearRegistry.Api.ExceptionHandling;
 
 internal sealed class GlobalExceptionHandler(
     RequestDelegate next

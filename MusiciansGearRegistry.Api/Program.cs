@@ -72,12 +72,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddOptions();
 builder.Services.AddLogging();
 
-//builder.Services.AddProblemDetails();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
 //app.UseExceptionHandler(e => e.Run(async context => await Results.Problem().ExecuteAsync(context)));
-//app.UseMiddleware<GlobalExceptionHandler>();
+app.UseMiddleware<GlobalExceptionHandler>();
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
