@@ -14,7 +14,7 @@ public class GearImageService : ServiceBase, IGearImageService
 
     public GearImageService(IGearImageRepository imageRepo
         , ILoggingService logSvc
-        , ILogger log
+        , ILogger<GearImageService> log
         , TelemetryClient telemetryClient
         ) 
         : base(logSvc, log, telemetryClient) { 

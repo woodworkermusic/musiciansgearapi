@@ -13,7 +13,7 @@ public class UserGearService : ServiceBase, IUserGearService
 
     public UserGearService(IUserGearRepository userGearRepo
         , ILoggingService logSvc
-        , ILogger log
+        , ILogger<UserGearService> log
         , TelemetryClient telemetryClient
         ) 
         : base(logSvc, log, telemetryClient)

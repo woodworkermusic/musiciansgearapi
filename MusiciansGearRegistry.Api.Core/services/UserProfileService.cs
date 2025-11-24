@@ -14,7 +14,7 @@ public class UserProfileService : ServiceBase, IUserProfileService
 
     public UserProfileService(IUserProfileRepository userProfileRepo
         , ILoggingService logSvc
-        , ILogger log
+        , ILogger<UserProfileService> log
         , TelemetryClient telemetryClient
         ) 
         : base(logSvc, log, telemetryClient)

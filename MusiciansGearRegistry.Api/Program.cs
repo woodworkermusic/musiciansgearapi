@@ -2,6 +2,7 @@ using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.EntityFrameworkCore;
 using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Api.Core.services;
+using MusiciansGearRegistry.Api.ExceptionHandling;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Api.Logging.Services;
 using MusiciansGearRegistry.Api.Security.interfaces;
@@ -68,11 +69,15 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod());
 });
 
-builder.Services.AddProblemDetails();
+builder.Services.AddOptions();
+builder.Services.AddLogging();
+
+//builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-app.UseExceptionHandler(e => e.Run(async context => await Results.Problem().ExecuteAsync(context)));
+//app.UseExceptionHandler(e => e.Run(async context => await Results.Problem().ExecuteAsync(context)));
+//app.UseMiddleware<GlobalExceptionHandler>();
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())

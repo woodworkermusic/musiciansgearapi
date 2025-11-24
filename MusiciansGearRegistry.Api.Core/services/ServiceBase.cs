@@ -13,7 +13,8 @@ public abstract class ServiceBase
 
     public ServiceBase(ILoggingService logSvc
         , ILogger logger
-        , TelemetryClient telemetryClient)
+        , TelemetryClient telemetryClient
+        )
     {
         this._logger = logger;
         this._telemetryClient = telemetryClient;
@@ -37,8 +38,8 @@ public abstract class ServiceBase
         catch (Exception ex)
         {
             _log.Error(ex.ToString());
-            _logger.LogError(ex.ToString());
-            _telemetryClient.TrackEvent("ServiceRequest");
+            //_logger.LogError(ex.ToString());
+            //_telemetryClient.TrackEvent("ServiceRequest");
 
             throw;
         }

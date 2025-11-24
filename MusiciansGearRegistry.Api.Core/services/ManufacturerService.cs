@@ -15,7 +15,7 @@ public class ManufacturerService : ServiceBase, IManufacturerService
 
     public ManufacturerService(IManufacturerRepository ManufacturerRepository
         , ILoggingService logSvc
-        , ILogger log
+        , ILogger<ManufacturerService> log
         , TelemetryClient telemetryClient
         ) 
         : base(logSvc, log, telemetryClient)

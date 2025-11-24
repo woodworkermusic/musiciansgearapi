@@ -14,7 +14,7 @@ public class GearModelService : ServiceBase, IGearModelService
 
     public GearModelService(IGearModelRepository GearModelRepository
         , ILoggingService logSvc
-        , ILogger log
+        , ILogger<GearModelService> log
         , TelemetryClient telemetryClient
         ) 
         : base(logSvc, log, telemetryClient)
