@@ -43,13 +43,13 @@ builder.Services.AddScoped(typeof(ITokenHandlerService), typeof(TokenHandlerServ
 // dbContext:
 var connectionString = builder.Configuration.GetConnectionString("MusiciansGearDb");
 
-builder.Services.AddDbContext<MusiciansGearRegistryContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddDbContext<SecurityContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<MusiciansGearRegistryContext>(options => options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure(2)));
+builder.Services.AddDbContext<SecurityContext>(options => options.UseSqlServer(connectionString, o=> o.EnableRetryOnFailure(2)));
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
 
 builder.Services.AddSwaggerGen(options => {
     options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
@@ -76,7 +76,6 @@ builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-//app.UseExceptionHandler(e => e.Run(async context => await Results.Problem().ExecuteAsync(context)));
 app.UseMiddleware<GlobalExceptionHandler>();
 
 // Configure the HTTP request pipeline.
