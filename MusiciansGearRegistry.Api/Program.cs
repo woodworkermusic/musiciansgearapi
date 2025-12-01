@@ -43,8 +43,8 @@ builder.Services.AddScoped(typeof(ITokenHandlerService), typeof(TokenHandlerServ
 // dbContext:
 var connectionString = builder.Configuration.GetConnectionString("MusiciansGearDb");
 
-builder.Services.AddDbContext<MusiciansGearRegistryContext>(options => options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure(2)));
-builder.Services.AddDbContext<SecurityContext>(options => options.UseSqlServer(connectionString, o=> o.EnableRetryOnFailure(2)));
+builder.Services.AddDbContext<MusiciansGearRegistryContext>(options => options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure(3)));
+builder.Services.AddDbContext<SecurityContext>(options => options.UseSqlServer(connectionString, o=> o.EnableRetryOnFailure(3)));
 
 builder.Services.AddControllers();
 
