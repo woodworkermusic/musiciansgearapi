@@ -69,8 +69,8 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
                 Active = f.Active,
                 GearModelId = f.GearModelId,
                 ModelName = f.ModelName,
-                StartingDate = f.StartingDate,
-                EndingDate = f.EndingDate
+                StartYear = f.StartYear,
+                EndYear = f.EndYear
             })));
 
         return searchResponse;
@@ -107,8 +107,8 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
         {
             currentModel.ModelName = GearModel.ModelName;
             currentModel.Active = GearModel.Active;
-            currentModel.StartingDate = GearModel.StartingDate;
-            currentModel.EndingDate = GearModel.EndingDate;
+            currentModel.StartYear = GearModel.StartYear;
+            currentModel.EndYear = GearModel.EndYear;
             currentModel.ModifiedBy = userId.ToString();
             currentModel.ModifiedOn = DateTime.UtcNow;
 
