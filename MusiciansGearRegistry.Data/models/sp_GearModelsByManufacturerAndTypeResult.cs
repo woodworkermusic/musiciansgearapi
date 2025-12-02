@@ -14,8 +14,8 @@ namespace MusiciansGearRegistry.Data.Models
         [StringLength(100)]
         public string ModelName { get; set; }
         public bool Active { get; set; }
-        public DateTime? StartingDate { get; set; }
-        public DateTime? EndingDate { get; set; }
+        public int? StartYear { get; set; }
+        public int? EndYear { get; set; }
         [StringLength(100)]
         public string GearTypeName { get; set; }
     }

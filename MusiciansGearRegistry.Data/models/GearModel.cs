@@ -28,11 +28,9 @@ public partial class GearModel
 
     public bool Active { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime? StartingDate { get; set; }
+    public int? StartYear { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime? EndingDate { get; set; }
+    public int? EndYear { get; set; }
 
     [Required]
     [StringLength(50)]
