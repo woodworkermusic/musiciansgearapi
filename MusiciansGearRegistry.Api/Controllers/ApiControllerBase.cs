@@ -39,12 +39,12 @@ namespace MusiciansGearRegistry.Api.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                return BadRequest(ex.ToString());
+                //throw;
                 //_log.Error(ex.ToString());
                 //_logger.LogError(ex.ToString());
                 //_telemetryClient.TrackEvent("ServiceRequest");
 
-                //return BadRequest(ex.ToString());
             }
         }
     }

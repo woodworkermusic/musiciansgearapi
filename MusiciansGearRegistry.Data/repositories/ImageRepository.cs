@@ -77,6 +77,7 @@ public class ImageRepository : RepositoryBase, IImageRepository
             .GearModelImage
             .SingleAsync(s => s.GearModelImageId == id);
 
+        gearModelImage.ImageId = id;
         return KeyValuePair.Create(Guid.NewGuid(), gearModelImage);
     }
 
