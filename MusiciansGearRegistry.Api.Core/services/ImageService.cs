@@ -5,6 +5,7 @@ using MusiciansGearRegistry.Data.Models;
 using MusiciansGearRegistry.Data.dto;
 using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace MusiciansGearRegistry.Api.Core.services;
 
@@ -28,7 +29,7 @@ public class ImageService : ServiceBase, IImageService
         return await _imageRepo.Get_UserGearImage(id);
     }
 
-    public async Task<UserGearImage> Add_UserGearImage(dto_UserGearImage newImage)
+    public async Task<UserGearImage> Add_UserGearImage(INewImage newImage)
     {
         return await _imageRepo.Add_UserGearImage(newImage);
     }
@@ -48,7 +49,7 @@ public class ImageService : ServiceBase, IImageService
         return await _imageRepo.Get_GearTypeImage(id);
     }
 
-    public async Task<GearTypeImage> Add_GearTypeImage(dto_GearTypeImage newImage)
+    public async Task<GearTypeImage> Add_GearTypeImage(INewImage newImage)
     {
         return await _imageRepo.Add_GearTypeImage(newImage);
     }
@@ -73,7 +74,7 @@ public class ImageService : ServiceBase, IImageService
         return await _imageRepo.Get_GearModelImage(id);
     }
 
-    public async Task<GearModelImage> Add_GearModelImage(dto_GearModelImage newImage)
+    public async Task<GearModelImage> Add_GearModelImage(INewImage newImage)
     {
         return await _imageRepo.Add_GearModelImage(newImage);
     }

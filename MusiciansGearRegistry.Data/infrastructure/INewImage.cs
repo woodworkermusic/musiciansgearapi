@@ -1,14 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MusiciansGearRegistry.Data.dto;
+namespace MusiciansGearRegistry.Data.infrastructure;
 
-public abstract class dto_ImageBase
+public interface INewImage
 {
+    [Required]
+    public int ParentId { get; set; }
+
     [Required]
     [StringLength(512)]
     public string ImageFile { get; set; }
 
     [Required]
+    [StringLength(32)]
     public string ImageType { get; set; }
 
     [Required]

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MusiciansGearRegistry.Api.Core.interfaces;
 using MusiciansGearRegistry.Data.dto;
+using MusiciansGearRegistry.Data.infrastructure;
 
 namespace MusiciansGearRegistry.Api.Controllers;
 
@@ -20,8 +21,9 @@ public class ImageContentController : ApiControllerBase
         _imageService = imageService;
     }
 
+
     [HttpPost("gearmodel")]
-    public async Task<IActionResult> GearModelImage_Add([FromBody] dto_GearModelImage gearModelImage)
+    public async Task<IActionResult> GearModelImage_Add([FromBody] INewImage gearModelImage)
     {
         var dto = await _imageService.Add_GearModelImage(gearModelImage);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
@@ -49,14 +51,14 @@ public class ImageContentController : ApiControllerBase
     }
 
     [HttpPost("geartype")]
-    public async Task<IActionResult> AddGearTypeImage([FromBody] dto_GearTypeImage gearTypeImage)
+    public async Task<IActionResult> AddGearTypeImage([FromBody] INewImage gearTypeImage)
     {
         var dto = await _imageService.Add_GearTypeImage(gearTypeImage);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
     [HttpPost("usergear")]
-    public async Task<IActionResult> AddUserGearImage([FromBody] dto_UserGearImage userGearImage)
+    public async Task<IActionResult> AddUserGearImage([FromBody] INewImage userGearImage)
     {
         var dto = await _imageService.Add_UserGearImage(userGearImage);
         return (dto != null) ? Ok(dto) : BadRequest("nope");

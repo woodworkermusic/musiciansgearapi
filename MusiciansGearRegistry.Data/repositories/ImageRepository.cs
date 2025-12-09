@@ -18,11 +18,11 @@ public class ImageRepository : RepositoryBase, IImageRepository
             .SingleAsync(s => s.UserGearImageId == id);
     }
 
-    public async Task<UserGearImage> Add_UserGearImage(dto_UserGearImage userGearImage)
+    public async Task<UserGearImage> Add_UserGearImage(INewImage userGearImage)
     {
         var newImage = new UserGearImage()
         {
-            UserGearId = userGearImage.UserGearId,
+            UserGearId = userGearImage.ParentId,
             CreatedBy = userGearImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = userGearImage.ImageFile,
@@ -81,11 +81,11 @@ public class ImageRepository : RepositoryBase, IImageRepository
         return KeyValuePair.Create(Guid.NewGuid(), gearModelImage);
     }
 
-    public async Task<GearModelImage> Add_GearModelImage(dto_GearModelImage gearModelImage)
+    public async Task<GearModelImage> Add_GearModelImage(INewImage gearModelImage)
     {
         var newImage = new GearModelImage()
         {
-            GearModelId = gearModelImage.GearModelId,
+            GearModelId = gearModelImage.ParentId,
             CreatedBy = gearModelImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = gearModelImage.ImageFile,
@@ -132,11 +132,11 @@ public class ImageRepository : RepositoryBase, IImageRepository
             .SingleAsync(s => s.GearTypeImageId == id);
     }
 
-    public async Task<GearTypeImage> Add_GearTypeImage(dto_GearTypeImage gearTypeImage)
+    public async Task<GearTypeImage> Add_GearTypeImage(INewImage gearTypeImage)
     {
         var newImage = new GearTypeImage()
         {
-            GearTypeId = gearTypeImage.GearTypeId,
+            GearTypeId = gearTypeImage.ParentId,
             CreatedBy = gearTypeImage.CreatedBy,
             CreatedOn = DateTime.UtcNow,
             ImageFile = gearTypeImage.ImageFile,
