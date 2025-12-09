@@ -9,49 +9,56 @@ namespace MusiciansGearRegistry.Api.Controllers;
 [ApiController]
 public class ImageContentController : ApiControllerBase
 {
-    private readonly IGearImageService _gearImageService;
+    private readonly IImageService _imageService;
 
-    public ImageContentController(IGearImageService gearImageService
+    public ImageContentController(IImageService imageService
         , ILogger<ImageContentController> logger
         , TelemetryClient telemetryClient
         ) 
         : base(logger, telemetryClient)
     {
-        _gearImageService = gearImageService;
+        _imageService = imageService;
     }
 
     [HttpPost("gearmodel")]
     public async Task<IActionResult> GearModelImage_Add([FromBody] dto_GearModelImage gearModelImage)
     {
-        var dto = await _gearImageService.Add_GearModelImage(gearModelImage);
+        var dto = await _imageService.Add_GearModelImage(gearModelImage);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
     [HttpGet("gearmodel/{imageId}")]
     public async Task<IActionResult> GearModelImage_Get(int imageId)
     {
-        var result = await _gearImageService.Get_GearModelImage(imageId);
+        var result = await _imageService.Get_GearModelImage(imageId);
+        return Ok(result);
+    }
+
+    [HttpGet("gearmodel/{gearModelId}/idlist")]
+    public async Task<IActionResult> GearModelImage_IdList(int gearModelId)
+    {
+        var result = await _imageService.Get_GearModelImageIdList(gearModelId);
         return Ok(result);
     }
 
     [HttpDelete("gearmodel/{imageId}")]
     public async Task<IActionResult> GearModelImage_Delete(int imageId)
     {
-        var result = await _gearImageService.Delete_GearModelImage(imageId, 1);
+        var result = await _imageService.Delete_GearModelImage(imageId, 1);
         return Ok(true);
     }
 
     [HttpPost("geartype")]
     public async Task<IActionResult> AddGearTypeImage([FromBody] dto_GearTypeImage gearTypeImage)
     {
-        var dto = await _gearImageService.Add_GearTypeImage(gearTypeImage);
+        var dto = await _imageService.Add_GearTypeImage(gearTypeImage);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
     [HttpPost("usergear")]
     public async Task<IActionResult> AddUserGearImage([FromBody] dto_UserGearImage userGearImage)
     {
-        var dto = await _gearImageService.Add_UserGearImage(userGearImage);
+        var dto = await _imageService.Add_UserGearImage(userGearImage);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 }

@@ -8,13 +8,13 @@ using Microsoft.Extensions.Logging;
 
 namespace MusiciansGearRegistry.Api.Core.services;
 
-public class GearImageService : ServiceBase, IGearImageService
+public class ImageService : ServiceBase, IImageService
 {
-    private readonly IGearImageRepository _imageRepo;
+    private readonly IImageRepository _imageRepo;
 
-    public GearImageService(IGearImageRepository imageRepo
+    public ImageService(IImageRepository imageRepo
         , ILoggingService logSvc
-        , ILogger<GearImageService> log
+        , ILogger<ImageService> log
         , TelemetryClient telemetryClient
         ) 
         : base(logSvc, log, telemetryClient) { 
@@ -62,6 +62,11 @@ public class GearImageService : ServiceBase, IGearImageService
     #endregion
 
     #region "GearModelImages"
+
+    public async Task<List<int>> Get_GearModelImageIdList(int id)
+    {
+        return await _imageRepo.Get_GearModelImageIdList(id);
+    }
 
     public async Task<KeyValuePair<Guid, GearModelImage>> Get_GearModelImage(int id)
     {

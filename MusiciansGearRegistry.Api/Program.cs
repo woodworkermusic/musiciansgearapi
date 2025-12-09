@@ -19,7 +19,7 @@ var aiOptions = new ApplicationInsightsServiceOptions() { ConnectionString = bui
 builder.Services.AddApplicationInsightsTelemetry(aiOptions);
 
 // Add services to the container.
-builder.Services.AddScoped(typeof(IGearImageService), typeof (GearImageService));
+builder.Services.AddScoped(typeof(IImageService), typeof (ImageService));
 builder.Services.AddScoped(typeof(IManufacturerService), typeof(ManufacturerService));
 builder.Services.AddScoped(typeof(IGearModelService), typeof(GearModelService));
 builder.Services.AddScoped(typeof(IGearTypeService), typeof(GearTypeService));
@@ -27,7 +27,7 @@ builder.Services.AddScoped(typeof(IUserProfileService), typeof(UserProfileServic
 builder.Services.AddScoped(typeof(IUserGearService), typeof(UserGearService));
 
 // repositories:
-builder.Services.AddScoped(typeof(IGearImageRepository), typeof(GearImageRepository));
+builder.Services.AddScoped(typeof(IImageRepository), typeof(ImageRepository));
 builder.Services.AddScoped(typeof(IManufacturerRepository), typeof(ManufacturerRepository));
 builder.Services.AddScoped(typeof(IGearModelRepository), typeof(GearModelRepository));
 builder.Services.AddScoped(typeof(IGearTypeRepository), typeof(GearTypeRepository));

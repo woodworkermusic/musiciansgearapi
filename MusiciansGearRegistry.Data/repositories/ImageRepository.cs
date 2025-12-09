@@ -5,9 +5,9 @@ using MusiciansGearRegistry.Data.Models;
 
 namespace MusiciansGearRegistry.Data.repositories;
 
-public class GearImageRepository : RepositoryBase, IGearImageRepository
+public class ImageRepository : RepositoryBase, IImageRepository
 {
-    public GearImageRepository(MusiciansGearRegistryContext dbContext) : base(dbContext) { }
+    public ImageRepository(MusiciansGearRegistryContext dbContext) : base(dbContext) { }
 
     #region "UserGearImages"
 
@@ -62,6 +62,15 @@ public class GearImageRepository : RepositoryBase, IGearImageRepository
 
     #region "GearModelImages"
 
+    public async Task<List<int>> Get_GearModelImageIdList(int id)
+    {
+        return await _dbContext
+            .GearModelImage
+            .Where(w => w.GearModelId == id)
+            .Select(s => s.GearModelImageId)
+            .ToListAsync();
+
+    }
     public async Task<KeyValuePair<Guid, GearModelImage>> Get_GearModelImage(int id)
     {
         var gearModelImage = await _dbContext
