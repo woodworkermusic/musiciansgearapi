@@ -14,7 +14,7 @@ public class ImageRepository : RepositoryBase, IImageRepository
     {
         return await _dbContext
             .UserGearImage
-            .SingleAsync(s => s.UserGearImageId == id);
+            .SingleAsync(s => s.UserGearImageId == id && s.DeletedOn == null);
     }
 
     public async Task<UserGearImage> Add_UserGearImage(INewImage userGearImage)
@@ -43,7 +43,7 @@ public class ImageRepository : RepositoryBase, IImageRepository
     {
         var GearImage = await Get_UserGearImage(id);
 
-        if (GearImage != null) return false;
+        if (GearImage == null) return false;
 
         GearImage.DeletedOn = DateTime.UtcNow;
         GearImage.DeletedBy = userId.ToString();
@@ -65,7 +65,7 @@ public class ImageRepository : RepositoryBase, IImageRepository
     {
         return await _dbContext
             .GearModelImage
-            .Where(w => w.GearModelId == id)
+            .Where(w => w.GearModelId == id && w.DeletedOn == null)
             .Select(s => s.GearModelImageId)
             .ToListAsync();
 
@@ -75,9 +75,9 @@ public class ImageRepository : RepositoryBase, IImageRepository
     {
         var gearModelImage = await _dbContext
             .GearModelImage
-            .SingleAsync(s => s.GearModelImageId == id);
+            .SingleAsync(s => s.GearModelImageId == id && s.DeletedOn == null);
 
-        //gearModelImage.ImageId = id;
+        gearModelImage.ImageId = id;
         return gearModelImage;
     }
 
@@ -105,11 +105,9 @@ public class ImageRepository : RepositoryBase, IImageRepository
     public async Task<bool> Delete_GearModelImage(int id
     , int userId)
     {
-        var gearImage = await _dbContext
-            .GearModelImage
-            .SingleAsync(s => s.GearModelImageId == id); 
+        var gearImage = await Get_GearModelImage(id);
 
-        if (gearImage != null) return false;
+        if (gearImage == null) return false;
 
         gearImage.DeletedOn = DateTime.UtcNow;
         gearImage.DeletedBy = userId.ToString();
@@ -127,9 +125,12 @@ public class ImageRepository : RepositoryBase, IImageRepository
 
     public async Task<GearTypeImage> Get_GearTypeImage(int id)
     {
-        return await _dbContext
+        var gearTypeImage = await _dbContext
             .GearTypeImage
-            .SingleAsync(s => s.GearTypeImageId == id);
+            .SingleAsync(s => s.GearTypeImageId == id && s.DeletedOn == null);
+
+        gearTypeImage.ImageId = id;
+        return gearTypeImage;
     }
 
     public async Task<GearTypeImage> Add_GearTypeImage(INewImage gearTypeImage)
@@ -158,7 +159,7 @@ public class ImageRepository : RepositoryBase, IImageRepository
     {
         var GearImage = await Get_GearTypeImage(id);
 
-        if (GearImage != null) return false;
+        if (GearImage == null) return false;
 
         GearImage.DeletedOn = DateTime.UtcNow;
         GearImage.DeletedBy = userId.ToString();
