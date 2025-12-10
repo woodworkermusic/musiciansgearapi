@@ -38,12 +38,12 @@ public class GearModelService : ServiceBase, IGearModelService
         return await _GearModelRepo.Get(GearModelId);
     }
 
-    public async Task<List<KeyValuePair<Guid,  GearModel>>> GetMany(CommonSearchEntity searchEntity)
+    public async Task<List<GearModel>> GetMany(CommonSearchEntity searchEntity)
     {
         return await _GearModelRepo.GetMany(searchEntity);
     }
 
-    public async Task<List<KeyValuePair<Guid, GearModel>>> GetByManufacturerAndType(int manufacturerId
+    public async Task<List<GearModel>> GetByManufacturerAndType(int manufacturerId
         , int gearTypeId)
     {
         return await _GearModelRepo.GetByManufacturerAndType(manufacturerId , gearTypeId);

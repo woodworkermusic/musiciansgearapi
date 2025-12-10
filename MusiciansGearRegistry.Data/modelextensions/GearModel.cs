@@ -2,7 +2,7 @@
 
 namespace MusiciansGearRegistry.Data.Models;
 
-public partial class GearModel
+public partial class GearModel : ExtensionBase
 {
     [NotMapped]
     public List<int> ImageIdList { get; set; } = new();

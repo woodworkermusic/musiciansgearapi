@@ -26,7 +26,7 @@ public class ImageContentController : ApiControllerBase
     public async Task<IActionResult> GearModelImage_Add([FromBody] INewImage gearModelImage)
     {
         var dto = await _imageService.Add_GearModelImage(gearModelImage);
-        return (dto != null) ? Ok(dto) : BadRequest("nope");
+        return Ok(dto);
     }
 
     [HttpGet("gearmodel/{imageId}")]

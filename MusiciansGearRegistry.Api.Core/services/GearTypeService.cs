@@ -39,17 +39,17 @@ public class GearTypeService : ServiceBase, IGearTypeService
         return await _GearTypeRepo.Get(GearTypeId);
     }
 
-    public async Task<List<KeyValuePair<Guid,  GearType>>> Get()
+    public async Task<List<GearType>> Get()
     {
         return await _GearTypeRepo.Get();
     }
 
-    public async Task<List<KeyValuePair<Guid, GearType>>> GetMany(CommonSearchEntity GearTypeSearch)
+    public async Task<List<GearType>> GetMany(CommonSearchEntity GearTypeSearch)
     {
         return await _GearTypeRepo.GetMany(GearTypeSearch);
     }
 
-    public async Task<List<KeyValuePair<Guid, GearType>>> GetByManufacturer(int manufacturerId)
+    public async Task<List<GearType>> GetByManufacturer(int manufacturerId)
     {
         return await _GearTypeRepo.GetByManufacturerId(manufacturerId);
     }

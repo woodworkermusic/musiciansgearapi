@@ -7,10 +7,10 @@ namespace MusiciansGearRegistry.Data.infrastructure;
 public interface IGearTypeRepository
 {
     Task<GearType> Get(int GearTypeId);
-    Task<List<KeyValuePair<Guid, GearType>>> Get();
-    Task<List<KeyValuePair<Guid,  GearType>>> GetMany(CommonSearchEntity GearTypeSearch);
+    Task<List<GearType>> Get();
+    Task<List<GearType>> GetMany(CommonSearchEntity GearTypeSearch);
 
-    Task<List<KeyValuePair<Guid, GearType>>> GetByManufacturerId(int manufacturerId);
+    Task<List<GearType>> GetByManufacturerId(int manufacturerId);
 
     Task<GearType?> Add(
         dto_GearType GearType,

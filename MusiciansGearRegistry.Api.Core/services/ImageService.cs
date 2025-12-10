@@ -69,7 +69,7 @@ public class ImageService : ServiceBase, IImageService
         return await _imageRepo.Get_GearModelImageIdList(id);
     }
 
-    public async Task<KeyValuePair<Guid, GearModelImage>> Get_GearModelImage(int id)
+    public async Task<GearModelImage> Get_GearModelImage(int id)
     {
         return await _imageRepo.Get_GearModelImage(id);
     }

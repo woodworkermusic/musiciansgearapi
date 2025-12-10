@@ -28,11 +28,11 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
     /// <param name="pageNumber"></param>
     /// <param name="pageCount"></param>
     /// <returns></returns>
-    public async Task<List<KeyValuePair<Guid,  GearType>>> GetMany(CommonSearchEntity GearTypeSearch)
+    public async Task<List<GearType>> GetMany(CommonSearchEntity GearTypeSearch)
     {
         string startsWith = (!string.IsNullOrWhiteSpace(GearTypeSearch.startsWith) ? GearTypeSearch.startsWith.Trim() : string.Empty);
 
-        var searchResult = await _dbContext.GearType
+        return await _dbContext.GearType
             .Where(m =>
                 (
                 (startsWith == string.Empty) || m.GearTypeName.StartsWith(startsWith)
@@ -42,28 +42,19 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
             .Take(GearTypeSearch.pageSize)
             .OrderBy(ob => ob.GearTypeName)
             .ToListAsync();
-
-        var searchResponse = new List<KeyValuePair<Guid,  GearType>>();
-        searchResult.ForEach(f => searchResponse.Add(KeyValuePair.Create(Guid.NewGuid(), f)));
-
-        return searchResponse;
     }
 
-    public async Task<List<KeyValuePair<Guid, GearType>>> Get()
+    public async Task<List<GearType>> Get()
     {
-        var gearTypes = await _dbContext.GearType.ToListAsync();
-        var dataList = new List<KeyValuePair<Guid, GearType>>();
-
-        gearTypes.ForEach(f => dataList.Add(KeyValuePair.Create(Guid.NewGuid(), f)));
-        return dataList;
+        return await _dbContext.GearType.ToListAsync();
     }
 
-    public async Task<List<KeyValuePair<Guid, GearType>>> GetByManufacturerId(int manufacturerId)
+    public async Task<List<GearType>> GetByManufacturerId(int manufacturerId)
     {
         var searchResult = await _dbContext.Procedures.sp_GearTypesByManufacturerAsync(manufacturerId);
 
-        var searchResponse = new List<KeyValuePair<Guid, GearType>>();
-        searchResult.ForEach(f => searchResponse.Add(KeyValuePair.Create(Guid.NewGuid(), new GearType() { Active = f.Active, GearTypeId = f.GearTypeId, GearTypeName = f.GearTypeName })));
+        var searchResponse = new List<GearType>();
+        searchResult.ForEach(f => searchResponse.Add(new GearType() { Active = f.Active, GearTypeId = f.GearTypeId, GearTypeName = f.GearTypeName }));
 
         return searchResponse;
     }

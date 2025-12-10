@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MusiciansGearRegistry.Data.dto;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
 
@@ -71,14 +70,15 @@ public class ImageRepository : RepositoryBase, IImageRepository
             .ToListAsync();
 
     }
-    public async Task<KeyValuePair<Guid, GearModelImage>> Get_GearModelImage(int id)
+
+    public async Task<GearModelImage> Get_GearModelImage(int id)
     {
         var gearModelImage = await _dbContext
             .GearModelImage
             .SingleAsync(s => s.GearModelImageId == id);
 
-        gearModelImage.ImageId = id;
-        return KeyValuePair.Create(Guid.NewGuid(), gearModelImage);
+        //gearModelImage.ImageId = id;
+        return gearModelImage;
     }
 
     public async Task<GearModelImage> Add_GearModelImage(INewImage gearModelImage)

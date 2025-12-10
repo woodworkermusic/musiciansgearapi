@@ -38,10 +38,9 @@ public class ManufacturerService : ServiceBase, IManufacturerService
         return await _MfrRepo.Get(manufacturerId);
     }
 
-    public async Task<List<KeyValuePair<Guid, Manufacturer>>> GetMany(CommonSearchEntity manufacturerSearch)
+    public async Task<List<Manufacturer>> GetMany(CommonSearchEntity manufacturerSearch)
     {
-        var response = await _MfrRepo.GetMany(manufacturerSearch);
-        return response;
+        return await _MfrRepo.GetMany(manufacturerSearch);
     }
 
     public async Task<Manufacturer> Update(dto_Manufacturer manufacturer, int userId)

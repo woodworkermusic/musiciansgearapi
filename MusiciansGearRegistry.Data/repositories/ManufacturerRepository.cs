@@ -17,11 +17,11 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
         return await _dbContext.Manufacturer.SingleOrDefaultAsync(s => s.ManufacturerId == manufacturerId && s.DeletedOn == null);
     }
 
-    public async Task<List<KeyValuePair<Guid, Manufacturer>>> GetMany(CommonSearchEntity search)
+    public async Task<List<Manufacturer>> GetMany(CommonSearchEntity search)
     {
         search.startsWith = search.startsWith.Trim();
 
-        var searchResult = await _dbContext.Manufacturer
+        return await _dbContext.Manufacturer
             .Where(m =>
                 (
                     string.IsNullOrEmpty(search.startsWith) ||
@@ -34,11 +34,6 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
             .Skip((search.pageNumber - 1) * search.pageSize)
             .Take(search.pageSize)
             .ToListAsync();
-
-        var searchResponse = new List<KeyValuePair<Guid, Manufacturer>>();
-        searchResult.ForEach(f => searchResponse.Add(KeyValuePair.Create(Guid.NewGuid(), f)));
-
-        return searchResponse;
     }
 
     public async Task<Manufacturer> Add(

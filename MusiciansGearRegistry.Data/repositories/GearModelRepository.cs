@@ -36,9 +36,9 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
     /// <param name="pageNumber"></param>
     /// <param name="pageCount"></param>
     /// <returns></returns>
-    public async Task<List<KeyValuePair<Guid,  GearModel>>> GetMany(CommonSearchEntity searchEntity)
+    public async Task<List<GearModel>> GetMany(CommonSearchEntity searchEntity)
     {
-        var searchResult = await _dbContext.GearModel
+        return await _dbContext.GearModel
             .Where(m =>
                 (
                     string.IsNullOrWhiteSpace(searchEntity.startsWith) ||
@@ -49,21 +49,15 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
             .Skip((searchEntity.pageNumber - 1) * searchEntity.pageSize)
             .Take(searchEntity.pageSize)
             .ToListAsync();
-
-        var searchResponse = new List<KeyValuePair<Guid,  GearModel>>();
-        searchResult.ForEach(f => searchResponse.Add(KeyValuePair.Create(Guid.NewGuid(), f)));
-
-        return searchResponse;
-
     }
 
-    public async Task<List<KeyValuePair<Guid, GearModel>>> GetByManufacturerAndType(int manufacturerId
+    public async Task<List<GearModel>> GetByManufacturerAndType(int manufacturerId
         , int gearTypeId)
     {
         var searchResult = await _dbContext.Procedures.sp_GearModelsByManufacturerAndTypeAsync(manufacturerId, gearTypeId);
 
-        var searchResponse = new List<KeyValuePair<Guid, GearModel>>();
-        searchResult.ForEach(f => searchResponse.Add(KeyValuePair.Create(Guid.NewGuid(),
+        var searchResponse = new List<GearModel>();
+        searchResult.ForEach(f => searchResponse.Add(
             new GearModel()
             {
                 Active = f.Active,
@@ -71,7 +65,7 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
                 ModelName = f.ModelName,
                 StartYear = f.StartYear,
                 EndYear = f.EndYear
-            })));
+            }));
 
         return searchResponse;
     }

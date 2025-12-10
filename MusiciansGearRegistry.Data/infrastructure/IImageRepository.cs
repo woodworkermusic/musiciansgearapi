@@ -10,7 +10,7 @@ public interface IImageRepository
         , int userId);
 
     Task<List<int>> Get_GearModelImageIdList(int id);
-    Task<KeyValuePair<Guid, GearModelImage>> Get_GearModelImage(int id);
+    Task<GearModelImage> Get_GearModelImage(int id);
     Task<GearModelImage> Add_GearModelImage(INewImage newImage);
     Task<bool> Delete_GearModelImage(int id
     , int userId);

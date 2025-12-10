@@ -11,7 +11,7 @@ namespace MusiciansGearRegistry.Api.Controllers;
 [ApiController]
 public class ManufacturerController : ApiControllerBase
 {
-    private readonly IManufacturerService _MfrSvc;
+    private readonly IManufacturerService _mfrSvc;
 
     public ManufacturerController(IManufacturerService MfrSvc
         , ILogger<ManufacturerController> logger
@@ -19,25 +19,25 @@ public class ManufacturerController : ApiControllerBase
         )
         : base(logger, telemetryClient)
     {
-        _MfrSvc = MfrSvc;
+        _mfrSvc = MfrSvc;
     }
 
     [HttpGet("{manufacturerId}")]
     public async Task<IActionResult> Get(int manufacturerId)
     {
-        return await ProcessSvcRequest<Manufacturer>(_MfrSvc.Get(manufacturerId));
+        return await ProcessSvcRequest<Manufacturer>(_mfrSvc.Get(manufacturerId));
     }
 
     [HttpPost("Search")]
     public async Task<IActionResult> GetMany([FromBody] CommonSearchEntity manufacturerSearch)
     {
-        return await ProcessSvcRequest<List<KeyValuePair<Guid, Manufacturer>>>(_MfrSvc.GetMany(manufacturerSearch));
+        return await ProcessSvcRequest<List<Manufacturer>>(_mfrSvc.GetMany(manufacturerSearch));
     }
 
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] dto_Manufacturer newManufacturer)
     {
-        return await ProcessSvcRequest<Manufacturer>(_MfrSvc.Add(newManufacturer, 1));
+        return await ProcessSvcRequest<Manufacturer>(_mfrSvc.Add(newManufacturer, 1));
     }
 
     [HttpPut]
@@ -45,7 +45,7 @@ public class ManufacturerController : ApiControllerBase
     {
         // Will have to check against the logged in user to make sure they can update this piece of 
         // or that they are an admin.
-        var dto = await _MfrSvc.Update(manufacturerUpdate, 1);
+        var dto = await _mfrSvc.Update(manufacturerUpdate, 1);
         return (dto != null) ? Ok(dto) : BadRequest("nope");
     }
 
@@ -55,7 +55,7 @@ public class ManufacturerController : ApiControllerBase
     {
         // Will have to check against the logged in user to make sure they are either the current gear owner 
         // or an admin level user to do this.
-        var dto = await _MfrSvc.Delete(manufacturerId, userId);
+        var dto = await _mfrSvc.Delete(manufacturerId, userId);
         return Ok(dto);
     }
 }
