@@ -36,8 +36,12 @@ builder.Services.AddScoped(typeof(IUserProfileRepository), typeof(UserProfileRep
 
 // security / logging
 builder.Services.AddScoped(typeof(ILoggingService), typeof(NLogLogger));
-builder.Services.AddScoped(typeof(ILoginService), typeof(LoginService));
-builder.Services.AddScoped(typeof(ITokenHandlerService), typeof(TokenHandlerService));
+builder.Services.AddScoped(typeof(IAccessService), typeof(AccessService));
+
+var tokenKey = builder.Configuration["TokenHandler:SymmetricKey"];
+
+builder.Services.AddSingleton<ITokenService>(x => new TokenService(tokenKey));
+//builder.Services.AddScoped(typeof(ITokenService), typeof(TokenService));
 //builder.Services.AddScoped(typeof(IWebSecurity));
 
 // dbContext:

@@ -5,12 +5,17 @@ using System.Security.Claims;
 
 namespace MusiciansGearRegistry.Api.Security.services;
 
-public class TokenHandlerService : ITokenHandlerService
+public class TokenService : ITokenService
 {
-    public string GenerateLoginToken(string username, string role, DateTime expiresOn, string app)
+    private readonly string _symmetricKey;
+
+    public TokenService(string symmetricKey)
     {
-        //var symmetricKey = Convert.FromBase64String(ConfigurationManager["symmetricKey"]);
-        var symmetricKey = Convert.FromBase64String(Guid.NewGuid().ToString());
+        _symmetricKey = symmetricKey;
+    }
+
+    public string GenerateLoginToken(string username, string role)
+    {
         var now = DateTime.UtcNow;
 
         // generate token
@@ -19,14 +24,15 @@ public class TokenHandlerService : ITokenHandlerService
         tokenDescriptor.Subject = new ClaimsIdentity(new Claim[] {
                                                          new Claim(ClaimTypes.Name, username),
                                                          new Claim(ClaimTypes.Role, role),
-                                                         new Claim("App", app)
+                                                         new Claim("MusiciansGearRegistry.Api", "MusiciansGearRegistry.Api")
                                                         });
 
         tokenDescriptor.Issuer = "self";
         tokenDescriptor.Audience = "http://www.example.com";
-        tokenDescriptor.Expires = DateTime.Now.AddYears(1);
+        tokenDescriptor.Expires = DateTime.Now.AddMonths(1);
 
-        tokenDescriptor.SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(symmetricKey),
+        var keyData = Convert.FromBase64String(_symmetricKey);
+        tokenDescriptor.SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyData),
                                                                         "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256",
                                                                         "http://www.w3.org/2001/04/xmlenc#sha256");
         var token = tokenHandler.CreateToken(tokenDescriptor);

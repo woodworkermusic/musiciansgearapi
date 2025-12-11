@@ -6,7 +6,8 @@ namespace MusiciansGearRegistry.Api.Security.models;
 public class LoginRequest
 {
     [Required]
-    [Description("valid values:  user, token, externalToken, email")]
+    [Description("valid values:  username, token, externalToken, email")]
+    [DefaultValue("username")]
     public string LoginType { get; set; }
 
     public string? UserName { get; set; }

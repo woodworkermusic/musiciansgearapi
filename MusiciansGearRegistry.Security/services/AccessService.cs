@@ -9,15 +9,15 @@ using System.Text;
 
 namespace MusiciansGearRegistry.Api.Security.services;
 
-public class LoginService : ILoginService
+public class AccessService : IAccessService
 {
     // token manager
-    private readonly ITokenHandlerService tokenHandler;
+    private readonly ITokenService tokenHandler;
     private readonly ILoggingService log;
     private readonly SecurityContext _securityContext;
 
-    public LoginService(SecurityContext securityContext
-        , ITokenHandlerService tokenHandler
+    public AccessService(SecurityContext securityContext
+        , ITokenService tokenHandler
         , ILoggingService loggingService) 
     {
         _securityContext = securityContext;

@@ -8,22 +8,37 @@ namespace MusiciansGearRegistry.Api.Controllers;
 [ApiController]
 public class AccessController : ApiControllerBase
 {
-    private readonly ILoginService _loginSvc;
+    private readonly IAccessService _accessService;
+    private readonly ITokenService _tokenService;
 
-    public AccessController(ILoginService loginSvc
+    public AccessController(IAccessService accessService
+        , ITokenService tokenService
         , ILogger<AccessController> logger
         , TelemetryClient telemetryClient
         ) 
         : base(logger, telemetryClient)
     {
-        _loginSvc = loginSvc;
+        _accessService = accessService;
+        _tokenService = tokenService;
     }
 
-    [Route("SignIn")]
-    [HttpPost]
+    [HttpPost("Login")]
     public async Task<IActionResult> SignIn([FromBody] LoginRequest loginRequest)
     {
-        var loginResult = _loginSvc.Login(loginRequest);
-        return (loginResult != null) ? Ok() : BadRequest("nope");
+        var loginResult = _accessService.Login(loginRequest);
+
+        if (loginResult.success)
+        {
+            var signInToken = _tokenService.GenerateLoginToken(loginRequest.UserName, "ADMIN");
+            return Ok(signInToken);
+        }
+
+        return BadRequest("nope");
+    }
+
+    [HttpGet("Logout")]
+    public async Task<IActionResult> Logout()
+    {
+        return Ok();
     }
 }

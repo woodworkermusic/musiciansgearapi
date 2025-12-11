@@ -2,7 +2,7 @@
 
 namespace MusiciansGearRegistry.Api.Security.interfaces;
 
-public interface ILoginService
+public interface IAccessService
 {
     LoginResult Login(LoginRequest loginInfo);
 }
