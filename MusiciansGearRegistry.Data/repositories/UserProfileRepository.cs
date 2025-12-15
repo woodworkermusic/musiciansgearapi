@@ -14,9 +14,11 @@ public class UserProfileRepository : RepositoryBase, IUserProfileRepository
 
     public async Task<UserProfile?> Get(int userProfileId)
     {
-        return await _dbContext
+        var userProfile = await _dbContext
             .UserProfile
             .SingleAsync(s => s.UserProfileId == userProfileId);
+
+        return userProfile;
     }
 
     public async Task<bool> Add(CreateUserRequest createRequest)

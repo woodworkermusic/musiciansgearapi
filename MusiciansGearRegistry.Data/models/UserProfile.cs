@@ -68,4 +68,7 @@ public partial class UserProfile
 
     [StringLength(50)]
     public string DeletedBy { get; set; }
+
+    [InverseProperty("UserProfile")]
+    public virtual ICollection<UserRoles> UserRoles { get; set; } = new List<UserRoles>();
 }

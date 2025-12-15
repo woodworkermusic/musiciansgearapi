@@ -48,7 +48,7 @@ builder.Services.AddSingleton<ITokenService>(x => new TokenService(tokenKey));
 var connectionString = builder.Configuration.GetConnectionString("MusiciansGearDb");
 
 builder.Services.AddDbContext<MusiciansGearRegistryContext>(options => options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure(3)));
-builder.Services.AddDbContext<SecurityContext>(options => options.UseSqlServer(connectionString, o=> o.EnableRetryOnFailure(3)));
+//builder.Services.AddDbContext<SecurityContext>(options => options.UseSqlServer(connectionString, o=> o.EnableRetryOnFailure(3)));
 
 builder.Services.AddControllers();
 

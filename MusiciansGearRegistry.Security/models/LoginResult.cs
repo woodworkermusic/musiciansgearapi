@@ -12,9 +12,8 @@ public class LoginResult : ILoginResult
     public string userName { get; set; }
     public string fullName { get; set; }
     public string displayName { get; set; }
-    public bool isAnonymous { get; set; }
     public string email { get; set; }
-    public Roles role { get; set; }
+    public List<string> roles { get; set; }
      
     // security
     public string accessToken {get; set;}
@@ -25,7 +24,6 @@ public class LoginResult : ILoginResult
     public LoginResult()
     {
         success = false;
-        isAnonymous = false;
         message = "invalid username / emailaddress or password.";
     }
 }

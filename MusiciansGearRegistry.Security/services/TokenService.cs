@@ -14,18 +14,21 @@ public class TokenService : ITokenService
         _symmetricKey = symmetricKey;
     }
 
-    public string GenerateLoginToken(string username, string role)
+    public string GenerateLoginToken(string username, List<string> roles)
     {
         var now = DateTime.UtcNow;
 
         // generate token
         var tokenHandler = new JsonWebTokenHandler();
         SecurityTokenDescriptor tokenDescriptor = new();
-        tokenDescriptor.Subject = new ClaimsIdentity(new Claim[] {
-                                                         new Claim(ClaimTypes.Name, username),
-                                                         new Claim(ClaimTypes.Role, role),
-                                                         new Claim("MusiciansGearRegistry.Api", "MusiciansGearRegistry.Api")
-                                                        });
+
+        var claims = new List<Claim>();
+
+        claims.Add(new Claim(ClaimTypes.Name, username));
+        claims.AddRange(roles.Select(s => new Claim(ClaimTypes.Role, s)));
+        claims.Add(new Claim(ClaimTypes.Webpage, "MusiciansGearRegistry.Api"));
+
+        tokenDescriptor.Subject = new ClaimsIdentity(claims);
 
         tokenDescriptor.Issuer = "self";
         tokenDescriptor.Audience = "http://www.example.com";

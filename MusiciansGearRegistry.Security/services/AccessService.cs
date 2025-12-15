@@ -1,9 +1,7 @@
 ﻿using MusiciansGearRegistry.Api.Logging.interfaces;
-using MusiciansGearRegistry.Api.Security.enums;
 using MusiciansGearRegistry.Api.Security.interfaces;
 using MusiciansGearRegistry.Api.Security.models;
-using MusiciansGearRegistry.Api.Security.Models;
-using System.Security.Claims;
+using MusiciansGearRegistry.Data.Models;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -12,17 +10,15 @@ namespace MusiciansGearRegistry.Api.Security.services;
 public class AccessService : IAccessService
 {
     // token manager
-    private readonly ITokenService tokenHandler;
-    private readonly ILoggingService log;
-    private readonly SecurityContext _securityContext;
+    private readonly ITokenService _tokenService;
+    private readonly MusiciansGearRegistryContext _dbContext;
 
-    public AccessService(SecurityContext securityContext
-        , ITokenService tokenHandler
+    public AccessService(MusiciansGearRegistryContext securityContext
+        , ITokenService tokenService
         , ILoggingService loggingService) 
     {
-        _securityContext = securityContext;
-        tokenHandler = tokenHandler;
-        log = loggingService.GetLoggingService("SimpleMemberhipJwtSecurity");
+        _dbContext = securityContext;
+        _tokenService = tokenService;
     }
 
     #region login and logout
@@ -120,7 +116,7 @@ public class AccessService : IAccessService
             return loginResult;
         }
 
-        var userProfile = _securityContext
+        var userProfile = _dbContext
             .UserProfile
             .Single(s => s.UserName == loginInfo.UserName);
 
@@ -141,7 +137,7 @@ public class AccessService : IAccessService
             return loginResult;
         }
 
-        var userProfile = _securityContext
+        var userProfile = _dbContext
             .UserProfile
             .Single(s => s.EMailAddress == loginInfo.Email);
 
@@ -168,10 +164,18 @@ public class AccessService : IAccessService
         loginResult.success = (pwdText == userProfile.UserPassword);
         loginResult.message = "";
 
+        if (loginResult.success)
+        {
+            var roleList = userProfile.UserRoles.Select(s => s.Role.RoleName).ToList<string>();
+            loginResult.roles = roleList;
+
+            loginResult.accessToken = _tokenService.GenerateLoginToken(userProfile.UserName, roleList);
+        }
+
         userProfile.LastLogin = DateTime.UtcNow;
 
-        _securityContext.UserProfile.Update(userProfile);
-        _securityContext.SaveChanges();
+        _dbContext.UserProfile.Update(userProfile);
+        _dbContext.SaveChanges();
 
         return loginResult;
     }

@@ -26,14 +26,7 @@ public class AccessController : ApiControllerBase
     public async Task<IActionResult> SignIn([FromBody] LoginRequest loginRequest)
     {
         var loginResult = _accessService.Login(loginRequest);
-
-        if (loginResult.success)
-        {
-            var signInToken = _tokenService.GenerateLoginToken(loginRequest.UserName, "ADMIN");
-            return Ok(signInToken);
-        }
-
-        return BadRequest("nope");
+        return (loginResult.success) ? Ok(loginResult) : BadRequest("nope");
     }
 
     [HttpGet("Logout")]

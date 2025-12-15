@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MusiciansGearRegistry.Api.Logging\MusiciansGearRegistry.Api.Logging.csproj" />
+    <ProjectReference Include="..\MusiciansGearRegistry.Data\MusiciansGearRegistry.Data.csproj" />
   </ItemGroup>
 
 </Project>

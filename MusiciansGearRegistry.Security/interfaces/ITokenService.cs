@@ -2,5 +2,5 @@
 
 public interface ITokenService
 {
-    string GenerateLoginToken(string username, string role);
+    string GenerateLoginToken(string username, List<string> roles);
 }

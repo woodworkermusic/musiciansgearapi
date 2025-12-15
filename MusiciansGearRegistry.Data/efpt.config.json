@@ -16,6 +16,10 @@
    "T4TemplatePath": null,
    "Tables": [
       {
+         "Name": "[dbo].[ApplicationRoles]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Client]",
          "ObjectType": 0
       },
@@ -81,6 +85,10 @@
       },
       {
          "Name": "[dbo].[UserProfile]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserRoles]",
          "ObjectType": 0
       },
       {
