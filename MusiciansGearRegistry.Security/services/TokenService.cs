@@ -25,7 +25,7 @@ public class TokenService : ITokenService
         SecurityTokenDescriptor tokenDescriptor = new();
 
         var claims = new List<Claim> {
-            new Claim("musiciansgearregistryuser", JsonConvert.SerializeObject(userInfo))
+            new Claim("mgruser", JsonConvert.SerializeObject(userInfo))
         };
 
         //claims.Add(new Claim(ClaimTypes.Webpage, "MusiciansGearRegistry.Api"));
