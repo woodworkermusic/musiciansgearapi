@@ -24,15 +24,16 @@ public class TokenService : ITokenService
         var tokenHandler = new JsonWebTokenHandler();
         SecurityTokenDescriptor tokenDescriptor = new();
 
-        var claims = new List<Claim>();
+        var claims = new List<Claim> {
+            new Claim("musiciansgearregistryuser", JsonConvert.SerializeObject(userInfo))
+        };
 
-        claims.Add(new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(userInfo)));
-        claims.Add(new Claim(ClaimTypes.Webpage, "MusiciansGearRegistry.Api"));
+        //claims.Add(new Claim(ClaimTypes.Webpage, "MusiciansGearRegistry.Api"));
 
         tokenDescriptor.Subject = new ClaimsIdentity(claims);
 
         tokenDescriptor.Issuer = "self";
-        tokenDescriptor.Audience = "http://www.example.com";
+        tokenDescriptor.Audience = "";
         tokenDescriptor.Expires = DateTime.Now.AddMonths(1);
 
         var keyData = Convert.FromBase64String(_symmetricKey);
