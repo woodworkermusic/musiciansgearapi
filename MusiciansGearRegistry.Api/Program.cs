@@ -6,7 +6,6 @@ using MusiciansGearRegistry.Api.ExceptionHandling;
 using MusiciansGearRegistry.Api.Logging.interfaces;
 using MusiciansGearRegistry.Api.Logging.Services;
 using MusiciansGearRegistry.Api.Security.interfaces;
-using MusiciansGearRegistry.Api.Security.Models;
 using MusiciansGearRegistry.Api.Security.services;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
