@@ -10,8 +10,9 @@ public class LoginRequest
     [DefaultValue("username")]
     public string LoginType { get; set; }
 
+    [DefaultValue("DonQuixote")]
     public string? UserName { get; set; }
-    public string Password { get; set; }
+    public string? Password { get; set; }
     public string? Token { get; set; }
 
     /// <summary>

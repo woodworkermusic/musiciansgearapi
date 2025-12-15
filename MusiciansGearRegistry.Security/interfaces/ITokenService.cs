@@ -1,6 +1,8 @@
-﻿namespace MusiciansGearRegistry.Api.Security.interfaces;
+﻿using MusiciansGearRegistry.Api.Security.models;
+
+namespace MusiciansGearRegistry.Api.Security.interfaces;
 
 public interface ITokenService
 {
-    string GenerateLoginToken(string username, List<string> roles);
+    string GenerateLoginToken(UserInfo userInfo);
 }

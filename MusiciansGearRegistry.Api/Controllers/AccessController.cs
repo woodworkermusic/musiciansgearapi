@@ -9,17 +9,14 @@ namespace MusiciansGearRegistry.Api.Controllers;
 public class AccessController : ApiControllerBase
 {
     private readonly IAccessService _accessService;
-    private readonly ITokenService _tokenService;
 
     public AccessController(IAccessService accessService
-        , ITokenService tokenService
         , ILogger<AccessController> logger
         , TelemetryClient telemetryClient
         ) 
         : base(logger, telemetryClient)
     {
         _accessService = accessService;
-        _tokenService = tokenService;
     }
 
     [HttpPost("Login")]

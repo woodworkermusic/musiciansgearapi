@@ -166,10 +166,12 @@ public class AccessService : IAccessService
 
         if (loginResult.success)
         {
-            var roleList = userProfile.UserRoles.Select(s => s.Role.RoleName).ToList<string>();
-            loginResult.roles = roleList;
+            var userInfo = new UserInfo();
+            userInfo = new UserInfo();
+            userInfo.roles = _dbContext.UserRoles.Where(w => w.UserProfileId == userProfile.UserProfileId).Select(s => s.Role.RoleName).ToList<string>();
+            userInfo.userName = userProfile.UserName;
 
-            loginResult.accessToken = _tokenService.GenerateLoginToken(userProfile.UserName, roleList);
+            loginResult.accessToken = _tokenService.GenerateLoginToken(userInfo);
         }
 
         userProfile.LastLogin = DateTime.UtcNow;

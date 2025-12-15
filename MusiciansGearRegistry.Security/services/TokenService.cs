@@ -1,7 +1,9 @@
 ﻿using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using MusiciansGearRegistry.Api.Security.interfaces;
+using MusiciansGearRegistry.Api.Security.models;
 using System.Security.Claims;
+using Newtonsoft.Json;
 
 namespace MusiciansGearRegistry.Api.Security.services;
 
@@ -14,7 +16,7 @@ public class TokenService : ITokenService
         _symmetricKey = symmetricKey;
     }
 
-    public string GenerateLoginToken(string username, List<string> roles)
+    public string GenerateLoginToken(UserInfo userInfo)
     {
         var now = DateTime.UtcNow;
 
@@ -24,8 +26,7 @@ public class TokenService : ITokenService
 
         var claims = new List<Claim>();
 
-        claims.Add(new Claim(ClaimTypes.Name, username));
-        claims.AddRange(roles.Select(s => new Claim(ClaimTypes.Role, s)));
+        claims.Add(new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(userInfo)));
         claims.Add(new Claim(ClaimTypes.Webpage, "MusiciansGearRegistry.Api"));
 
         tokenDescriptor.Subject = new ClaimsIdentity(claims);
