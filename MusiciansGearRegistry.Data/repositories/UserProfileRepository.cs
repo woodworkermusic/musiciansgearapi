@@ -5,6 +5,7 @@ using MusiciansGearRegistry.Data.Models;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml.XPath;
+using MusiciansGearRegistry.Data.enums;
 
 namespace MusiciansGearRegistry.Data.repositories;
 
@@ -45,9 +46,29 @@ public class UserProfileRepository : RepositoryBase, IUserProfileRepository
         };
 
         await _dbContext.UserProfile.AddAsync(newUserProfile);
-        int result = await _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync();
 
-        return (result > 0);
+        if (newUserProfile.UserProfileId > 0)
+        {
+            // Add the 'user' role.
+            int roleId = _dbContext.ApplicationRoles.FirstOrDefault(f => f.RoleName == Roles.USER)?.RoleId ?? 0;
+
+            if (roleId > 0)
+            {
+                var newRole = new UserRoles()
+                {
+                    UserProfileId = newUserProfile.UserProfileId,
+                    RoleId = roleId,
+                    CreatedBy = "system",
+                    CreatedOn = DateTime.UtcNow
+                };
+
+                await _dbContext.UserRoles.AddAsync(newRole);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+        return (newUserProfile.UserProfileId > 0);
     }
 
     public async Task<UserProfile> Update(UserProfile currentProfile
