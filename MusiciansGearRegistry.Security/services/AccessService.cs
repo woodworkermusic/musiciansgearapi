@@ -167,9 +167,11 @@ public class AccessService : IAccessService
         if (loginResult.success)
         {
             var userInfo = new UserInfo();
-            userInfo = new UserInfo();
+
             userInfo.roles = _dbContext.UserRoles.Where(w => w.UserProfileId == userProfile.UserProfileId).Select(s => s.Role.RoleName).ToList<string>();
             userInfo.userName = userProfile.UserName;
+            userInfo.displayName = $"{userProfile.FirstName} {userProfile.LastName}";
+            userInfo.email = userProfile.EMailAddress;
 
             loginResult.accessToken = _tokenService.GenerateLoginToken(userInfo);
         }
