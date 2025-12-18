@@ -41,13 +41,11 @@ var tokenKey = builder.Configuration["TokenHandler:SymmetricKey"];
 
 builder.Services.AddSingleton<ITokenService>(x => new TokenService(tokenKey));
 //builder.Services.AddScoped(typeof(ITokenService), typeof(TokenService));
-//builder.Services.AddScoped(typeof(IWebSecurity));
 
 // dbContext:
 var connectionString = builder.Configuration.GetConnectionString("MusiciansGearDb");
 
 builder.Services.AddDbContext<MusiciansGearRegistryContext>(options => options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure(3)));
-//builder.Services.AddDbContext<SecurityContext>(options => options.UseSqlServer(connectionString, o=> o.EnableRetryOnFailure(3)));
 
 builder.Services.AddControllers();
 
@@ -76,6 +74,8 @@ builder.Services.AddOptions();
 builder.Services.AddLogging();
 
 builder.Services.AddProblemDetails();
+builder.Services.AddHealthChecks()
+    .AddCheck("SQLServer", new SQLHealthCheckService(connectionString));
 
 var app = builder.Build();
 
@@ -96,6 +96,6 @@ app.UseRouting();
 app.UseCors("MusiciansGearRegistryApi");
 app.UseAuthorization();
 
-app.UseEndpoints(e => e.MapControllers());
-//app.MapControllers();
+app.MapControllers();
+app.UseHealthChecks("/Health");
 app.Run();
