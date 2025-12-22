@@ -37,6 +37,13 @@ namespace MusiciansGearRegistry.Api.Controllers
 
                 return Ok(svcResult);
             }
+            catch (Microsoft.Data.SqlClient.SqlException sqlEx)
+            {
+                if (sqlEx.Message.ToLower().Contains("connection timeout expired"))
+                    return StatusCode(StatusCodes.Status503ServiceUnavailable, "connection failed");
+
+                return BadRequest("");
+            }
             catch (Exception ex)
             {
                 return BadRequest(ex.ToString());
