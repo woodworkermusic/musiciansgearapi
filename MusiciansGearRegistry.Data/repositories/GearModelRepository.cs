@@ -41,8 +41,8 @@ public class GearModelRepository : RepositoryBase, IGearModelRepository
         return await _dbContext.GearModel
             .Where(m =>
                 (
-                    string.IsNullOrWhiteSpace(searchEntity.startsWith) ||
-                    (!string.IsNullOrWhiteSpace(searchEntity.startsWith) && m.ModelName.StartsWith(searchEntity.startsWith))
+                    string.IsNullOrWhiteSpace(searchEntity.searchText) ||
+                    (!string.IsNullOrWhiteSpace(searchEntity.searchText) && m.ModelName.StartsWith(searchEntity.searchText))
                 ) 
                 //&& m.ManufacturerId == (manufacturerId != null ? manufacturerId.Value : m.ManufacturerId) 
                 && m.DeletedOn == null)

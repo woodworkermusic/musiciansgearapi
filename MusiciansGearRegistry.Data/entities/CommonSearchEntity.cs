@@ -5,7 +5,7 @@ namespace MusiciansGearRegistry.Data.entities;
 public class CommonSearchEntity
 {
     [DefaultValue("")]
-    public string startsWith { get; set; }
+    public string searchText { get; set; }
     [DefaultValue(1)]
     public int pageNumber { get; set; }
     [DefaultValue(10)]

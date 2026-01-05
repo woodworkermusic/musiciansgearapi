@@ -10,6 +10,7 @@ using MusiciansGearRegistry.Api.Security.services;
 using MusiciansGearRegistry.Data.infrastructure;
 using MusiciansGearRegistry.Data.Models;
 using MusiciansGearRegistry.Data.repositories;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ builder.Services.AddScoped(typeof(IGearModelService), typeof(GearModelService));
 builder.Services.AddScoped(typeof(IGearTypeService), typeof(GearTypeService));
 builder.Services.AddScoped(typeof(IUserProfileService), typeof(UserProfileService));
 builder.Services.AddScoped(typeof(IUserGearService), typeof(UserGearService));
+builder.Services.AddScoped(typeof(ISearchService), typeof(SearchService));
 
 // repositories:
 builder.Services.AddScoped(typeof(IImageRepository), typeof(ImageRepository));
@@ -32,6 +34,7 @@ builder.Services.AddScoped(typeof(IGearModelRepository), typeof(GearModelReposit
 builder.Services.AddScoped(typeof(IGearTypeRepository), typeof(GearTypeRepository));
 builder.Services.AddScoped(typeof(IUserGearRepository), typeof(UserGearRepository));
 builder.Services.AddScoped(typeof(IUserProfileRepository), typeof(UserProfileRepository));
+builder.Services.AddScoped(typeof(ISearchRepository), typeof(SearchRepository));
 
 // security / logging
 builder.Services.AddScoped(typeof(ILoggingService), typeof(NLogLogger));
@@ -47,7 +50,9 @@ var connectionString = builder.Configuration.GetConnectionString("MusiciansGearD
 
 builder.Services.AddDbContext<MusiciansGearRegistryContext>(options => options.UseSqlServer(connectionString, o => o.EnableRetryOnFailure(3)));
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

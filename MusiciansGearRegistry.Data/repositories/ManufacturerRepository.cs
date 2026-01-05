@@ -19,13 +19,13 @@ public class ManufacturerRepository : RepositoryBase, IManufacturerRepository
 
     public async Task<List<Manufacturer>> GetMany(CommonSearchEntity search)
     {
-        search.startsWith = search.startsWith.Trim();
+        search.searchText = search.searchText.Trim();
 
         return await _dbContext.Manufacturer
             .Where(m =>
                 (
-                    string.IsNullOrEmpty(search.startsWith) ||
-                    m.ManufacturerName.StartsWith(search.startsWith)
+                    string.IsNullOrEmpty(search.searchText) ||
+                    m.ManufacturerName.StartsWith(search.searchText)
                 )
                 &&
                 (search.includeDeleted || (m.DeletedOn == null))

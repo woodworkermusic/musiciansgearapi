@@ -30,7 +30,7 @@ public class GearTypeRepository : RepositoryBase, IGearTypeRepository
     /// <returns></returns>
     public async Task<List<GearType>> GetMany(CommonSearchEntity GearTypeSearch)
     {
-        string startsWith = (!string.IsNullOrWhiteSpace(GearTypeSearch.startsWith) ? GearTypeSearch.startsWith.Trim() : string.Empty);
+        string startsWith = (!string.IsNullOrWhiteSpace(GearTypeSearch.searchText) ? GearTypeSearch.searchText.Trim() : string.Empty);
 
         return await _dbContext.GearType
             .Where(m =>
